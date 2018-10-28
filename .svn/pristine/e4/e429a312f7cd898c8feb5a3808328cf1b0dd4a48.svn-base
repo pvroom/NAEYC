@@ -1,0 +1,66 @@
+<ion-header>
+
+	<ion-navbar color="primary">
+		<ion-title>Sample Receipt / Badge</ion-title>
+		<ion-buttons end>
+			<button ion-button (click)="closeModal()">Close</button>
+		</ion-buttons>
+	</ion-navbar>
+
+</ion-header>
+
+
+<ion-content padding>
+	
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.3em;">
+			Below are samples of both your confirmation receipt and your badge when trying to locate
+			your Registration ID.
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			&nbsp; 
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			<b>Sample Receipt</b>
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			Your Registration ID is located on your receipt, under the barcode in the upper right
+			and above your name and address on the left.  Both places are circled in red.
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			<img src='assets/img/SampleReceipt.jpg'> 
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			&nbsp; 
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			<b>Sample Badge</b>
+		</div>
+	</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			Your Registration ID on your badge is the 7 digit number to the left (circled in red).&nbsp; 
+			However, only enter the first 6 digits and do not enter spaces or dashes between those digits.
+			&nbsp; So for a badge with 12 - 345 - 67, you would enter 123456 as your Username.
+		</div>
+	<div style="text-align: center;">
+		<div style="display: inline-block; width:80%; padding:10px; font-size:1.2em;">
+			<img src='assets/img/Sample Badge.png'> 
+		</div>
+	</div>
+	</div>
+	
+	
+</ion-content>

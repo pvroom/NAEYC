@@ -1,0 +1,116 @@
+<ion-header>
+
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+        </button>
+		<ion-title>Sponsors</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content fullscreen>
+   
+	<!-- Search bar -->
+	<ion-grid>
+		<ion-row>
+			<ion-col col-9>	
+
+				<ion-item class="item-input; shadow">
+					<ion-icon name="search" item-left></ion-icon>
+					<ion-input name="srchBarEntry" id="srchBarEntry" 
+						type="text" placeholder="Search" [(ngModel)]="EntryTerms"></ion-input>
+				</ion-item>
+			</ion-col>
+			<ion-col col-3>
+				<button ion-button full color=danger style="margin:0" (tap)="GetSearchResults()">Submit</button>
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<ion-card *ngFor="let sponsor of SponsorListing">
+		<!-- Sponsor level headers -->
+		<ion-card-header *ngIf=sponsor.showDividerPY style="color:#444; font-weight:bold; background: #E5E4E2">
+			<ion-icon item-left name="sync"></ion-icon>
+			YEAR ROUND PLATINUM SPONSOR
+		</ion-card-header>
+		<ion-card-header *ngIf=sponsor.showDividerGY style="color:#fff; font-weight:bold; background: #bf9b30">
+			<ion-icon item-left name="sync"></ion-icon>
+			YEAR ROUND GOLD SPONSOR
+		</ion-card-header>
+		<ion-card-header *ngIf=sponsor.showDividerSY style="color:#444; font-weight:bold; background: #C0C0C0">
+			<ion-icon item-left name="sync"></ion-icon>
+			YEAR ROUND SILVER SPONSOR
+		</ion-card-header>
+		<ion-card-header *ngIf=sponsor.showDividerP style="color:#444; font-weight:bold; background: #E5E4E2">
+			PLATINUM
+		</ion-card-header>
+		<ion-card-header *ngIf=sponsor.showDividerG style="color:#fff; font-weight:bold; background: #bf9b30">
+			GOLD
+		</ion-card-header>
+		<ion-card-header *ngIf=sponsor.showDividerS style="color:#444; font-weight:bold; background: #C0C0C0">
+			SILVER
+		</ion-card-header>
+		<!-- Main card with logo and description -->
+		<ion-card-header *ngIf=sponsor.showHeader class="cardHeader">
+			<ion-card-title style="color:#fff">
+				{{sponsor.SponsorName}}
+			</ion-card-title>
+		</ion-card-header>
+		<ion-card-content *ngIf=sponsor.showLogoDescription padding>
+			<img [src]="sponsor.SponsorLogo" onerror="this.src='assets/img/1x1.png'">
+			<!--<img-loader [src]="sponsor.SponsorLogo" useImg [spinner]=false></img-loader>-->
+			<p>
+				{{sponsor.SponsorDescription}}
+			</p>
+		</ion-card-content>
+
+		<!-- Sub-card with contact information -->
+		<ion-card *ngIf=sponsor.showContact>
+				<ion-card-header class="cardHeader">
+				Contact Information
+			</ion-card-header>
+
+			<ion-list>
+				<button ion-item *ngIf=sponsor.showContactWeb (click)="navToWeb(sponsor.SponsorWeb)">
+					<ion-icon name="globe" item-start></ion-icon>
+					{{sponsor.SponsorWeb}}
+				</button>
+
+				<button ion-item *ngIf=sponsor.showContactEmail (click)="navToEmail(sponsor.SponsorEmail)">
+					<ion-icon name="mail" item-start></ion-icon>
+					{{sponsor.SponsorEmail}}
+				</button>
+
+				<button ion-item *ngIf=sponsor.showContactPhone (click)="callPhone2(sponsor.SponsorPhon)">
+					<ion-icon name="phone-portrait" item-start></ion-icon>
+					{{sponsor.SponsorPhone}}
+				</button>
+
+				<button ion-item *ngIf=sponsor.showContactLinkedIn (click)="navToWeb(sponsor.SponsorSocialMediaLinkedIn)">
+					<ion-icon name="logo-linkedin" item-start></ion-icon>
+					{{sponsor.SponsorSocialMediaLinkedIn}}
+				</button>
+
+				<button ion-item *ngIf=sponsor.showContactTwitter (click)="navToWeb(sponsor.SponsorSocialMediaTwitter)">
+					<ion-icon name="logo-twitter" item-start></ion-icon>
+					{{sponsor.SponsorSocialMediaTwitter}}
+				</button>
+
+				<button ion-item *ngIf=sponsor.showContactFacebook (click)="navToWeb(sponsor.SponsorSocialMediaFacebook)">
+					<ion-icon name="logo-facebook" item-start></ion-icon>
+					{{sponsor.SponsorSocialMediaFacebook}}
+				</button>
+
+			</ion-list>
+		</ion-card>
+	
+	</ion-card>
+	
+</ion-content>
+
+
+
+
+
+

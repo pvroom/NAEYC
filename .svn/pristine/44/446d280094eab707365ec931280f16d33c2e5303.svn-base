@@ -1,0 +1,280 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button icon-only menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>
+			2018 NAEYC Annual
+		</ion-title>
+		<ion-buttons start>
+	
+			<button style="background:transparent!important">
+				<ion-avatar>
+					<ion-text-avatar class="avatar" color="danger" style="z-index: 10;" (click)="AvatarNavigation()">{{AttendeeInitials}}
+						<ion-icon end name="{{LogInOutIcon}}" color="light" style="z-index: 1000;">
+						</ion-icon>
+					</ion-text-avatar>
+				</ion-avatar>
+			</button>
+
+		</ion-buttons>
+
+		<!--<ion-buttons end>
+			<button ion-button icon-only color="light" (click)="NavigateToLoginPage()">
+				<ion-icon name="{{LogInOutIcon}}"></ion-icon>
+			</button>
+		</ion-buttons>-->
+
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="{{MenuBackground}}" >
+
+	<!-- Floating button menu for adding new comment -->
+	<ion-fab bottom right #fab>
+		<button ion-fab color="danger" ion-fab>
+			<ion-icon name="add"></ion-icon>
+		</button>
+		<ion-fab-list side="top">
+			<button ion-fab (click)="ViewLeaderboard(fab)">
+				<ion-icon name="trophy"></ion-icon>
+				<div class="fabdivbutton">View Leaderboard</div>
+			</button>
+			<button ion-fab (click)="AddPosting(fab)">
+				<ion-icon name="chatboxes"></ion-icon>
+				<div class="fabdivbutton">Add Posting</div>
+			</button>
+		</ion-fab-list>
+	</ion-fab>
+
+	<img src="assets/img/AC_logo2018.png" width=90%; style="padding:5px; margin-left:10px">
+
+	<div id="MenuVertical" *ngIf="DisplayMenuVertical">
+
+		<ion-list no-lines class="bgCityscape">
+			<button ion-item class="opacity" [navPush]="programPage">
+				<p class="myFontSize26">Program</p>
+				<ion-icon name="list" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" [navPush]="speakersPage">
+				<p class="myFontSize26">Speakers</p>
+				<ion-icon name="mic" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('MyAgenda')">
+				<p class="myFontSize26">My Agenda</p>
+				<ion-icon name="calendar" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" [navPush]="exhibitorsPage">
+				<p class="myFontSize26">Exhibitors</p>
+				<ion-icon name="people" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" [navPush]="mapPage">
+				<p class="myFontSize26">Map</p>
+				<ion-icon name="map" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" [navPush]="conferenceCityPage">
+				<p class="myFontSize26">Washington, DC</p>
+				<ion-icon name="compass" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Networking')">
+				<p class="myFontSize26">Networking <ion-icon *ngIf=NewMessagesIndicator style="color:red" name="medical"></ion-icon></p>
+				<ion-icon name="contacts" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" [navPush]="helpPage">
+				<p class="myFontSize26">Help</p>
+				<ion-icon name="help" item-left></ion-icon>
+			</button>
+
+			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Notes')">
+				<p class="myFontSize26">Notes</p>
+				<ion-icon name="create" item-left></ion-icon>
+			</button>
+		</ion-list>
+
+
+
+	
+
+
+
+<!--
+		<button ion-button full color=danger icon-only (click)="presentPopover($event)">
+			
+				<h4>Actvity Feed</h4>
+			</button>
+
+	-->
+
+
+
+
+
+	<div id="MenuGrid" *ngIf="DisplayMenuGrid">
+
+		<div class="row" style="padding-top:20px; padding-bottom:0; margin-top:20px; margin-bottom:0">
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img (click)="NavigateToAuthenticatedPage('MyAgenda')" src="assets/img/calendar2.png" width="50%" height="auto" style="display: block; margin-left:auto; margin-right:auto; margin-top:0">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold"  class=""><span style="">YourAgenda</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="programPage" src="assets/img/schedule.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto; margin-top:0">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Program</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="speakersPage" src="assets/img/educator1.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                <p id="home-markdown6" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Educators</span></p>
+            </div>
+          </div>
+
+        <div class="row" style="padding-top:10px; padding-bottom:0; margin-top:10px; margin-bottom:0">
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0;">
+                <img (click)="NavigateToAuthenticatedPage('CETracking')" src="assets/img/ce.png" width="50%" height="auto" style="display: block; margin-top:0; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#ffffff;text-align:center;font-weight:bold" class=""><span style="">CE Tracker</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+
+              <img [navPush]="programPage" src="assets/img/book.png" width="50%" height="auto" style="display: block; margin-top:0; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#ffffff;text-align:center;font-weight:bold" class=""><span style="">Course Locations</span></p>
+            </div>
+
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img src="assets/img/gift.png" href="#" onclick="window.open('https://aacd.ejoinme.org/MyEvents/GiveBackaSmileSilentAuction2017/tabid/811205/Default.aspx', '_system', 'location=yes'); return false;" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">GBAS Auction</span></p>
+            </div>
+          </div>
+
+        <div class="row" style="padding-top:10px; padding-bottom:0; margin-top:10px; margin-bottom:0">
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="exhibitorsPage" src="assets/img/exhibitors1.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Exhibitors</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img src="assets/img/person1.png" href="#" onclick="window.open('https://www.aacd.com/index.php?module=login', '_system', 'location=yes'); return false;" width="50%" height="auto" style="display: block; margin-top:0; margin-left: auto; margin-right: auto;">
+                <p id="home-markdown3" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Your AACD</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="mapPage" src="assets/img/map.png" width="50%" height="auto" style="display: block; margin-top:0; margin-left: auto; margin-right: auto; padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <p id="home-markdown6"  style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Maps</span></p>
+            </div>
+        </div>
+	</div>
+
+	<div id="MenuDashboard" *ngIf="DisplayMenuDashboard">
+
+        <div class="row" style="width:100%; padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+			<ion-list no-lines>
+				<ion-item class="steel" (click)="NavigateToAuthenticatedPage('MyAgenda')">
+					Upcoming Agenda Items
+					<ion-icon name="calendar" item-left></ion-icon>
+				</ion-item>
+				<ion-item style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);color: white; padding-bottom:-30px; margin-bottom:-30px;" (click)="EventDetails(upcomingAgenda.visEventID)" *ngFor="let upcomingAgenda of upcomingAgendaItems" id="upcomingAgenda-list-item19" >
+					<div>
+						<div class="row">
+							<div class="col">
+								<div style="float: left; padding-right: 10px;">
+									<ion-icon name="{{upcomingAgenda.eventTypeIcon}}"></ion-icon>
+								</div>
+								<div>
+									<p class="myLabelBold" style="color: white;">
+										{{upcomingAgenda.EventName}}
+									</p>
+									<p style="color: white;">
+										{{upcomingAgenda.visEventTimeframe}}
+										<br/>
+										{{upcomingAgenda.EventLocation}}
+									</p>
+								</div>
+								<div style="float: right; color: white;">
+									<ion-icon name="{{upcomingAgenda.navigationArrow}}"></ion-icon>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ion-item>
+				<ion-item class="steel" (click)="NavigateToAuthenticatedPage('CETracking')">
+					CE Credits Completed
+					<ion-icon name="school" item-left></ion-icon>
+				</ion-item>
+				<ion-item style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);color: white;" (click)="NavigateToAuthenticatedPage('CETracking')" id="cetrackervalue-list" >
+					<div>
+						<div class="row">
+							<div class="col">
+								<div>
+									<p class="myLabelBold" style="color: white;font-size:1.8em">
+										{{creditsTypeL}}L / {{creditsTypeP}}P
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ion-item>
+				<ion-item class="steel">
+					Announcements
+					<ion-icon name="bookmarks" item-left></ion-icon>
+				</ion-item>
+				<ion-item style="border-color: rgba(0, 0, 0, 0);background-color: rgba(0, 0, 0, 0);color: white;" id="announcement-list" >
+					<div>
+						<div class="row">
+							<div class="col">
+								<div style="float: left; padding-right: 10px;">
+									<ion-icon name="bookmark"></ion-icon>
+								</div>
+								<div>
+									<p class="myLabelBold" style="color: white;">
+										12:30pm<br/>
+										Head over now to the Exhibit Hall to see Dr. Phil Smith
+									</p>
+								</div>
+							</div>
+						</div>
+					</div>
+				</ion-item>
+			</ion-list>
+        </div>
+
+        <div class="row" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0; position: fixed; bottom:0%;">
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="programPage" src="assets/img/schedule.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto; margin-top:0">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Program</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0">
+                <img [navPush]="exhibitorsPage" src="assets/img/exhibitors1.png" width="50%" height="auto" style="display: block; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#FFFFFF;text-align:center;font-weight:bold" class=""><span style="">Exhibitors</span></p>
+            </div>
+
+            <div class="col" style="padding-top:0; padding-bottom:0; margin-top:0; margin-bottom:0;">
+                <img (click)="NavigateToAuthenticatedPage('CETracking')" src="assets/img/ce.png" width="50%" height="auto" style="display: block; margin-top:0; margin-left: auto; margin-right: auto;">
+                <p id="" style="color:#ffffff;text-align:center;font-weight:bold" class=""><span style="">CE Tracker</span></p>
+            </div>
+
+		</div>
+	</div>
+	
+</div>
+</ion-content>
+
+	<ion-footer>
+			<ion-toolbar style="margin:0">
+			  <button ion-button full color="danger" [navPush]="activityPage">Activity Feed</button>
+			</ion-toolbar>
+		  </ion-footer>
+
+

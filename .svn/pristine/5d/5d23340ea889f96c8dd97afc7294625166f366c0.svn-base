@@ -1,0 +1,8 @@
+page-sponsors {
+
+    .cardHeader {
+        background:#740e88,; 
+        color:#fff;
+    }
+
+}

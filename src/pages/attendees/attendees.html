@@ -1,0 +1,50 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Attendees</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content class="attendees-page">
+
+	<!-- Search input 
+
+	<ion-grid>
+			<ion-row>
+				<ion-col col-9>	
+
+					<ion-item class="item-input; shadow">
+						<ion-icon name="search" item-left></ion-icon>
+						<ion-input name="srchBarEntry" id="srchBarEntry" 
+						type="text" placeholder="Search" [(ngModel)]="EntryTerms"></ion-input>
+					</ion-item>
+				</ion-col>
+				<ion-col col-3>
+					<button ion-button full color=danger style="margin:0" (tap)="GetSearchResults()">Submit</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+-->
+
+
+	<!-- Attendee Listing -->
+	<ion-list>
+		<ion-item tappable (click)="AttendeeDetails(attendee.AttendeeID)" *ngFor="let attendee of AttendeeListing" id="Attendee-list-item19">
+			<div style="float: left; padding-right: 10px;">
+				<ion-avatar item-start>
+					<img *ngIf=attendee.ShowHideAttendeeIcon [src]="attendee.AttendeeAvatar" src="assets/img/personIcon.png" onerror="this.src='assets/img/personIcon.png'">
+					<!--<img-loader *ngIf=attendee.ShowHideAttendeeIcon [src]="attendee.AttendeeAvatar" useImg [spinner]=false [fallbackAsPlaceholder]=true></img-loader>-->
+					<img *ngIf=attendee.ShowHideDividerIcon src="assets/img/SpeakerDivider.png">
+				</ion-avatar>
+			</div>
+			<ion-icon item-right name="{{attendee.navigationArrow}}"></ion-icon>
+				<h2 style="padding-top: 7px;">{{attendee.AttendeeName}}</h2>
+				<h3>{{attendee.AttendeeTitle}}</h3>
+				<h3>{{attendee.AttendeeOrganization}}</h3>
+		</ion-item>
+	</ion-list>
+
+</ion-content>
+

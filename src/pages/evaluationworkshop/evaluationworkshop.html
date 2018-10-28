@@ -1,0 +1,387 @@
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Evaluation</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+<ion-content>
+	
+	<ion-list>
+		<ion-list-header text-wrap style="background:#510e88; color:#fff">
+
+			<h2 style="color:#fff; font-weight:bold">Course Name</h2>
+			<h4 style="color:#fff">{{DisplayEventName}}</h4>
+			<h4 style="color:#fff">{{DisplayEventTimeDateLocation}}</h4>
+
+		</ion-list-header>
+
+
+		<ion-list-header text-wrap style="background:#510e88">
+			<h2 style="color:#fff">1.1)  Is this the first time you have attended a scientific session?</h2>
+		</ion-list-header>
+
+		<ion-list radio-group [(ngModel)]="CEEvaluationQ11" name="CEEvaluationQ11" (ionChange)="mcqAnswer($event)">
+			<ion-item>
+				<ion-label>Yes</ion-label>
+				<ion-radio value="Yes"></ion-radio>
+			</ion-item>
+			<ion-item>
+				<ion-label>No</ion-label>
+				<ion-radio value="No"></ion-radio>
+			</ion-item>
+		</ion-list>
+
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">1.2)  I am a...</h2>
+			</ion-card-header>
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ12" name="CEEvaluationQ12">
+					<ion-item>
+						<ion-label>Doctor</ion-label>
+						<ion-radio value="Doctor"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>Laboratory Technician</ion-label>
+						<ion-radio value="LabTech"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>Team</ion-label>
+						<ion-radio value="Team"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">2.1) The learning objectives were delivered effectively.</h2>
+			</ion-card-header>
+		
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ21" name="CEEvaluationQ21">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strong Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>		
+		</ion-card>
+	
+
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">2.2) The synopsis was an accurate reflection of the course as presented.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ22" name="CEEvaluationQ22">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff"> 2.3) The presentation style and organization contributed positively to the course.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ23" name="CEEvaluationQ23">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+		
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff"> 2.4) The material will be useful to me and my practice.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ24" name="CEEvaluationQ24">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+	   
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">2.5) The session provided opportunities for active learning.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ25" name="CEEvaluationQ25">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">2.6) I would attend another course by this presenter.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ26" name="CEEvaluationQ26">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">3.1) The presentation was not skewed toward the manufacture but balanced with regard to materials and equipment.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ31" name="CEEvaluationQ31">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+		<ion-card>
+
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">3.2) The presenter allotted sufficient time for questions and answers.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ32" name="CEEvaluationQ32">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+
+
+		<ion-card>
+
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">3.3) The balance of heavy emphasis on hands-on and minimal emphasis on lecture was good.</h2>
+			</ion-card-header>
+
+			<ion-card-content>
+				<ion-list radio-group [(ngModel)]="CEEvaluationQ33" name="CEEvaluationQ33">
+					<ion-item>
+						<ion-label>5 - Strongly Agree</ion-label>
+						<ion-radio value="5"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>4</ion-label>
+						<ion-radio value="4"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>3</ion-label>
+						<ion-radio value="3"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>2</ion-label>
+						<ion-radio value="2"></ion-radio>
+					</ion-item>
+					<ion-item>
+						<ion-label>1 - Strongly Disagree</ion-label>
+						<ion-radio value="1"></ion-radio>
+					</ion-item>
+				</ion-list>
+			</ion-card-content>
+		</ion-card>
+
+
+		<ion-card>
+			<ion-card-header text-wrap style="background:#510e88">	
+				<h2 style="color:#fff">4.1) Please contribute your additional comments or suggestions about this course below.</h2>
+			</ion-card-header>
+		
+			<ion-card-content>
+				<ion-textarea (input)='CEEvaluationQ41 = $event.target.value' 
+					name="CEEvaluationQ41"
+					[value]="CEEvaluationQ41" 
+					id="CEEvaluationQ41"
+					placeholder="Enter text" rows="4"></ion-textarea>
+			</ion-card-content>
+		</ion-card>
+	</ion-list>
+
+	<div>
+		<button ion-button style="background:#710080; width:50%; margin-right:25%; margin-left:25%" (click)="SubmitEvaluation()">
+			SUBMIT
+		</button>
+	</div>
+	<br/><br/><br/>
+
+</ion-content>
+
+
+

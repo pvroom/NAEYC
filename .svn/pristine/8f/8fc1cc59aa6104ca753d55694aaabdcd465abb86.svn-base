@@ -1,0 +1,76 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Speaker Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+	<ion-grid>
+		<ion-row>
+			<ion-col col-4>
+				<!--<img-loader [src]="visualImageURL" useImg style="float:left; width:70%" ></img-loader>-->
+				<img [src]="visualImageURL" onerror="this.src='assets/img/personIcon.png'"
+					style="float:left; width:70%" src="assets/img/personIcon.png" alt="Image error">
+			</ion-col>
+	
+			<ion-col col-8 class="myLabelBold" style="padding-left:0">
+					<h2>{{visualDisplayName}}</h2>
+					<h5>{{visualTitle}}<br/>
+					{{visualAffiliation}}</h5>
+					<button ion-button outline *ngIf="btnBookmarkManagement" (click)="BookmarkManagement()" [style.background-color]="BookmarkButtonColor" [style.color]="BookmarkButtonTextColor" [style.border-color]="BookmarkButtonTextColor">
+						<div>
+							<ion-icon name="bookmark"></ion-icon>
+							<label>{{visBookmarkAddRemoveButton}}</label>
+						</div>
+					</button>
+					</ion-col>
+		</ion-row>
+	</ion-grid>
+
+	<ion-card>
+		<ion-card-header class="cardHeader" >
+			Biography
+		</ion-card-header>
+		<ion-card-content [innerHTML]="spkrDetails" style="margin-top:5px">
+			{{visualBiography}}
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="WebsiteShow">
+		<ion-card-header class="cardHeader">
+			<p style="color:#fff">
+				Website
+			</p>
+		</ion-card-header>
+
+		<ion-card-content style="margin-top:5px">
+			<div class="list" (click)="navToWebsite(visWebsite)">
+				{{visWebsite}}
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header class="cardHeader">
+				Sessions
+		</ion-card-header>
+		<ion-card-content>
+			<ion-list id="speakersessions-list3" style="margin-top:5px">
+				<ion-item class="item-icon-left item-icon-right" (click)="EventDetails(session.EventID)" *ngFor="let session of SessionListing" id="speakersessions-list-item19">
+					<ion-icon item-right name="arrow-dropright"></ion-icon>
+					<ion-icon item-left name="list"></ion-icon>
+					<h2 text-wrap> {{session.DisplayEventName}}</h2>
+					<p>{{session.DisplayEventTimeDateLocation}}</p>
+				</ion-item>
+			</ion-list>
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

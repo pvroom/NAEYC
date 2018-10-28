@@ -1,0 +1,242 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Full Agenda</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content>
+
+	<!--Rotating Banner Ad-->
+	<div style="background:rgb(255, 255, 255)">
+		<ion-slides class="ad" autoplay="5000" loop="true" speed="3000">
+			<ion-slide>
+				<img src="assets/img/Cloud_banner.jpg">
+			</ion-slide>
+			<ion-slide >
+				<img src="assets/img/Cloud_banner.jpg">
+			</ion-slide>
+			<ion-slide >
+				<img src="assets/img/Cloud_banner.jpg">
+			</ion-slide>
+		</ion-slides>
+	</div>
+
+
+
+	<!--Segment Menu Bar-->
+	<div>
+		<ion-segment [(ngModel)]="agenda">
+			<ion-segment-button value="myagenda" style="background:#5757A0; color:#fff">
+				My Agenda
+			</ion-segment-button>
+			<ion-segment-button value="fullagenda" style="background:#F15D22; color:#fff">
+				Full Agenda
+			</ion-segment-button>
+		</ion-segment>
+	</div>
+
+
+	<!--My Agenda Contents-->
+	<div style="padding:0!important;margin-left:0!important; margin-right:-20px" [ngSwitch]="agenda">
+		<ion-list style="padding:0!important;margin:0!important" *ngSwitchCase="'myagenda'" id="agendafull-list3">
+			<ion-item>
+
+				<!-- Tuesday agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#5757A0; color:#fff">
+						<h2 style="color:#fff">Saturday, June 9</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="EventDetails(agendaTue.visEventID)" *ngFor="let agendaTue of agendaTueItems" id="fullagenda-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{agendaTue.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{agendaTue.EventName}}</h2>
+							<p>{{agendaTue.visEventTimeframe}}</p>
+							<p>{{agendaTue.EventLocation}}</p>
+							<p [ngClass]="agendaTue.SessionStatusStyle">{{agendaTue.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Wednesday agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#5757A0; color:#fff">
+						<h2 style="color:#fff">Sunday, June 10</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="EventDetails(agendaWed.visEventID)" *ngFor="let agendaWed of agendaWedItems" id="fullagenda-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{agendaWed.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{agendaWed.EventName}}</h2>
+							<p>{{agendaWed.visEventTimeframe}}</p>
+							<p>{{agendaWed.EventLocation}}</p>
+							<p [ngClass]="agendaWed.SessionStatusStyle">{{agendaWed.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+
+				<!-- Thursday agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#5757A0; color:#fff">
+						<h2 style="color:#fff">Monday, June 11</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="EventDetails(agendaThu.visEventID)" *ngFor="let agendaThu of agendaThuItems" id="fullagenda-list-item20">
+							<ion-icon style="color:#ef6a04" item-left name="{{agendaThu.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{agendaThu.EventName}}</h2>
+							<p>{{agendaThu.visEventTimeframe}}</p>
+							<p>{{agendaThu.EventLocation}}</p>
+							<p [ngClass]="agendaThu.SessionStatusStyle">{{agendaThu.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+
+				<!-- Friday agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#5757A0; color:#fff">
+						<h2 style="color:#fff">Tuesday, June 12</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="EventDetails(agendaFri.visEventID)" *ngFor="let agendaFri of agendaFriItems" id="fullagenda-list-item21">
+							<ion-icon style="color:#ef6a04" item-left name="{{agendaFri.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{agendaFri.EventName}}</h2>
+							<p>{{agendaFri.visEventTimeframe}}</p>
+							<p>{{agendaFri.EventLocation}}</p>
+							<p [ngClass]="agendaFri.SessionStatusStyle">{{agendaFri.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Saturday agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#5757A0; color:#fff">
+						<h2 style="color:#fff">Wednesday, June 13</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="EventDetails(agendaSat.visEventID)" *ngFor="let agendaSat of agendaSatItems" id="fullagenda-list-item22">
+							<ion-icon style="color:#ef6a04" item-left name="{{agendaSat.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{agendaSat.EventName}}</h2>
+							<p>{{agendaSat.visEventTimeframe}}</p>
+							<p>{{agendaSat.EventLocation}}</p>
+							<p [ngClass]="agendaSat.SessionStatusStyle">{{agendaSat.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+			</ion-item>
+		</ion-list>
+	</div>
+
+
+	<!-- Full Agenda Contents -->
+	<div style="padding:0!important;margin:0!important" [ngSwitch]="agenda">
+		<ion-list style="padding:0!important;margin:0!important" *ngSwitchCase="'fullagenda'" id="agendafull-list3">
+
+			<ion-item>
+
+				<!-- Day 1 agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#F15D22; color:#fff">
+						<h2 style="color:#fff">Saturday, June 9</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="SessionDetails(fullagendaDay1.visEventID)" *ngFor="let fullagendaDay1 of fullagendaDay1Items" id="fullagendaDay1-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{fullagendaDay1.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{fullagendaDay1.EventName}}</h2>
+							<p>{{fullagendaDay1.visEventTimeframe}}</p>
+							<p>{{fullagendaDay1.EventLocation}}</p>
+							<p>{{fullagendaDay1.visCourseID}}</p>
+							<p [ngClass]="fullagendaDay1.SessionStatusStyle">{{fullagendaDay1.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Day 2 agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#F15D22; color:#fff">
+						<h2 style="color:#fff">Sunday, June 10</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="SessionDetails(fullagendaDay2.visEventID)" *ngFor="let fullagendaDay2 of fullagendaDay2Items" id="fullagendaDay2-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{fullagendaDay2.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{fullagendaDay2.EventName}}</h2>
+							<p>{{fullagendaDay2.visEventTimeframe}}</p>
+							<p>{{fullagendaDay2.EventLocation}}</p>
+							<p>{{fullagendaDay2.visCourseID}}</p>
+							<p [ngClass]="fullagendaDay2.SessionStatusStyle">{{fullagendaDay2.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Day 3 agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#F15D22; color:#fff">
+						<h2 style="color:#fff">Monday, June 11</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="SessionDetails(fullagendaDay3.visEventID)" *ngFor="let fullagendaDay3 of fullagendaDay3Items" id="fullagendaDay2-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{fullagendaDay3.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{fullagendaDay3.EventName}}</h2>
+							<p>{{fullagendaDay3.visEventTimeframe}}</p>
+							<p>{{fullagendaDay3.EventLocation}}</p>
+							<p>{{fullagendaDay3.visCourseID}}</p>
+							<p [ngClass]="fullagendaDay3.SessionStatusStyle">{{fullagendaDay3.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Day 4 agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#F15D22; color:#fff">
+						<h2 style="color:#fff">Tuesday, June 12</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="SessionDetails(fullagendaDay4.visEventID)" *ngFor="let fullagendaDay4 of fullagendaDay4Items" id="fullagendaDay2-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{fullagendaDay4.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{fullagendaDay4.EventName}}</h2>
+							<p>{{fullagendaDay4.visEventTimeframe}}</p>
+							<p>{{fullagendaDay4.EventLocation}}</p>
+							<p>{{fullagendaDay4.visCourseID}}</p>
+							<p [ngClass]="fullagendaDay4.SessionStatusStyle">{{fullagendaDay4.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+
+				<!-- Day 5 agenda items -->
+				<ion-card style="padding:0!important;margin:0!important">
+					<ion-card-header style="background:#F15D22; color:#fff">
+						<h2 style="color:#fff">Wednesday, June 13</h2>
+					</ion-card-header>
+					<ion-card-content>
+						<ion-item text-wrap (click)="SessionDetails(fullagendaDay5.visEventID)" *ngFor="let fullagendaDay5 of fullagendaDay5Items" id="fullagendaDay2-list-item19" >
+							<ion-icon style="color:#ef6a04" item-left name="{{fullagendaDay5.eventTypeIcon}}"></ion-icon>
+							<ion-icon item-right name="arrow-dropright"></ion-icon>
+							<h2>{{fullagendaDay5.EventName}}</h2>
+							<p>{{fullagendaDay5.visEventTimeframe}}</p>
+							<p>{{fullagendaDay5.EventLocation}}</p>
+							<p>{{fullagendaDay5.visCourseID}}</p>
+							<p [ngClass]="fullagendaDay5.SessionStatusStyle">{{fullagendaDay5.SessionStatus}}</p>
+						</ion-item>
+					</ion-card-content>
+				</ion-card>
+			</ion-item>
+		</ion-list>
+	</div>
+
+</ion-content>
+
+
+
+

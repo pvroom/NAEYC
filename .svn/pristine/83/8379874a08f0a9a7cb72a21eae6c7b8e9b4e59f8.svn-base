@@ -1,0 +1,83 @@
+<!--
+  Generated template for the Map page.
+
+  See http://ionicframework.com/docs/v2/components/#navigation for more info on
+  Ionic pages and navigation.
+-->
+<ion-header>
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Maps</ion-title>
+  </ion-navbar>
+</ion-header>
+
+
+
+<ion-content>
+
+	<!-- imageView version -->
+	<!--
+	<ion-card>
+		<ion-card-header style="background:#740e88; color:#fff">
+			Austin JW Marriott Meeting Rooms -- Floor 2
+		</ion-card-header>
+		<img src="assets/img/ausJW2a.png" imageViewer/>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#740e88; color:#fff">
+			Austin JW Marriott Meeting Rooms -- Floor 3
+		</ion-card-header>
+		<img src="assets/img/ausJW3a.png" imageViewer />
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#740e88; color:#fff">
+			Austin JW Marriott Meeting Rooms -- Floor 4
+		</ion-card-header>
+		<img src="assets/img/ausJW4a.png" imageViewer />
+	</ion-card>
+	-->
+	
+	<!-- Leaflet version -->
+	<ion-card>
+		<ion-card-header style="background:#bfcc33; color:#fff">
+			DC Convention Center -- Level 1
+		</ion-card-header>
+        <div id="mapLevel2" style="width:100%; height:500px;"></div>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#bfcc33; color:#fff">
+			DC Convention Center -- Level 2
+		</ion-card-header>
+        <div id="mapLevel3" style="width:100%; height:500px;"></div>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#bfcc33; color:#fff">
+			DC Convention Center -- Level 3
+		</ion-card-header>
+        <div id="mapLevel4" style="width:100%; height:500px;"></div>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#bfcc33; color:#fff">
+			DC Convention Center -- Concourse
+		</ion-card-header>
+        <div id="mapLevel5" style="width:100%; height:500px;"></div>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#bfcc33; color:#fff">
+			DC Convention Center -- Salons
+		</ion-card-header>
+        <div id="mapLevel6" style="width:100%; height:500px;"></div>
+	</ion-card>
+
+</ion-content>
+
+     
+   

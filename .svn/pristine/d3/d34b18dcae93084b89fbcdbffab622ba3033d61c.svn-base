@@ -1,0 +1,23 @@
+page-exhibitordetails {
+
+
+    .marginTB0  {
+        margin-top:0!important;
+        margin-bottom:0!important;
+        margin-left:0!important;
+        text-align: left!important;
+        }
+
+
+.opacity  {
+    background: rgba(0, 0, 0, 0.6);
+    color:#fff;
+
+}
+
+.steel {
+  background:rgba(0, 0, 0, 0.6)!important;
+      color:#fff;
+  }
+
+}

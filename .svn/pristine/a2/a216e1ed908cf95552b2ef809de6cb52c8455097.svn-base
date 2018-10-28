@@ -1,0 +1,259 @@
+webpackJsonp([19],{
+
+/***/ 952:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+Object.defineProperty(__webpack_exports__, "__esModule", { value: true });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "ActivityFeedDetailsPageModule", function() { return ActivityFeedDetailsPageModule; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_forms__ = __webpack_require__(29);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3__activityfeeddetails__ = __webpack_require__(981);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+// Components, functions, plugins
+
+
+
+// Pages
+
+let ActivityFeedDetailsPageModule = class ActivityFeedDetailsPageModule {
+};
+ActivityFeedDetailsPageModule = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_1__angular_core__["NgModule"])({
+        declarations: [__WEBPACK_IMPORTED_MODULE_3__activityfeeddetails__["a" /* ActivityFeedDetailsPage */]],
+        imports: [
+            __WEBPACK_IMPORTED_MODULE_0__angular_forms__["a" /* FormsModule */],
+            __WEBPACK_IMPORTED_MODULE_2_ionic_angular__["IonicPageModule"].forChild(__WEBPACK_IMPORTED_MODULE_3__activityfeeddetails__["a" /* ActivityFeedDetailsPage */])
+        ],
+        exports: [__WEBPACK_IMPORTED_MODULE_3__activityfeeddetails__["a" /* ActivityFeedDetailsPage */]]
+    })
+], ActivityFeedDetailsPageModule);
+
+//# sourceMappingURL=activityfeeddetails.module.js.map
+
+/***/ }),
+
+/***/ 981:
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "a", function() { return ActivityFeedDetailsPage; });
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_0__angular_core__ = __webpack_require__(0);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_1_ionic_angular__ = __webpack_require__(6);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_2__ionic_storage__ = __webpack_require__(25);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__ = __webpack_require__(24);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map___default = __webpack_require__.n(__WEBPACK_IMPORTED_MODULE_3_rxjs_add_operator_map__);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_4__providers_database_database__ = __webpack_require__(21);
+/* harmony import */ var __WEBPACK_IMPORTED_MODULE_5__providers_localstorage_localstorage__ = __webpack_require__(15);
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+var __metadata = (this && this.__metadata) || function (k, v) {
+    if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
+};
+// Components, functions, plugins
+
+
+
+
+
+
+let ActivityFeedDetailsPage = class ActivityFeedDetailsPage {
+    constructor(navCtrl, navParams, storage, databaseprovider, cd, alertCtrl, events, loadingCtrl, modal, localstorage) {
+        this.navCtrl = navCtrl;
+        this.navParams = navParams;
+        this.storage = storage;
+        this.databaseprovider = databaseprovider;
+        this.cd = cd;
+        this.alertCtrl = alertCtrl;
+        this.events = events;
+        this.loadingCtrl = loadingCtrl;
+        this.modal = modal;
+        this.localstorage = localstorage;
+        this.afComments = [];
+    }
+    ionViewDidLoad() {
+        console.log('ionViewDidLoad ActivityFeedDetailsPage');
+    }
+    AddComment(fab) {
+        const AddCommentModalOptions = {
+            enableBackdropDismiss: false
+        };
+        const AddCommentModal = this.modal.create('ActivityFeedCommentPage', {}, AddCommentModalOptions);
+        AddCommentModal.present();
+        AddCommentModal.onDidDismiss((data) => {
+            // If saved, then re-run ngOnInit to refresh the listing
+            if (data == "Save") {
+                this.ngOnInit();
+            }
+        });
+        fab.close();
+    }
+    timeDifference(laterdate, earlierdate) {
+        var difference = laterdate.getTime() - earlierdate.getTime();
+        var daysDifference = Math.floor(difference / 1000 / 60 / 60 / 24);
+        difference -= daysDifference * 1000 * 60 * 60 * 24;
+        var hoursDifference = Math.floor(difference / 1000 / 60 / 60);
+        difference -= hoursDifference * 1000 * 60 * 60;
+        var minutesDifference = Math.floor(difference / 1000 / 60);
+        difference -= minutesDifference * 1000 * 60;
+        var secondsDifference = Math.floor(difference / 1000);
+        var stringOutput = "";
+        if (daysDifference > 0) {
+            stringOutput = daysDifference + ' day/s';
+        }
+        else {
+            if (hoursDifference > 0) {
+                stringOutput = hoursDifference + ' hr/s';
+            }
+            else {
+                if (minutesDifference > 0) {
+                    stringOutput = minutesDifference + ' min/s';
+                }
+                else {
+                    if (hoursDifference == 0) {
+                        stringOutput = secondsDifference + ' sec/s';
+                    }
+                }
+            }
+        }
+        console.log('timeDifference output: ' + stringOutput);
+        return stringOutput;
+    }
+    ngOnInit() {
+        var AttendeeID = this.localstorage.getLocalValue('AttendeeID');
+        if (AttendeeID == '' || AttendeeID == null) {
+            AttendeeID = '0';
+        }
+        // Load initial data set here
+        let loading = this.loadingCtrl.create({
+            spinner: 'crescent',
+            content: 'Please wait...'
+        });
+        loading.present();
+        // Blank and show loading info
+        this.cd.markForCheck();
+        // Temporary use variables
+        var ActivityFeedID = this.localstorage.getLocalValue('ActivityFeedID');
+        this.ActivityFeedID = ActivityFeedID;
+        var flags = "dt|" + ActivityFeedID + "|Alpha|";
+        // -------------------------
+        // Get Activity Feed Details
+        // -------------------------
+        var PrimarySpeakerName = "";
+        var SQLDate;
+        var DisplayDateTime;
+        var dbEventDateTime;
+        var courseID = "";
+        var UpdatedEventDescription;
+        var UpdatedEventDescription2;
+        var HandoutPDFName = "";
+        this.afComments = [];
+        console.log('Activity Feed Details, flags: ' + flags);
+        // Get Activity Feed detail record
+        this.databaseprovider.getActivityFeedData(flags, AttendeeID).then(data => {
+            console.log("getActivityFeedData: " + JSON.stringify(data));
+            if (data['length'] > 0) {
+                // Original posting details
+                var imageAvatar = "https://naeyc.convergence-us.com/AdminGateway/images/Attendees/" + data[0].Poster + ".jpg";
+                var imageAttachment = data[0].afImageAttachment;
+                if (imageAttachment != "") {
+                    imageAttachment = "https://naeyc.convergence-us.com/AdminGateway/images/ActivityFeedAttachments/" + imageAttachment;
+                }
+                var DisplayName = data[0].PosterFirst + " " + data[0].PosterLast;
+                dbEventDateTime = data[0].Posted.substring(0, 19);
+                dbEventDateTime = dbEventDateTime.replace(/-/g, '/');
+                dbEventDateTime = dbEventDateTime.replace(/T/g, ' ');
+                SQLDate = new Date(dbEventDateTime);
+                DisplayDateTime = dateFormat(SQLDate, "mm/dd h:MMtt");
+                var CurrentDateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+                var CurrentDateTime2 = new Date(CurrentDateTime);
+                var PostedDate = new Date(data[0].Posted);
+                var TimeDifference = this.timeDifference(CurrentDateTime2, PostedDate);
+                this.ActivityFeedCommentAvatar = imageAvatar;
+                this.ActivityFeedCommentBy = DisplayName;
+                this.ActivityFeedCommentPosted = DisplayDateTime;
+                this.ActivityFeedComment = data[0].afMessage;
+                this.ActivityFeedLikesCounter = data[0].afLikesCounter;
+                this.ActivityFeedCommentsCounter = data[0].CommentsCount;
+                this.ActivityFeedCommentPostedDuration = TimeDifference;
+                this.ActivityFeedAttachment = imageAttachment;
+                this.localstorage.setLocalValue('ActivityFeedIDCCount', data[0].CommentsCount);
+                console.log('Initial post set');
+                if (data[0].CommentsCount > 0) {
+                    // Commenter details
+                    for (var i = 0; i < data['length']; i++) {
+                        var imageAvatar = "https://naeyc.convergence-us.com/AdminGateway/images/Attendees/" + data[i].Commenter + ".jpg";
+                        DisplayName = data[i].CommenterFirst + " " + data[i].CommenterLast;
+                        dbEventDateTime = data[i].CommentPosted.substring(0, 19);
+                        dbEventDateTime = dbEventDateTime.replace(/-/g, '/');
+                        dbEventDateTime = dbEventDateTime.replace(/T/g, ' ');
+                        SQLDate = new Date(dbEventDateTime);
+                        DisplayDateTime = dateFormat(SQLDate, "mm/dd h:MMtt");
+                        // Show the current record
+                        this.afComments.push({
+                            afID: data[i].afID,
+                            ActivityFeedCommentAvatar: imageAvatar,
+                            ActivityFeedCommentBy: DisplayName,
+                            ActivityFeedCommentPosted: DisplayDateTime,
+                            ActivityFeedComment: data[i].afcComment
+                        });
+                    }
+                }
+            }
+            this.cd.markForCheck();
+            loading.dismiss();
+        }).catch(function () {
+            console.log("Activity Feed Promise Rejected");
+            loading.dismiss();
+        });
+    }
+    UpdateLikes() {
+        console.log('Likes button tapped');
+        var flags = "lu|" + this.ActivityFeedID;
+        // Get the data
+        this.databaseprovider.getActivityFeedData(flags, "0").then(data => {
+            console.log(JSON.stringify(data));
+            if (data['length'] > 0) {
+                if (data[0].Status = "Saved") {
+                    this.ActivityFeedLikesCounter = data[0].NewLikes;
+                    this.cd.markForCheck();
+                }
+            }
+        }).catch(function () {
+            console.log("UpdateLikes Promise Rejected");
+        });
+    }
+};
+ActivityFeedDetailsPage = __decorate([
+    Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["Component"])({
+        selector: 'page-activityfeeddetails',template:/*ion-inline-start:"C:\SVNProjects\NAEYC_Annual_v2\src\pages\activityfeeddetails\activityfeeddetails.html"*/'<ion-header>\n\n	<ion-navbar color="primary">\n		<button ion-button menuToggle>\n			<ion-icon name="menu"></ion-icon>\n		</button>\n		<ion-title>Attendee Posting</ion-title>\n	</ion-navbar>\n\n</ion-header>\n\n<ion-content class="page-activityfeeddetails">\n\n	<!-- Initial posting by attendee -->\n	<ion-card>\n\n		<!-- Attendee avatar and name -->\n		<ion-item>\n			<ion-avatar item-start>\n				<img src="{{ActivityFeedCommentAvatar}}" onerror="this.src=\'assets/img/personIcon.png\'">\n			</ion-avatar>\n			<h2>{{ActivityFeedCommentBy}}</h2>\n			<p>{{ActivityFeedCommentPosted}}</p>\n		</ion-item>\n\n		<!-- Posting picture attachment -->\n		<img src="{{ActivityFeedAttachment}}">\n\n		<!-- Attendee\'s comment -->\n		<ion-card-content>\n			<p>{{ActivityFeedComment}}</p>\n		</ion-card-content>\n\n		<!-- Footer with details -->\n		<ion-row>\n			<ion-col>\n				<button ion-button icon-left clear small tappable (click)="UpdateLikes(afID)">\n					<ion-icon name="thumbs-up"></ion-icon>\n					<div>{{ActivityFeedLikesCounter}} Likes</div>\n				</button>\n			</ion-col>\n			<ion-col>\n				<button ion-button icon-left clear small>\n					<ion-icon name="text"></ion-icon>\n					<div>{{ActivityFeedCommentsCounter}} Comments</div>\n				</button>\n			</ion-col>\n			<ion-col center text-center>\n				<ion-note>\n					{{ActivityFeedCommentPostedDuration}} ago\n				</ion-note>\n			</ion-col>\n		</ion-row>\n\n	</ion-card>\n	\n	<!-- Comments to posting by other attendees -->\n    <ion-scroll scrollY="true" style="width: 100%; height: 100%;">\n	\n		<ion-card *ngFor="let comment of afComments">\n\n			<!-- Attendee avatar and name -->\n			<ion-item>\n				<ion-avatar item-start>\n					<img src="{{comment.ActivityFeedCommentAvatar}}" onerror="this.src=\'assets/img/personIcon.png\'">\n				</ion-avatar>\n				<h2>{{comment.ActivityFeedCommentBy}}</h2>\n				<p>{{comment.ActivityFeedCommentPosted}}</p>\n			</ion-item>\n			<ion-card-content>\n				<p>{{comment.ActivityFeedComment}}</p>\n			</ion-card-content>\n		</ion-card>\n\n	</ion-scroll>\n\n	<!-- Floating button menu for adding new comment -->\n    <ion-fab bottom right #fab>\n		<button ion-fab color="danger" ion-fab>\n			<ion-icon name="add"></ion-icon>\n		</button>\n		<ion-fab-list side="top">\n			<button ion-fab (click)="AddComment(fab)">\n				<ion-icon name="chatbubbles"></ion-icon>\n				<div class="fabdivbutton">Add a Comment</div>\n			</button>\n		</ion-fab-list>\n    </ion-fab>\n\n</ion-content>\n'/*ion-inline-end:"C:\SVNProjects\NAEYC_Annual_v2\src\pages\activityfeeddetails\activityfeeddetails.html"*/,
+        changeDetection: __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectionStrategy"].OnPush
+    }),
+    __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavController"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["NavParams"],
+        __WEBPACK_IMPORTED_MODULE_2__ionic_storage__["b" /* Storage */],
+        __WEBPACK_IMPORTED_MODULE_4__providers_database_database__["a" /* Database */],
+        __WEBPACK_IMPORTED_MODULE_0__angular_core__["ChangeDetectorRef"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["AlertController"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["Events"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["LoadingController"],
+        __WEBPACK_IMPORTED_MODULE_1_ionic_angular__["ModalController"],
+        __WEBPACK_IMPORTED_MODULE_5__providers_localstorage_localstorage__["a" /* Localstorage */]])
+], ActivityFeedDetailsPage);
+
+//# sourceMappingURL=activityfeeddetails.js.map
+
+/***/ })
+
+});
+//# sourceMappingURL=19.js.map

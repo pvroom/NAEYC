@@ -1,0 +1,50 @@
+page-attendees {
+
+
+
+    .avatar {
+        vertical-align: middle;
+        width: 40px!important;
+        height: 40px!important;
+        border-radius: 50%;
+        font-size:18px;
+        box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+    }
+
+
+    ion-icon {
+        font-size: 50px;
+        color:#fff;
+    }
+
+
+    #alphabets{
+        position: fixed;
+        top:0;
+        right:0;
+        height:100%;
+        z-index:11;
+        width: 50px;
+        background: #eaeaea;
+        padding: 10px 20px;
+        line-height:24px;
+      }
+      
+      /* ------------------------------- */
+      .ion_alpha_list_outer .list{
+          padding-right: 15px;
+      }
+      .ion_alpha_list_outer .item{
+          border-right: none;
+      }
+      .ion_alpha_sidebar{
+          position: fixed;
+          right: 0;
+          top: 0;
+          height: 100%;
+      }
+      .ion_alpha_sidebar li{
+          line-height: 1.1;
+      }
+
+}

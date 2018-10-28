@@ -1,0 +1,231 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Event Survey</ion-title>
+	</ion-navbar>
+</ion-header>
+
+<ion-content>
+
+
+
+		<ion-card>
+
+				<ion-card-header style="background: #0b172a">
+						<ion-item text-wrap style="background: #0b172a" id="survey-list-item-divider2"><h2 style="color:#fff">1.	What did you like the most about the conference?</h2></ion-item>
+				</ion-card-header>
+			  
+				<ion-card-content>
+					
+						<label class="item item-input " id="survey-textarea2"></label>
+						<ion-item class="lmargin10" id="survey-textarea2">
+								<ion-textarea type="text" placeholder="Comments" [(ngModel)]="eventSurveyQ1" rows="3" name="Qu1"></ion-textarea>
+						</ion-item>
+				</ion-card-content>
+			  
+			  </ion-card>
+
+
+			  <ion-card>
+
+					<ion-card-header style="background: #0b172a">
+							<ion-item text-wrap style="background: #0b172a" id="survey-list-item-divider2"><h2 style="color:#fff">2.	What did you like the least about the conference?</h2></ion-item>
+					</ion-card-header>
+				  
+					<ion-card-content>
+							<label class="item item-input " id="survey-textarea2"></label>
+							<ion-item class="lmargin10" id="survey-textarea2">
+									<ion-textarea type="text" placeholder="Comments" [(ngModel)]="eventSurveyQ2" rows="3" name="Qu2"></ion-textarea>
+							</ion-item>
+						
+					</ion-card-content>
+				  
+				  </ion-card>
+
+
+
+				  <ion-card>
+
+						<ion-card-header style="background: #0b172a">
+								<ion-item text-wrap style="background: #0b172a" id="survey-list-item-divider2"><h2 style="color:#fff">3.	What could we have done to make your conference experience better?</h2></ion-item>
+						</ion-card-header>
+					  
+						<ion-card-content>
+								<label class="item item-input " id="survey-textarea2"></label>
+								<ion-item class="lmargin10" id="survey-textarea2">
+										<ion-textarea type="text" placeholder="Comments" [(ngModel)]="eventSurveyQ3" rows="3" name="Qu3"></ion-textarea>
+								</ion-item>
+							
+						</ion-card-content>
+					  
+					  </ion-card>
+
+
+					  <ion-card>
+
+							<ion-card-header style="background: #0b172a">
+									<ion-item text-wrap style="background: #0b172a" id="survey-list-item-divider2"><h2 style="color:#fff">4.	What was your goal for 
+											attending the conference?</h2></ion-item>
+							</ion-card-header>
+						  
+							<ion-card-content>
+									<label class="item item-input " id="survey-textarea2"></label>
+									<ion-item class="lmargin10" id="survey-textarea2">
+											<ion-textarea type="text" placeholder="Comments" [(ngModel)]="eventSurveyQ4" rows="3" name="Qu4"></ion-textarea>
+									</ion-item>
+								
+							</ion-card-content>
+						  
+						  </ion-card>
+
+
+
+						  <ion-card>
+
+								<ion-card-header style="background: #0b172a">
+										<ion-item text-wrap style="background: #0b172a" id="survey-list-item-divider2"><h2 style="color:#fff">5. Did you meet your goal?</h2></ion-item>
+								</ion-card-header>
+							  
+								<ion-card-content>
+										<ion-list radio-group [(ngModel)]="eventSurveyQ5" name="Qu5" (ionChange)="mcqAnswer($event)">
+												<ion-item>
+													<ion-label>Yes</ion-label>
+													<ion-radio value="Yes"></ion-radio>
+												</ion-item>
+												<ion-item>
+													<ion-label>No</ion-label>
+													<ion-radio value="No"></ion-radio>
+												</ion-item>
+												<ion-item class="lmargin10" id="survey-textarea6">
+													<ion-textarea type="text" placeholder="If no, why were your goals not met?"[(ngModel)]="eventSurveyQ5C" rows="3" name="Qu5C"></ion-textarea>
+												</ion-item>
+											</ion-list>
+									
+								</ion-card-content>
+							  
+							  </ion-card>
+	
+
+
+	<ion-card>
+
+	<ion-card-header style="background: #0b172a">
+
+	<ion-item text-wrap class="item-divider" style="background: #0b172a" id="survey-list-item-divider7"><h2 style="color:#fff">6. What’s the idea you heard that you 
+		were most excited to take back to the office?</h2></ion-item>
+</ion-card-header>
+	
+<ion-card-content>
+	<label class="item item-input" id="survey-textarea7"></label>
+	<ion-item class="lmargin10" id="survey-textarea7a">
+			<ion-textarea type="text" placeholder="Comments"[(ngModel)]="eventSurveyQ6" rows="3" name="Qu6"></ion-textarea>
+	</ion-item>
+</ion-card-content>
+		</ion-card>
+	
+
+
+
+	<ion-card>
+
+	<ion-card-header style="background: #0b172a">	
+
+	<ion-item text-wrap class="item-divider" style="background: #0b172a" id="survey-list-item-divider9"><h2 style="color:#fff">7. What other educational topics would you like to have added to the program?</h2></ion-item>
+</ion-card-header>
+	<ion-card-content>
+	<label class="item item-input " id="survey-textarea9"></label>
+	<ion-item class="lmargin10" id="survey-textarea9a">
+			<ion-textarea type="text" placeholder="Comments"[(ngModel)]="eventSurveyQ7" rows="3" name="Qu7"></ion-textarea>
+	</ion-item>
+</ion-card-content>
+</ion-card>
+	
+
+
+<ion-card>
+
+		<ion-card-header style="background: #0b172a">	
+	
+	<ion-item text-wrap class="item-divider" style="background: #0b172a" id="survey-list-item-divider10"><h2 style="color:#fff">8. Do you plan to attend the conference next year?</h2></ion-item>
+</ion-card-header>
+<ion-card-content>
+	<ion-list radio-group [(ngModel)]="eventSurveyQ8" name="Qu8">
+		<ion-item>
+			<ion-label>Yes</ion-label>
+			<ion-radio value="Yes"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>No</ion-label>
+			<ion-radio value="No"></ion-radio>
+		</ion-item>
+	</ion-list>
+	</ion-card-content>
+</ion-card>
+
+
+
+<ion-card>
+
+		<ion-card-header style="background: #0b172a">	
+	<ion-item text-wrap class="item-divider item-text-wrap"  style="background: #0b172a" id="survey-list-item-divider11"><h2 style="color:#fff">9. Would you recommend this 
+		conference to your peers to attend next year?</h2></ion-item>
+</ion-card-header>
+<ion-card-content>
+	<ion-list radio-group [(ngModel)]="eventSurveyQ9" name="Qu9">
+		<ion-item>
+			<ion-label>Yes</ion-label>
+			<ion-radio value="Yes"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>No</ion-label>
+			<ion-radio value="No"></ion-radio>
+		</ion-item>
+		<ion-item class="lmargin10" id="survey-textarea9">
+			<ion-textarea type="text" placeholder="If no, why not?"[(ngModel)]="eventSurveyQ9C" rows="3" name="Qu9C"></ion-textarea>
+		</ion-item>
+		</ion-list>
+	</ion-card-content>
+</ion-card>
+
+
+<ion-card>
+<ion-card-header style="background: #0b172a">	
+	<ion-item text-wrap class="item-divider item-text-wrap" style="background: #0b172a" id="survey-list-item-divider12"><h2 style="color:#fff">10. How did you learn about the conference?</h2></ion-item>
+</ion-card-header>
+<ion-card-content>
+	<ion-list radio-group [(ngModel)]="eventSurveyQ10" name="Qu10">
+		<ion-item>
+			<ion-label>E-mail from NAEYC</ion-label>
+			<ion-radio value="Email"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>Recommendation from a colleague</ion-label>
+			<ion-radio value="Recommendation"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>Website search</ion-label>
+			<ion-radio value="Website"></ion-radio>
+		</ion-item>
+		<ion-item>
+			<ion-label>Other</ion-label>
+			<ion-radio value="Other"></ion-radio>
+		</ion-item>
+		<ion-item class="lmargin10" id="survey-textarea12C">
+			<ion-textarea type="text" placeholder="Please specify"[(ngModel)]="eventSurveyQ10C" rows="3" name="Qu10C"></ion-textarea>
+		</ion-item>
+	</ion-list>
+</ion-card-content>
+</ion-card>
+
+
+	<div text-center>
+		<button ion-button class="primary" style="background:#ef6a04" (click)="SubmitEvaluation()">
+			SUBMIT
+		</button>
+	</div>
+
+	<div class="spacer" style="width:320px; height: 16px;"></div>
+
+</ion-content>

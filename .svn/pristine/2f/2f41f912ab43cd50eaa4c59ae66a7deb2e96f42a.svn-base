@@ -1,0 +1,132 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Exhibitor Details</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+    <ion-grid>
+        <ion-row>
+			<ion-col col-4>
+				<!--<img-loader [src]="ExhibitorCompanyLogoFilename" useImg [spinner]=false [fallbackAsPlaceholder]=true></img-loader>-->
+				<img [src]="ExhibitorCompanyLogoFilename" onerror="this.src='assets/img/a_00_3920.jpg'"
+					src="assets/img/a_00_3920.jpg"
+					class="img-default img-responsive"
+					alt="Image error">
+			</ion-col>
+			<ion-col><p class="marginTB0 myLabelBold myFontSize22">{{ExhibitorCompanyName}}</p>
+				<p class="marginTB0 myFontSize18">{{ExhibitorAddressLine1}}</p>
+				<p class="marginTB0 myFontSize18">{{ExhibitorDisplayCityState}}</p>
+				<p class="marginTB0 myFontSize18">{{ExhibitorBoothNumber}}</p>
+			</ion-col>
+        </ion-row>
+    </ion-grid>
+
+	<ion-card-header class="button-bar">
+		<button ion-button outline [color]="btnEmail" (click)="navToEmail(ExhibitorPrimaryOnsiteContactEmailURL)">
+			<div>
+				<ion-icon name="mail"></ion-icon>
+				<label></label>
+			</div>
+		</button>
+		<button ion-button outline [color]="btnWebsite" (click)="navToWebsite(ExhibitorWebsite)">
+			<div>
+				<ion-icon name="globe"></ion-icon>
+				<label></label>
+			</div>
+		</button>
+		<button ion-button outline [color]="btnCall" (click)="callPhone2(ExhibitorPrimaryOnsiteContactPhone)">
+			<div>
+				<ion-icon name="call"></ion-icon>
+				<label></label>
+			</div>
+		</button>
+		<button ion-button outline *ngIf="btnBookmarkManagement" (click)="BookmarkManagement()" [style.background-color]="BookmarkButtonColor" [style.color]="BookmarkButtonTextColor" [style.border-color]="BookmarkButtonTextColor">
+			<div>
+				<ion-icon name="bookmark"></ion-icon>
+				<label>{{visBookmarkAddRemoveButton}}</label>
+			</div>
+		</button>
+
+	</ion-card-header>
+
+	<ion-card>
+		<ion-card-header style="background:color=primary; color:#fff">
+			Contact
+		</ion-card-header>
+
+		<ion-list>
+			<ion-item *ngIf=visPrimaryContact>
+				<ion-icon name="person" item-start></ion-icon>
+				<h2>{{ExhibitorPrimaryOnsiteContactName}}</h2>
+			</ion-item>
+
+			<button ion-item>
+				<ion-icon name="mail" item-start></ion-icon>
+				{{ExhibitorPrimaryOnsiteContactEmailDisplay}}
+			</button>
+
+			<button ion-item>
+				<ion-icon name="call" item-start></ion-icon>
+				{{ExhibitorPrimaryOnsiteContactPhone}}
+			</button>
+		</ion-list>
+	</ion-card>
+
+	<ion-card>
+		<ion-card-header style="background:#bfcc33;color:#fff">
+			Description
+		</ion-card-header>
+		<ion-card-content>
+			<div [innerHTML]="exDetails" class="myMarginTopBottom">
+				{{ExhibitorCompanyDescription}}
+			</div>
+		</ion-card-content>
+	</ion-card>
+
+	<ion-card *ngIf="visSocialMediaHeader">
+		<ion-card-header style="background:#bfcc33;color:#fff">
+			Social Media
+		</ion-card-header>
+		<ion-card-content padding>
+			<button ion-button outline *ngIf="visSocialMediaFacebookVisible" (click)="navToWebsite(ExhibitorSocialMediaFacebook)">
+				<ion-icon name="logo-facebook" style="font-size:2em;"></ion-icon>
+			</button>
+			<button ion-button outline *ngIf="visSocialMediaTwitterVisible" (click)="navToWebsite(ExhibitorSocialMediaTwitter)">
+				<ion-icon name="logo-twitter" style="font-size:2em;"></ion-icon>
+			</button>
+			<button ion-button outline *ngIf="visSocialMediaLinkedInVisible" (click)="navToWebsite(ExhibitorSocialMediaLinkedIn)">
+				<ion-icon name="logo-linkedin" style="font-size:2em;"></ion-icon>
+			</button>
+			<button ion-button outline *ngIf="visSocialMediaYouTubeVisible" (click)="navToWebsite(ExhibitorSocialMediaYouTube)">
+				<ion-icon name="logo-youtube" style="font-size:2em;"></ion-icon>
+			</button>
+			<button ion-button outline *ngIf="visSocialMediaRSSVisible" (click)="navToWebsite(ExhibitorSocialMediaRSS)">
+				<ion-icon name="logo-rss" style="font-size:2em;"></ion-icon>
+			</button>
+			<button ion-button outline *ngIf="visSocialMediaGooglePlusVisible" (click)="navToWebsite(ExhibitorSocialMediaGooglePlus)">
+				<ion-icon name="logo-googleplus" style="font-size:2em;"></ion-icon>
+			</button>
+		</ion-card-content>
+	</ion-card>
+
+    <ion-card>
+        <ion-card-header style="background:#bfcc33; color:#fff">
+                Locator
+            </ion-card-header>
+        <ion-card-content>
+        <div id="map2" style="width:100%; height:300px;"></div>
+		<!-- <div class="map-container">
+			<div id="mapId" style="width: 100%; height: 100%">
+			</div>
+		</div> -->
+		</ion-card-content>
+	</ion-card>
+
+</ion-content>

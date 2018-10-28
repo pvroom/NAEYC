@@ -1,0 +1,37 @@
+<ion-header>
+		<ion-navbar color="primary">
+		  <button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		  </button>
+		  <ion-title>
+			Leaderboard Top 10
+		  </ion-title>
+		</ion-navbar>
+	  </ion-header>
+
+<ion-content>
+
+	<div style="display:block;">
+		<canvas baseChart #chart
+		 [data]='chartData' 
+		 [labels]='chartLabels' 
+		 [chartType]='chartType'
+		 [options] = 'chartOptions'
+		 [legend]="chartLegend">
+		</canvas>
+	</div>
+	
+	<ion-grid>
+		<ion-row>
+			<ion-col col-4 >
+			</ion-col>
+			<ion-col col-4 >
+				<button ion-button full (click)="closeModal()">
+					Close
+				</button>
+			</ion-col>
+			<ion-col col-4 >
+			</ion-col>
+		</ion-row>
+	</ion-grid>
+</ion-content>		

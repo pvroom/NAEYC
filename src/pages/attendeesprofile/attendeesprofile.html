@@ -1,0 +1,90 @@
+<ion-header>
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Attendee Profile</ion-title>
+	</ion-navbar>
+</ion-header>
+
+
+<ion-content padding class="bg-style">
+    <ion-grid>
+        <ion-row>
+          <ion-col col-3>
+          </ion-col>
+          <ion-col col-5>
+              <ion-item no-lines style="background:transparent">
+                  <ion-avatar>
+					<!--<img-loader [src]="visualImageURL" useImg [spinner]=false [fallbackAsPlaceholder]=true></img-loader>-->
+					<img  [src]="visualImageURL" src="assets/img/personIcon.png" onerror="this.src='assets/img/personIcon.png'">
+                  </ion-avatar>
+                </ion-item>
+          </ion-col>
+        </ion-row>
+        <ion-row>
+            <ion-col col-11>
+				<ion-item no-lines style="background:#009448;color:#fff;">
+					<p style="background:#009448;color:#fff; font-size:1.5em; text-align:center; font-weight:500">{{prAttendeeName}}</p>
+					<p text-wrap style="background:#009448;color:#fff; font-size:1.25em; text-align:center">{{prAttendeeTitle}}</p>
+					<p text-wrap style="background:#009448; color:#fff; font-size:1.25em; text-align:center">{{prAttendeeOrganization}}</p>
+				</ion-item>
+            </ion-col>
+        </ion-row>
+	</ion-grid>
+	
+
+
+
+					<!--
+					<ion-row *ngIf="btnBookmarkManagement == false">
+						<ion-col col-3>
+						</ion-col>
+						<ion-col col-4>
+							<button ion-button full (click)="StartContinueConversation()">
+								Start a Conversation
+							</button>
+						</ion-col>
+						<ion-col col-3>
+						</ion-col>
+					</ion-row>
+					-->
+
+				<ion-grid>
+					<ion-row *ngIf="btnBookmarkManagement">
+						<ion-col>
+							<button ion-button color=danger full (click)="StartContinueConversation(prAttendeeName, prConversationAttendeeID)">
+								Direct Chat
+							</button>
+						</ion-col>
+				
+						<ion-col>
+							<button ion-button color=danger full (click)="BookmarkManagement()">
+								{{visBookmarkAddRemoveButton}}
+							</button>
+						</ion-col>
+					</ion-row>
+		<ion-col col-11>
+			<p style="color:#fff;text-align:center">Tap a green highlighted icon to view that social media profile</p>
+		</ion-col>
+        <ion-row>
+            <ion-col col-1>
+            </ion-col>
+            <ion-col col-2>
+                <ion-icon [color]=statusTwitter name="logo-twitter" (tap)="viewSocialMedia(smURLTwitter)"></ion-icon>
+            </ion-col>
+            <ion-col col-2>
+                <ion-icon [color]=statusFacebook name="logo-facebook" (tap)="viewSocialMedia(smURLFacebook)"></ion-icon>
+            </ion-col>
+            <ion-col col-2>
+                <ion-icon [color]=statusLinkedIn name="logo-linkedin" (tap)="viewSocialMedia(smURLLinkedIn)"></ion-icon>
+            </ion-col>
+            <ion-col col-2>
+                <ion-icon [color]=statusInstagram name="logo-instagram" (tap)="viewSocialMedia(smURLInstagram)"></ion-icon>
+            </ion-col>
+            <ion-col col-2>
+                <ion-icon [color]=statusPinterest name="logo-pinterest" (tap)="viewSocialMedia(smURLPinterest)"></ion-icon>
+            </ion-col>
+        </ion-row>
+      </ion-grid>
+</ion-content>

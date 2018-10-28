@@ -1,0 +1,318 @@
+// Components, functions, plugins
+import { Component, HostListener, ChangeDetectionStrategy, ChangeDetectorRef, NgModule } from '@angular/core';
+import { Modal, ModalController, ModalOptions, NavController, NavParams, LoadingController } from 'ionic-angular';
+import { Storage } from '@ionic/storage';
+import { Http } from '@angular/http';
+import 'rxjs/add/operator/map';
+import { Database } from './../../providers/database/database';
+import { Localstorage } from './../../providers/localstorage/localstorage';
+import { FabContainer } from 'ionic-angular';
+import { ImageLoaderConfig } from 'ionic-image-loader';
+
+declare var dateFormat: any;
+
+@Component({
+  selector: 'page-activity',
+  templateUrl: 'activity.html',
+  changeDetection: ChangeDetectionStrategy.OnPush
+})
+
+export class ActivityPage {
+
+	public activityFeedListing: any[] = [];
+
+	constructor(public navCtrl: NavController, 
+				public navParams: NavParams,
+				private storage: Storage,
+				private databaseprovider: Database,
+				private imageLoaderConfig: ImageLoaderConfig,
+				private modal: ModalController,
+				private cd: ChangeDetectorRef,
+				public loadingCtrl: LoadingController,
+				private localstorage: Localstorage) {
+	}
+
+	ionViewDidLoad() {
+		console.log('ionViewDidLoad ActivityPage');
+	}
+
+	ionViewDidEnter() {
+		
+		console.log('ionViewDidEnter ActivityPage');
+
+		// Update Comment count here when coming back from a posting
+		var ActivityFeedID = this.localstorage.getLocalValue('ActivityFeedID');
+		var ActivityFeedIDCCount = this.localstorage.getLocalValue('ActivityFeedIDCCount');
+		var ActivityFeedArrayString = this.localstorage.getLocalValue('ActivityFeedObject');
+
+		//if (ActivityFeedArrayString == '' || ActivityFeedArrayString == null || ActivityFeedArrayString == undefined) {
+			// Don't do anything
+		//} else {
+
+		//	console.log('ActivityFeedArrayString: ' + ActivityFeedArrayString);
+		//	var data2 = JSON.parse(ActivityFeedArrayString);
+		//	console.log(data2);
+		//	console.log('ActivityFeedID, Current Comment Count: ' + data2.ActivityFeedCommentsCounter);
+		//	data2.ActivityFeedCommentsCounter = ActivityFeedIDCCount;
+		//	console.log('ActivityFeedID, Updated Comment Count: ' + data2.ActivityFeedCommentsCounter);
+			
+		//	this.cd.markForCheck();
+		//}
+	}
+
+	timeDifference(laterdate, earlierdate) {
+		
+		var difference = laterdate.getTime() - earlierdate.getTime();
+	 
+		var daysDifference = Math.floor(difference/1000/60/60/24);
+		difference -= daysDifference*1000*60*60*24
+	 
+		var hoursDifference = Math.floor(difference/1000/60/60);
+		difference -= hoursDifference*1000*60*60
+	 
+		var minutesDifference = Math.floor(difference/1000/60);
+		difference -= minutesDifference*1000*60
+	 
+		var secondsDifference = Math.floor(difference/1000);
+		var stringOutput = "";
+		
+		if (daysDifference>0) {
+			
+			stringOutput = daysDifference + ' day/s';
+			
+		} else {
+		
+			if (hoursDifference>0) {
+				
+				stringOutput = hoursDifference + ' hr/s';
+			
+			} else {
+		
+				if (minutesDifference>0) {
+
+					stringOutput = minutesDifference + ' min/s';
+
+				} else {
+
+					if (hoursDifference==0) {
+						
+						stringOutput = secondsDifference + ' sec/s';
+						
+					}
+				}
+			}
+		}
+		
+		console.log('timeDifference output: ' + stringOutput);
+		
+		return stringOutput;
+		
+	}
+
+	ngOnInit() {
+
+		// Load initial data set here
+		let loading = this.loadingCtrl.create({
+			spinner: 'crescent',
+			content: 'Please wait...'
+		});
+
+		loading.present();
+
+		// Blank and show loading info
+		this.activityFeedListing = [];
+		this.cd.markForCheck();
+		this.imageLoaderConfig.setFallbackUrl('assets/img/personIcon.png');
+		
+		// Temporary use variables
+		var flags = "li|Alpha|0";
+        var DisplayName = "";
+        var SQLDate;
+        var DisplayDateTime;
+        var dbEventDateTime;
+		
+		// Get the data
+		this.databaseprovider.getActivityFeedData(flags, "0").then(data => {
+			
+			console.log(JSON.stringify(data));
+			
+			if (data['length']>0) {
+				
+				for (var i = 0; i < data['length']; i++) {
+					
+					console.log('Processing afID: ' + data[i].afID);
+					
+					var imageAvatar = "https://naeyc.convergence-us.com/AdminGateway/images/Attendees/" + data[i].AttendeeID + ".jpg";
+					console.log(imageAvatar);
+					
+					var imageAttachment = data[i].afImageAttachment;
+					var imageAttached = false;
+					if (imageAttachment != "") {
+						imageAttachment = "https://naeyc.convergence-us.com/AdminGateway/images/ActivityFeedAttachments/" + imageAttachment;
+						imageAttached = true;
+					}
+
+					DisplayName = data[i].PosterFirst + " " + data[i].PosterLast;
+
+					dbEventDateTime = data[i].Posted.substring(0, 19);
+					dbEventDateTime = dbEventDateTime.replace(/-/g, '/');
+					dbEventDateTime = dbEventDateTime.replace(/T/g, ' ');
+					SQLDate = new Date(dbEventDateTime);
+					DisplayDateTime = dateFormat(SQLDate, "mm/dd h:MMtt");
+				
+					var CurrentDateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
+					var CurrentDateTime2 = new Date(CurrentDateTime);
+					var PostedDate = new Date(data[i].Posted);
+					var TimeDifference = this.timeDifference(CurrentDateTime2, PostedDate);					
+
+					// Show the current record
+					this.activityFeedListing.push({
+						afID: data[i].afID,
+						ActivityFeedCommentAvatar: imageAvatar,
+						ActivityFeedCommentBy: DisplayName,
+						ActivityFeedCommentPosted: DisplayDateTime,
+						ActivityFeedAttachment: imageAttachment,
+						ActivityFeedComment: data[i].afMessage,
+						ActivityFeedLikesCounter: data[i].afLikesCounter,
+						ActivityFeedCommentsCounter: data[i].CommentsCount,
+						ActivityFeedCommentPostedDuration: TimeDifference,
+						ActivityFeedAttached: imageAttached
+					});
+
+				}
+
+
+			} else {
+				
+                // No records to show
+				this.activityFeedListing.push({
+						afID: 0,
+						ActivityFeedCommentAvatar: "No records found",
+						ActivityFeedCommentBy: "",
+						ActivityFeedCommentPosted: "",
+						ActivityFeedAttachment: "",
+						ActivityFeedComment: "",
+						ActivityFeedLikesCounter: "",
+						ActivityFeedCommentsCounter: "",
+						ActivityFeedCommentPostedDuration: "",
+						ActivityFeedAttached: false
+				});
+
+			}
+
+			this.cd.markForCheck();
+
+			loading.dismiss();
+			
+		}).catch(function () {
+			console.log("Promise Rejected");
+			loading.dismiss();
+		});
+					
+			
+		
+	}
+
+	UpdateLikes(activityFeedItem, activityfeedID) {
+
+		console.log('Likes button tapped');
+		
+		this.localstorage.setLocalValue('ActivityFeedLikesButton', '1');
+		
+		var flags = "lu|" + activityfeedID;
+
+		// Get the data
+		this.databaseprovider.getActivityFeedData(flags, "0").then(data => {
+			
+			console.log(JSON.stringify(data));
+			
+			if (data['length']>0) {
+				
+				if (data[0].Status = "Saved") {
+					activityFeedItem.ActivityFeedLikesCounter = data[0].NewLikes;
+					this.cd.markForCheck();
+				}
+				
+			}
+			
+		}).catch(function () {
+			console.log("UpdateLikes Promise Rejected");
+		});
+
+	}
+
+
+    ActivityFeedDetails(activityFeedItem, activityfeedID) {
+
+		this.localstorage.setLocalValue('ActivityFeedObject', JSON.stringify(activityFeedItem));
+					
+		console.log('Activity details requested');
+		
+		if (activityfeedID != 0) {
+			
+			var LikesButton = "";
+			LikesButton = this.localstorage.getLocalValue('ActivityFeedLikesButton');
+			console.log('Likes button check: ' + LikesButton);
+			if (LikesButton == '1') {
+				this.localstorage.setLocalValue('ActivityFeedLikesButton', '0');
+			} else {
+				console.log('Going to activity feed: ' + activityfeedID);
+				// Navigate to Activity Feed Details page
+				this.localstorage.setLocalValue('ActivityFeedID', activityfeedID);
+				this.navCtrl.push('ActivityFeedDetailsPage', {ActivityFeedID: activityfeedID}, {animate: true, direction: 'forward'});
+			}
+		}
+		
+    };
+
+	AddPosting(fab: FabContainer) {
+		
+		// Disable other click event
+		this.localstorage.setLocalValue('afFABClicked', '1');
+		
+		console.log('Set FAB Override, AddPosting');
+		
+		const AddPostingModalOptions: ModalOptions = {
+			enableBackdropDismiss: false
+		};
+
+		const AddPostingModal: Modal = this.modal.create('ActivityFeedPostingPage', {}, AddPostingModalOptions);
+
+		AddPostingModal.present();
+
+		AddPostingModal.onDidDismiss((data) => {
+			this.localstorage.setLocalValue('afFABClicked', '0');
+			// If saved, then re-run ngOnInit to refresh the listing
+			if (data == "Save") {
+				this.ngOnInit();
+			}
+		});
+		
+		fab.close();
+
+	}
+
+	ViewLeaderboard(fab: FabContainer) {
+		
+		// Disable other click event
+		this.localstorage.setLocalValue('afFABClicked', '1');
+
+		console.log('Set FAB Override, ViewLeaderboard');
+		
+		const ViewLeaderboardModalOptions: ModalOptions = {
+			enableBackdropDismiss: false
+		};
+
+		const ViewLeaderboardModal: Modal = this.modal.create('ActivityFeedLeaderboardPage', {}, ViewLeaderboardModalOptions);
+
+		ViewLeaderboardModal.present();
+
+		ViewLeaderboardModal.onDidDismiss((data) => {
+			this.localstorage.setLocalValue('afFABClicked', '0');
+		});
+		
+		fab.close();
+
+	}
+	
+}

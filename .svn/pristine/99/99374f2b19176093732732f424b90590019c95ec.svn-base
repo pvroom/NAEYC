@@ -1,0 +1,45 @@
+<ion-header>
+
+	<ion-navbar color="primary">
+		<button ion-button menuToggle>
+			<ion-icon name="menu"></ion-icon>
+		</button>
+		<ion-title>Exhibitors</ion-title>
+	</ion-navbar>
+
+</ion-header>
+
+<ion-content>
+
+	<ion-list id="Exhibitors-list3">
+
+		<!-- Search input -->
+		<ion-grid>
+			<ion-row>
+				<ion-col col-9>	
+
+					<ion-item class="item-input; shadow">
+						<ion-icon name="search" item-left></ion-icon>
+						<ion-input name="srchBarEntry" id="srchBarEntry" 
+						type="text" placeholder="Search" [(ngModel)]="EntryTerms"></ion-input>
+					</ion-item>
+				</ion-col>
+				<ion-col col-3>
+					<button ion-button color="danger" full style="margin:0" (tap)="GetSearchResults()">Submit</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<!-- Exhibitor listing -->
+		<ion-list>
+			<ion-item tappable (click)="ExhibitorDetails(exhibitor.ExhibitorID)" *ngFor="let exhibitor of ExhibitorListing" id="exhibitors-list-item19">
+				<ion-icon item-left name="{{exhibitor.exhibitorIcon}}"></ion-icon>
+				<ion-icon item-right name="{{exhibitor.navigationArrow}}"></ion-icon>
+				<h2>{{exhibitor.CompanyName}}</h2>
+				<p *ngIf=exhibitor.CityStateShow>{{exhibitor.DisplayCityState}}</p>
+				<p>{{exhibitor.BoothNumber}}</p>
+			</ion-item>
+		</ion-list>
+	</ion-list>
+
+</ion-content>

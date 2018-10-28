@@ -1,0 +1,72 @@
+
+<ion-header no-border>
+	<ion-navbar color="primary">
+		<ion-title>Activities Feed</ion-title>
+	</ion-navbar>
+</ion-header>
+   
+<ion-content fullscreen>
+   
+	<!-- List of attendee postings -->
+	<ion-card *ngFor="let activityFeedItem of activityFeedListing">
+
+		<!-- Attendee avatar and name -->
+		<ion-item (click)="ActivityFeedDetails(activityFeedItem.afID)">
+			<ion-avatar item-start>
+				<img-loader [src]="activityFeedItem.ActivityFeedCommentAvatar" useImg [spinner]=false [fallbackAsPlaceholder]=true></img-loader>
+				<!--<img src="{{activityFeedItem.ActivityFeedCommentAvatar}}" onerror="this.src='assets/img/personIcon.png'">-->
+			</ion-avatar>
+			<h2>{{activityFeedItem.ActivityFeedCommentBy}}</h2>
+			<p>{{activityFeedItem.ActivityFeedCommentPosted}}</p>
+		</ion-item>
+
+		<!-- Posting picture attachment -->
+		<!--<img-loader *ngIf=activityFeedItem.ActivityFeedAttached [src]="activityFeedItem.ActivityFeedAttachment" useImg [spinner]=false></img-loader>-->
+		<img src="{{activityFeedItem.ActivityFeedAttachment}}" (click)="ActivityFeedDetails(activityFeedItem, activityFeedItem.afID)">
+
+		<!-- Attendee's comment -->
+		<ion-card-content (click)="ActivityFeedDetails(activityFeedItem.afID)">
+			<p>{{activityFeedItem.ActivityFeedComment}}</p>
+		</ion-card-content>
+
+		<!-- Footer with details -->
+		<ion-row>
+			<ion-col>
+				<button ion-button icon-left clear small #activityCard (click)="UpdateLikes(activityFeedItem, activityFeedItem.afID, activityCard)">
+					<ion-icon name="thumbs-up"></ion-icon>
+					<div>{{activityFeedItem.ActivityFeedLikesCounter}} Likes</div>
+				</button>
+			</ion-col>
+			<ion-col>
+				<button ion-button icon-left clear small>
+					<ion-icon name="text"></ion-icon>
+					<div>{{activityFeedItem.ActivityFeedCommentsCounter}} Comments</div>
+				</button>
+			</ion-col>
+			<ion-col center text-center>
+				<ion-note>
+					{{activityFeedItem.ActivityFeedCommentPostedDuration}} ago
+				</ion-note>
+			</ion-col>
+		</ion-row>
+
+	</ion-card>
+	
+	<!-- Floating button menu for adding new comment -->
+    <ion-fab bottom right #fab>
+		<button ion-fab color="danger" ion-fab>
+			<ion-icon name="add"></ion-icon>
+		</button>
+		<ion-fab-list side="top">
+			<button ion-fab (click)="ViewLeaderboard(fab)">
+				<ion-icon name="trophy"></ion-icon>
+				<div class="fabdivbutton">View Leaderboard</div>
+			</button>
+			<button ion-fab (click)="AddPosting(fab)">
+				<ion-icon name="trophy"></ion-icon>
+				<div class="fabdivbutton">Add Posting</div>
+			</button>
+		</ion-fab-list>
+    </ion-fab>
+
+</ion-content>
