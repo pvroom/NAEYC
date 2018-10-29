@@ -75,36 +75,36 @@
 		</ion-card-header>
 
 		<ion-list>
-			<ion-item *ngIf=sponsor.showDividerPY style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerPY style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/platinum-background.png')">
 				<ion-icon name="recycle" item-start></ion-icon>
 				Year Round Platinum Sponsor
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerGY style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerGY style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/gold-background.jpg')">
 				<ion-icon name="recycle" item-start></ion-icon>
 				Year Round Gold Sponsor
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerSY style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerSY style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/silver-background.jpg')">
 				<ion-icon name="recycle" item-start></ion-icon>
 				Year Round Silver Sponsor
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerP style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerP style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/platinum-background.png')">
-				Platinum Sponsor
+				PLATINUM
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerG style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerG style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/gold-background.jpg')">
-				Gold Sponsor
+				GOLD
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerS style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerS style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/silver-background.jpg')">
-				Silver Sponsor
+				SILVER
 			</ion-item>
-			<ion-item *ngIf=sponsor.showDividerB style="color:#fff; font-weight:bold; 
+			<ion-item *ngIf=sponsor.showDividerB style="color:#444; font-weight:bold; 
 				background-image: url('assets/img/bronze-background.jpg')">
-				Bronze Sponsor
+				BRONZE
 			</ion-item>
 		</ion-list>
 

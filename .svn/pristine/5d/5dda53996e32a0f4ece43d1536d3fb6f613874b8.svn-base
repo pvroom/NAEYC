@@ -1551,9 +1551,8 @@ export class Database {
 				// Validate query
 				SQLquery = "SELECT DISTINCT c.session_id, c.session_title, c.session_start_time, c.session_end_time, c.room_number AS RoomName ";
 				SQLquery = SQLquery + "FROM courses c ";
-				SQLquery = SQLquery + "WHERE c.session_id IN " + QueryParam + " ";
-				console.log('Course Listing: ' + SQLquery);
-				
+				SQLquery = SQLquery + "WHERE c.course_id IN " + QueryParam + " ";
+
 			}
 
 			if (listingType == "cd") {	// List of speakers for specific course

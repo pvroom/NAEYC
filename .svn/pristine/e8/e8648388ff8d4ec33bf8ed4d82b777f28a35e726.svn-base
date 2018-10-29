@@ -174,7 +174,6 @@ export class SpeakerDetailsPage {
 					BioDisplay = BioDisplay.replace(/â€œ/g, '"');
 					BioDisplay = BioDisplay.replace(/Â/g, ' ');
 					BioDisplay = BioDisplay.replace(/â€/g, '"');
-					BioDisplay = BioDisplay.replace(/\\"/g, '"');
 					this.spkrDetails = BioDisplay;
 				}
 
@@ -185,7 +184,7 @@ export class SpeakerDetailsPage {
 				for (var i = 0; i < courses.length; i++) {
 					text += courses[i] + ",";
 				}
-				var QueryParam = text.substring(0, text.length - 1);
+				var QueryParam = text.substring(0, text.length - 2);
 				QueryParam = QueryParam + ")";
 
 				console.log("Course listing parameters: " + QueryParam);

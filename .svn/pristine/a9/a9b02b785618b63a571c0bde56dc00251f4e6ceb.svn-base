@@ -338,7 +338,7 @@ export class Database {
 			var SQLquery = "SELECT s.* ";
 			SQLquery = SQLquery + "FROM sponsors s ";
 			SQLquery = SQLquery + "INNER JOIN lookup_sponsor_levels lsl ON lsl.SponsorLevel = s.SponsorLevel ";
-			SQLquery = SQLquery + "ORDER BY lsl.SponsorSortLevel, s.SponsorName";
+			SQLquery = SQLquery + "ORDER BY lsl.SponsorLevelSort, s.SponsorName";
 
 			//console.log("Sponsor Query: " + SQLquery);
 			
@@ -1551,9 +1551,8 @@ export class Database {
 				// Validate query
 				SQLquery = "SELECT DISTINCT c.session_id, c.session_title, c.session_start_time, c.session_end_time, c.room_number AS RoomName ";
 				SQLquery = SQLquery + "FROM courses c ";
-				SQLquery = SQLquery + "WHERE c.session_id IN " + QueryParam + " ";
-				console.log('Course Listing: ' + SQLquery);
-				
+				SQLquery = SQLquery + "WHERE c.course_id IN " + QueryParam + " ";
+
 			}
 
 			if (listingType == "cd") {	// List of speakers for specific course
