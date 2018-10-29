@@ -114,7 +114,7 @@
       "cordova-plugin-ionic": {
         "APP_ID": "8b447cb1",
         "CHANNEL_NAME": "Production",
-        "UPDATE_METHOD": "auto",
+        "UPDATE_METHOD": "backgroundauto",
         "MAX_STORE": "2",
         "WARN_DEBUG": "true",
         "UPDATE_API": "https://api.ionicjs.com",
