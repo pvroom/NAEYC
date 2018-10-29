@@ -119,12 +119,12 @@
     <plugin name="onesignal-cordova-plugin" spec="2.4.4" />
     <engine name="android" spec="^7.1.1" />
     <plugin name="cordova-plugin-ionic" spec="^4.2.0">
-        <variable name="APP_ID" value="7e0fcdf0" />
-        <variable name="CHANNEL_NAME" value="Production" />
-        <variable name="UPDATE_METHOD" value="auto" />
+        <variable name="APP_ID" value=" 7e0fcdf0" />
+        <variable name="CHANNEL_NAME" value="production" />
+        <variable name="UPDATE_METHOD" value=" auto" />
+        <variable name="MAX_STORE" value="2" />
         <variable name="WARN_DEBUG" value="true" />
         <variable name="UPDATE_API" value="https://api.ionicjs.com" />
-        <variable name="MAX_STORE" value="2" />
         <variable name="ROLLBACK_TIMEOUT" value="10" />
         <variable name="MIN_BACKGROUND_DURATION" value="30" />
     </plugin>
