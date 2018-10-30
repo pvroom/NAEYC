@@ -7,8 +7,6 @@ import { Database } from './../../providers/database/database';
 import { Localstorage } from './../../providers/localstorage/localstorage';
 import { Synchronization } from "../../providers/synchronization/synchronization";
 
-declare var formatTime: any;
-declare var dateFormat: any;
 
 @Component({
   selector: 'page-database',
