@@ -40,9 +40,9 @@
 			<ion-card-content>
 				<ion-item class="item-icon-left item-icon-right" (tap)="NoteDetails(noteTue.EventID)" *ngFor="let noteTue of notesTue" id="notes-list-item19">
 					<i class="icon {{notesIcon}}"></i>
-					<h2 style="font-weight:bold">
+					<h3>
 						{{noteTue.CourseName}}
-					</h2>
+					</h3>
 					<h5>
 						{{noteTue.visEventTimeframe}}
 					</h5>
@@ -65,9 +65,9 @@
 			<ion-card-content>
 				<ion-item class="item-icon-left item-icon-right" (tap)="NoteDetails(noteWed.EventID)" *ngFor="let noteWed of notesWed" id="notes-list-item19">
 					<i class="icon {{notesIcon}}"></i>
-					<h2 style="font-weight:bold">
+					<p>
 						{{noteWed.CourseName}}
-					</h2>
+					</p>
 					<p>
 						{{noteWed.visEventTimeframe}}
 					</p>
@@ -91,9 +91,9 @@
 			<ion-card-content>
 				<ion-item class="item-icon-left item-icon-right" (tap)="NoteDetails(noteThu.EventID)" *ngFor="let noteThu of notesThu" id="notes-list-item19">
 					<i class="icon {{notesIcon}}"></i>
-					<h2 style="font-weight:bold">
+					<p>
 						{{noteThu.CourseName}}
-					</h2>
+					</p>
 					<p>
 						{{noteThu.visEventTimeframe}}
 					</p>
@@ -117,9 +117,9 @@
 			<ion-card-content>
 				<ion-item class="item-icon-left item-icon-right" (tap)="NoteDetails(noteFri.EventID)" *ngFor="let noteFri of notesFri" id="notes-list-item21">
 					<i class="icon {{notesIcon}}"></i>
-					<h2 style="font-weight:bold">
+					<p>
 						{{noteFri.CourseName}}
-					</h2>
+					</p>
 					<p>
 						{{noteFri.visEventTimeframe}}
 					</p>
@@ -142,9 +142,9 @@
 			<ion-card-content>
 				<ion-item class="item-icon-left item-icon-right" (tap)="NoteDetails(noteSat.EventID)" *ngFor="let noteSat of notesSat" id="notes-list-item22">
 					<i class="icon {{notesIcon}}"></i>
-					<h2 style="font-weight:bold">
+					<p>
 						{{noteSat.CourseName}}
-					</h2>
+					</p>
 					<p>
 						{{noteSat.visEventTimeframe}}
 					</p>

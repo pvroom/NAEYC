@@ -124,7 +124,7 @@ export class Synchronization {
 					.catch(e => console.log('Sync DBCall: Error selecting (' + SQLSelectQuery + ') base record: ' + JSON.stringify(e)))
 				} else {
 					this.db.executeSql(SQLSelectQuery, <any>{}).then((dataS) => {
-						console.log('DBCall Return: ' + JSON.stringify(dataS));
+						//console.log('DBCall Return: ' + JSON.stringify(dataS));
 						if (dataS.rows.length > 0) {
 							//console.log('DBCall: ' + SQLUpdateQuery);
 							resolve(SQLUpdateQuery);
@@ -149,7 +149,6 @@ export class Synchronization {
 				
 				this.db = db;
 				this.db.executeSql(SQLQuery, <any>{}).then((dataS) => {
-					console.log('DBCall2 Return: ' + JSON.stringify(dataS));
 					resolve(SQLQuery);
 				})
 				.catch(e => console.log('Sync DBCall2: Error selecting (' + SQLQuery + ') base record: ' + JSON.stringify(e)))

@@ -811,18 +811,18 @@ export class HomePage {
 			
 			// Call AutoSync service in providers
 			this.syncprovider.DirectChatMonitor(LastDirectChatCheck, ThisDirectChatCheck).then(data => {
-				//console.log('Home: Executed Direct Chat Monitoring');
+				console.log('Home: Executed Direct Chat Monitoring');
 				
 				this.localstorage.setLocalValue('DirectChatMonitoringString', JSON.stringify(data));
 				
 				if (data[0].NewMessages == "0") {
-					//console.log('No new messages');
+					console.log('No new messages');
 					if (this.NewMessagesIndicator != false) {
 						this.NewMessagesIndicator = false;
 						this.cd.markForCheck();
 					}
 				} else {
-					//console.log('New messages!');
+					console.log('New messages!');
 					if (this.NewMessagesIndicator != true) {
 						this.NewMessagesIndicator = true;
 						this.cd.markForCheck();

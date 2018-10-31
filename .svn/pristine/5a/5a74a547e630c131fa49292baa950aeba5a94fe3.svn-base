@@ -1761,7 +1761,7 @@ export class Database {
 					console.log('Database: Set Exhibitor query db variable');
 					
 					this.db.executeSql(SQLquery, <any>{}).then((data) => {
-						//console.log('Database: Exhibitor query: ' + JSON.stringify(data));
+						console.log('Database: Exhibitor query: ' + JSON.stringify(data));
 						console.log('Database: Exhibitor query rows: ' + data.rows.length);
 						let DatabaseResponse = [];
 						if(data.rows.length > 0) {

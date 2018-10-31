@@ -68,7 +68,7 @@
 		<ion-item ion-item text-wrap *ngFor="let session of ProgramListing" id="course-list-item19" [ngClass]="session.DividerStyle">
 			<ion-item no lines ion-item text-wrap (click)="EventDetails(session.EventID)" [ngClass]="session.DividerStyle">
 				<ion-icon item-right name="{{session.DisplayIcon}}"></ion-icon>
-				<h3>{{session.DisplayEventName}}</h3>
+				<h2>{{session.DisplayEventName}}</h2>
 				<p>{{session.DisplayEventTimeDateLocation}}</p>
 				<p>{{session.SpeakerDisplayName}}</p>
 				<p>{{session.DisplaySubjectCodeCECredits}}</p>

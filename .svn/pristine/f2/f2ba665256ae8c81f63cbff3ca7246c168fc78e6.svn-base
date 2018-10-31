@@ -15,10 +15,10 @@
 
 
 
-	<ion-item>
+	<ion-item style="width:100%">
 		<label class="item item-select" id="searchByTopic-select1"></label>
 		
-		<ion-select name="Topics" style="background:#0b172a; color:#fff; width:auto"[(ngModel)]="TopicSearchChoice" (ionChange)="SearchTopics($event)">
+		<ion-select name="Topics" style="background:#0b172a; color:#fff; width:100%"[(ngModel)]="TopicSearchChoice" (ionChange)="SearchTopics($event)">
 
 			<ion-option value='Select a topic...' selected>Select a topic...</ion-option>
 			<ion-option value='Advocacy/Public Policy'>Advocacy/Public Policy</ion-option>

@@ -16,9 +16,6 @@ import { MyAgendaFull } from '../myagendafull/myagendafull';
 import { EvaluationConference } from '../evaluationconference/evaluationconference';
 import { ProfilePage } from '../profile/profile';
 
-declare var formatTime: any;
-declare var dateFormat: any;
-
 @Component({
   selector: 'page-login',
   templateUrl: 'login.html',

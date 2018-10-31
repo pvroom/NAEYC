@@ -56,7 +56,7 @@
 		<ion-list no-lines class="bgCityscape">
 			<button ion-item class="opacity" [navPush]="programPage">
 				<p class="myFontSize26">Program</p>
-				<ion-icon name="list-box" item-left></ion-icon>
+				<ion-icon name="list" item-left></ion-icon>
 			</button>
 
 			<button ion-item class="opacity" [navPush]="speakersPage">
@@ -91,7 +91,7 @@
 
 			<button ion-item class="opacity" [navPush]="helpPage">
 				<p class="myFontSize26">Help</p>
-				<ion-icon name="help-circle" item-left></ion-icon>
+				<ion-icon name="help" item-left></ion-icon>
 			</button>
 
 			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Notes')">
