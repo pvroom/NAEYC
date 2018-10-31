@@ -7,7 +7,7 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content>
 
 		<!-- Posting picture attachment -->
 		<img class="center" [src]="_DomSanitizer.bypassSecurityTrustUrl(ProfileImageAttachment)" onerror="this.src='assets/img/missing-image.png'">
@@ -16,22 +16,22 @@
 		<ion-grid *ngIf=deviceButtons>
 			<ion-row>
 				<ion-col col-3 >
-					<button ion-button full (click)="closeModal('Cancel')">
+					<button ion-button color="danger" (click)="closeModal('Cancel')">
 						Cancel
 					</button>
 				</ion-col>
 				<ion-col col-3 >
-					<button ion-button full (click)="addGalleryImage()">
+					<button ion-button color="danger" (click)="addGalleryImage()">
 						Gallery
 					</button>
 				</ion-col>
 				<ion-col col-3 >
-					<button ion-button full (click)="addCameraImage()">
+					<button ion-button color="danger" (click)="addCameraImage()">
 						Camera
 					</button>
 				</ion-col>
 				<ion-col col-3 >
-					<button ion-button full (click)="closeModal('Save')">
+					<button ion-button color="danger" (click)="closeModal('Save')">
 						Save
 					</button>
 				</ion-col>
@@ -41,7 +41,7 @@
 		<ion-grid *ngIf=browserButtons>
 			<ion-row>
 				<ion-col col-3 >
-					<button ion-button full (click)="closeModal('Cancel')">
+					<button ion-button color="danger" (click)="closeModal('Cancel')">
 						Cancel
 					</button>
 				</ion-col>
@@ -49,7 +49,7 @@
 					<p style="text-align:center;">Please use the mobile app to upload an image</p>
 				</ion-col>
 				<ion-col col-3 >
-					<button ion-button full (click)="closeModal('Save')">
+					<button ion-button color="danger" (click)="closeModal('Save')">
 						Save
 					</button>
 				</ion-col>
