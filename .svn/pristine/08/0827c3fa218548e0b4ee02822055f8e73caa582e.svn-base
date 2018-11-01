@@ -1,0 +1,58 @@
+<ion-header>
+
+  <ion-navbar color="primary">
+    <button ion-button menuToggle>
+      <ion-icon name="menu"></ion-icon>
+    </button>
+    <ion-title>Speakers</ion-title>
+  </ion-navbar>
+
+</ion-header>
+
+
+<ion-content>
+
+	<ion-list id="speakers-list3">
+
+		<!-- Search input -->
+		<ion-grid>
+			<ion-row>
+				<ion-col col-9>	
+
+					<ion-item class="item-input; shadow">
+						<ion-icon name="search" item-left></ion-icon>
+						<ion-input name="srchBarEntry" id="srchBarEntry" 
+						type="text" placeholder="Search" [(ngModel)]="EntryTerms"></ion-input>
+					</ion-item>
+				</ion-col>
+				<ion-col col-3>
+					<button ion-button full class="buttonPadding" (click)="GetSearchResults()">Submit</button>
+				</ion-col>
+			</ion-row>
+		</ion-grid>
+
+		<!-- Speaker listing -->
+		<ion-list>
+			<ion-item tappable (click)="SpeakerDetails(speaker.SpeakerID)" *ngFor="let speaker of SpeakerListing" id="speaker-list-item19">
+				<div style="float: left; padding-right: 10px">
+					<!-- <ion-icon name="{{speaker.speakerIcon}}"></ion-icon> -->
+					<ion-avatar item-start>
+						<img  [src]="speaker.speakerAvatar" src="assets/img/personIcon.png" onerror="this.src='assets/img/personIcon.png'">
+						<!--<img-loader [src]="speaker.speakerAvatar" useImg [spinner]=false></img-loader>-->
+						<!--<img src="{{speaker.speakerAvatar}}" onerror="this.src='assets/img/personIcon.png'">-->
+					</ion-avatar>
+				</div>
+				<ion-icon item-right name="{{speaker.navigationArrow}}"></ion-icon>
+				<h2 style="padding-top: 7px;">{{speaker.DisplayNameLastFirst}}</h2>
+				<p>{{speaker.DisplayTitle}}</p>
+				<p>{{speaker.DisplayCredentials}}</p>
+			</ion-item>
+		</ion-list>
+
+	</ion-list>
+
+</ion-content>
+
+
+
+
