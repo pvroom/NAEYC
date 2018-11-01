@@ -203,16 +203,4 @@ export class SpeakersPage {
 	};
 	
 
-
-	swipeEvent(e) {
-		if (e.direction == 2) {
-		  this.navCtrl.push('Item2');
-		}
-	}
-
-
-
-
-
-
 }

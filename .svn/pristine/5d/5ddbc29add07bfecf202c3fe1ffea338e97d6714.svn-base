@@ -6,7 +6,7 @@
 
 	<ion-toolbar no-border style="margin:0" [style.height]="showEmojiPicker ? '255px' : '55px'">
 		<div style="background:#fff; color:#444; margin:0" class="input-wrap">
-			<ion-textarea style="background:#fff;color:#444" #chat_input
+			<ion-textarea style="color:#444" #chat_input
 				placeholder="Text Input"
 				[(ngModel)]="editorMsg"
 				(keyup.enter)="sendMsg()"
