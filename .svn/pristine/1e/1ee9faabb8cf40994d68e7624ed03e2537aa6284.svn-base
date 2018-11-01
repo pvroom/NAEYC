@@ -4,8 +4,8 @@
 	</ion-navbar>
 
 
-	<ion-toolbar no-border style="margin:0" [style.height]="showEmojiPicker ? '255px' : '55px'">
-		<div style="background:#0b172a; color:#fff; margin:0" class="input-wrap">
+	<ion-toolbar no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+		<div style="background:#0b172a; color:#fff" class="input-wrap">
 			<ion-textarea style="color:#fff" #chat_input
 				placeholder="Text Input"
 				[(ngModel)]="editorMsg"

@@ -16,6 +16,8 @@ import { IonicImageLoader } from 'ionic-image-loader';
   changeDetection: ChangeDetectionStrategy.OnPush
 })
 
+
+
 export class SpeakersPage {
 
 	public SpeakerListing: any[] = [];
@@ -198,6 +200,19 @@ export class SpeakersPage {
 			this.navCtrl.push('SearchResultsPage', {SearchTerms: SearchTerms}, {animate: true, direction: 'forward'});
 
         }
-    };
+	};
+	
+
+
+	swipeEvent(e) {
+		if (e.direction == 2) {
+		  this.navCtrl.push('Item2');
+		}
+	}
+
+
+
+
+
 
 }

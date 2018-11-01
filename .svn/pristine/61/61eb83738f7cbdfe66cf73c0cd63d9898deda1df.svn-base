@@ -83,6 +83,6 @@
 
 <ion-footer>
 		
-	<button ion-button full color="light" style="margin:0">Deploy version: 1.24</button>
+	<button ion-button full color="light" style="margin:0">Deploy version: 1.23</button>
 
 </ion-footer>
