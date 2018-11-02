@@ -23,32 +23,32 @@ export class AttendeesPage {
 	triggerAlphaScrollChange: number = 0;
 
 	// Alpha buttons
-	public btnA = "myButtonGreyBlue";
-	public btnB = "myButtonGreyBlue";
-	public btnC = "myButtonGreyBlue";
-	public btnD = "myButtonGreyBlue";
-	public btnE = "myButtonGreyBlue";
-	public btnF = "myButtonGreyBlue";
-	public btnG = "myButtonGreyBlue";
-	public btnH = "myButtonGreyBlue";
-	public btnI = "myButtonGreyBlue";
-	public btnJ = "myButtonGreyBlue";
-	public btnK = "myButtonGreyBlue";
-	public btnL = "myButtonGreyBlue";
-	public btnM = "myButtonGreyBlue";
-	public btnN = "myButtonGreyBlue";
-	public btnO = "myButtonGreyBlue";
-	public btnP = "myButtonGreyBlue";
-	public btnQ = "myButtonGreyBlue";
-	public btnR = "myButtonGreyBlue";
-	public btnS = "myButtonGreyBlue";
-	public btnT = "myButtonGreyBlue";
-	public btnU = "myButtonGreyBlue";
-	public btnV = "myButtonGreyBlue";
-	public btnW = "myButtonGreyBlue";
-	public btnX = "myButtonGreyBlue";
-	public btnY = "myButtonGreyBlue";
-	public btnZ = "myButtonGreyBlue";
+	public btnA = "myButtonGreyBlue1";
+	public btnB = "myButtonGreyBlue1";
+	public btnC = "myButtonGreyBlue1";
+	public btnD = "myButtonGreyBlue1";
+	public btnE = "myButtonGreyBlue1";
+	public btnF = "myButtonGreyBlue1";
+	public btnG = "myButtonGreyBlue1";
+	public btnH = "myButtonGreyBlue1";
+	public btnI = "myButtonGreyBlue1";
+	public btnJ = "myButtonGreyBlue1";
+	public btnK = "myButtonGreyBlue1";
+	public btnL = "myButtonGreyBlue1";
+	public btnM = "myButtonGreyBlue1";
+	public btnN = "myButtonGreyBlue1";
+	public btnO = "myButtonGreyBlue1";
+	public btnP = "myButtonGreyBlue1";
+	public btnQ = "myButtonGreyBlue1";
+	public btnR = "myButtonGreyBlue1";
+	public btnS = "myButtonGreyBlue1";
+	public btnT = "myButtonGreyBlue1";
+	public btnU = "myButtonGreyBlue1";
+	public btnV = "myButtonGreyBlue1";
+	public btnW = "myButtonGreyBlue1";
+	public btnX = "myButtonGreyBlue1";
+	public btnY = "myButtonGreyBlue1";
+	public btnZ = "myButtonGreyBlue1";
 	
 	
 	constructor(public navCtrl: NavController,
@@ -224,32 +224,32 @@ export class AttendeesPage {
 		
 	SetCurrentButton(AlphaLetter) {
 		
-		this.btnA = "myButtonGreyBlue";
-		this.btnB = "myButtonGreyBlue";
-		this.btnC = "myButtonGreyBlue";
-		this.btnD = "myButtonGreyBlue";
-		this.btnE = "myButtonGreyBlue";
-		this.btnF = "myButtonGreyBlue";
-		this.btnG = "myButtonGreyBlue";
-		this.btnH = "myButtonGreyBlue";
-		this.btnI = "myButtonGreyBlue";
-		this.btnJ = "myButtonGreyBlue";
-		this.btnK = "myButtonGreyBlue";
-		this.btnL = "myButtonGreyBlue";
-		this.btnM = "myButtonGreyBlue";
-		this.btnN = "myButtonGreyBlue";
-		this.btnO = "myButtonGreyBlue";
-		this.btnP = "myButtonGreyBlue";
-		this.btnQ = "myButtonGreyBlue";
-		this.btnR = "myButtonGreyBlue";
-		this.btnS = "myButtonGreyBlue";
-		this.btnT = "myButtonGreyBlue";
-		this.btnU = "myButtonGreyBlue";
-		this.btnV = "myButtonGreyBlue";
-		this.btnW = "myButtonGreyBlue";
-		this.btnX = "myButtonGreyBlue";
-		this.btnY = "myButtonGreyBlue";
-		this.btnZ = "myButtonGreyBlue";
+		this.btnA = "myButtonGreyBlue1";
+		this.btnB = "myButtonGreyBlue1";
+		this.btnC = "myButtonGreyBlue1";
+		this.btnD = "myButtonGreyBlue1";
+		this.btnE = "myButtonGreyBlue1";
+		this.btnF = "myButtonGreyBlue1";
+		this.btnG = "myButtonGreyBlue1";
+		this.btnH = "myButtonGreyBlue1";
+		this.btnI = "myButtonGreyBlue1";
+		this.btnJ = "myButtonGreyBlue1";
+		this.btnK = "myButtonGreyBlue1";
+		this.btnL = "myButtonGreyBlue1";
+		this.btnM = "myButtonGreyBlue1";
+		this.btnN = "myButtonGreyBlue1";
+		this.btnO = "myButtonGreyBlue1";
+		this.btnP = "myButtonGreyBlue1";
+		this.btnQ = "myButtonGreyBlue1";
+		this.btnR = "myButtonGreyBlue1";
+		this.btnS = "myButtonGreyBlue1";
+		this.btnT = "myButtonGreyBlue1";
+		this.btnU = "myButtonGreyBlue1";
+		this.btnV = "myButtonGreyBlue1";
+		this.btnW = "myButtonGreyBlue1";
+		this.btnX = "myButtonGreyBlue1";
+		this.btnY = "myButtonGreyBlue1";
+		this.btnZ = "myButtonGreyBlue1";
 
 		switch(AlphaLetter) {
 			case "A":
