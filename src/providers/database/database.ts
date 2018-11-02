@@ -3288,6 +3288,7 @@ export class Database {
 
 			if (listingType == "al" || listingType == "sr") {	// Attendee Listing
 
+				/*
 				// Perform query against server-based MySQL database
 				var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
 				var emptyJSONArray = {};
@@ -3310,8 +3311,8 @@ export class Database {
 						}
 					);
 				});
+				*/
 
-				/*
 				var SQLquery = "";
 				SQLquery = "SELECT ct_id, last_name, first_name, title, company ";
 				SQLquery = SQLquery + "FROM attendees ";
@@ -3352,6 +3353,76 @@ export class Database {
 										AttendeeID: data.rows.item(i).ct_id,
 										LastName: data.rows.item(i).last_name,
 										FirstName: data.rows.item(i).first_name,
+										Title: data.rows.item(i).title,
+										Company: data.rows.item(i).company
+									});
+								}
+							}
+							resolve(DatabaseResponse);
+						})
+						.catch(e => console.log('Database: Messaging query error: ' + JSON.stringify(e)))
+					});
+					console.log('Database: Stats query complete');
+
+				});
+
+			}
+
+			if (listingType == "al2") {	// Attendee Listing by Letter
+
+				
+				// Perform query against server-based MySQL database
+				var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+				var emptyJSONArray = {};
+
+				return new Promise(resolve => {
+					this.httpCall.get(url).subscribe(
+						response => {
+							console.log('msgquery response: ' + JSON.stringify(response.json()));
+							resolve(response.json());
+						},
+						err => {
+							if (err.status == "412") {
+								console.log("App and API versions don't match.");
+								resolve(emptyJSONArray);
+							} else {
+								console.log(err.status);
+								console.log("API Error: ", err);
+								resolve(emptyJSONArray);
+							}
+						}
+					);
+				});
+				
+				/*
+				var SQLquery = "";
+				SQLquery = "SELECT ct_id, last_name, first_name, title, company, avatarFilename ";
+				SQLquery = SQLquery + "FROM attendees ";
+				SQLquery = SQLquery + "WHERE ActiveYN = 'Y' ";
+				SQLquery = SQLquery + "AND last_name LIKE '" + sortingType + "%' ";
+				SQLquery = SQLquery + "ORDER BY lower(last_name), lower(first_name) ";
+				
+				// Perform query against local SQLite database
+				return new Promise(resolve => {
+					
+					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+						console.log('Database: Opened DB for Messaging query');
+						
+						this.db = db;
+						
+						console.log('Database: Set Messaging query db variable');
+						
+						this.db.executeSql(SQLquery, <any>{}).then((data) => {
+							console.log('Database: Messaging query rows: ' + data.rows.length);
+							let DatabaseResponse = [];
+							if(data.rows.length > 0) {
+								for(let i = 0; i < data.rows.length; i++) {
+									DatabaseResponse.push({
+										AttendeeID: data.rows.item(i).ct_id,
+										LastName: data.rows.item(i).last_name,
+										FirstName: data.rows.item(i).first_name,
+										avatarFilename: data.rows.item(i).avatarFilename,
 										Title: data.rows.item(i).title,
 										Company: data.rows.item(i).company
 									});
