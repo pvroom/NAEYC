@@ -42,11 +42,14 @@ export class ProfileImagePage {
 	addCameraImage() {
 		
 		const options: CameraOptions = {
-			quality: 80,
+			quality: 100,
+			targetWidth:900,
+			targetHeight:600,
 			destinationType: this.camera.DestinationType.DATA_URL,
 			encodingType: this.camera.EncodingType.JPEG,
 			correctOrientation:true,
-			mediaType: this.camera.MediaType.PICTURE
+			mediaType: this.camera.MediaType.PICTURE,
+			sourceType:1
 		}
 
 		this.camera.getPicture(options).then((imageData) => {
