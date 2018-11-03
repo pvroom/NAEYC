@@ -1,0 +1,31 @@
+page-attendeesprofile {
+
+    .bg-style {
+        background: #eee;
+    }
+
+	ion-avatar img  {
+		width: 100% !important;
+		height: 100% !important;
+		max-width: 300px !important;
+		max-height: 300px !important;
+	}
+	
+	.avatar {
+		vertical-align: middle;
+        width: 37vw !important;
+        height: 37vw !important;
+		font-size: 3.5em;
+	}
+
+	ion-icon {
+		font-size: 50px;
+	}
+
+
+	.InputBoxW {
+		background-color: #fff;
+		color: #000;
+	}
+
+}

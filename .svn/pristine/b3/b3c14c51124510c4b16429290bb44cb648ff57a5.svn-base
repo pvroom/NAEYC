@@ -2676,7 +2676,6 @@ export class Database {
 
 			if (listingType == "pr") {	// Attendee Profile
 			
-				
 				// Perform query against server-based MySQL database
 				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
 				console.log(url);
@@ -2697,7 +2696,7 @@ export class Database {
 						}
 					);
 				});
-				
+
 				/*
 				var SQLquery = "";
 				//SQLquery = "SELECT * FROM attendees ";
@@ -2710,7 +2709,6 @@ export class Database {
 				SQLquery = SQLquery + "   ON ab.AttendeeID = '" + listingParameter + "' ";
 				SQLquery = SQLquery + "   AND ab.BookmarkID = a.ct_id ";
 				SQLquery = SQLquery + "   AND ab.BookmarkType = 'Attendees' ";
-				SQLquery = SQLquery + "   AND ab.UpdateType != 'Delete' ";
 				SQLquery = SQLquery + "WHERE a.ct_id = '" + AttendeeID + "' ";
 
 				// Perform query against local SQLite database
@@ -2762,28 +2760,6 @@ export class Database {
 
 			if (listingType == "pg") {	// Get Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
 				var SQLquery = "";
 				SQLquery = "SELECT * FROM attendees ";
 				SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
@@ -2834,34 +2810,11 @@ export class Database {
 					console.log('Database: Profile query complete');
 
 				});
-				*/
-				
+
 			}
 
 			if (listingType == "pu") {	// Update Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
 				var SQLquery = "";
 				SQLquery = "UPDATE attendees ";
 				
@@ -2924,33 +2877,11 @@ export class Database {
 					console.log('Database: Profile query complete');
 
 				});
-				*/
+
 			}
 
 			if (listingType == "pd") {	// Remove Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
 				var SQLquery = "";
 				SQLquery = "UPDATE attendees ";
 				
@@ -3013,33 +2944,11 @@ export class Database {
 					console.log('Database: Profile query complete');
 
 				});
-				*/
+
 			}
 
 			if (listingType == "ps") {	// Save Profile updates
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
 				var SQLquery = "";
 				SQLquery = "UPDATE attendees ";
 				SQLquery = SQLquery + "SET title = '" + AttendeeProfileTitle + "', ";
@@ -3081,7 +2990,7 @@ export class Database {
 					console.log('Database: Profile query complete');
 
 				});
-				*/
+
 			}
 			
 			if (listingType == "cn") { // Check Network
@@ -3595,7 +3504,6 @@ export class Database {
 		var BookmarkType = flagValues[2];
 		var BookmarkID = flagValues[3];
 		
-		/*
 		if (this.DevicePlatform == "iOS" || this.DevicePlatform == "Android") {
 			
 			if (listingType == "li") { // List bookmarks
@@ -3960,7 +3868,7 @@ export class Database {
 			}
 					
 		} else {
-		*/
+			
 			// Perform query against server-based MySQL database
 			var url = APIURLReference + "action=bmkquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
 
@@ -3981,7 +3889,7 @@ export class Database {
 				);
 			});
 			
-		//}
+		}
 			
 	}
 

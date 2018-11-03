@@ -253,82 +253,82 @@ export class AttendeesPage {
 
 		switch(AlphaLetter) {
 			case "A":
-				this.btnA = "myButtonActive";
+				this.btnA = "myButtonActive1";
 				break;
 			case "B":
-				this.btnB = "myButtonActive";
+				this.btnB = "myButtonActive1";
 				break;
 			case "C":
-				this.btnC = "myButtonActive";
+				this.btnC = "myButtonActive1";
 				break;
 			case "D":
-				this.btnD = "myButtonActive";
+				this.btnD = "myButtonActive1";
 				break;
 			case "E":
-				this.btnE = "myButtonActive";
+				this.btnE = "myButtonActive1";
 				break;
 			case "F":
-				this.btnF = "myButtonActive";
+				this.btnF = "myButtonActive1";
 				break;
 			case "G":
-				this.btnG = "myButtonActive";
+				this.btnG = "myButtonActive1";
 				break;
 			case "H":
-				this.btnH = "myButtonActive";
+				this.btnH = "myButtonActive1";
 				break;
 			case "I":
-				this.btnI = "myButtonActive";
+				this.btnI = "myButtonActive1";
 				break;
 			case "J":
-				this.btnJ = "myButtonActive";
+				this.btnJ = "myButtonActive1";
 				break;
 			case "K":
-				this.btnK = "myButtonActive";
+				this.btnK = "myButtonActive1";
 				break;
 			case "L":
-				this.btnL = "myButtonActive";
+				this.btnL = "myButtonActive1";
 				break;
 			case "M":
-				this.btnM = "myButtonActive";
+				this.btnM = "myButtonActive1";
 				break;
 			case "N":
-				this.btnN = "myButtonActive";
+				this.btnN = "myButtonActive1";
 				break;
 			case "O":
-				this.btnO = "myButtonActive";
+				this.btnO = "myButtonActive1";
 				break;
 			case "P":
-				this.btnP = "myButtonActive";
+				this.btnP = "myButtonActive1";
 				break;
 			case "Q":
-				this.btnQ = "myButtonActive";
+				this.btnQ = "myButtonActive1";
 				break;
 			case "R":
-				this.btnR = "myButtonActive";
+				this.btnR = "myButtonActive1";
 				break;
 			case "S":
-				this.btnS = "myButtonActive";
+				this.btnS = "myButtonActive1";
 				break;
 			case "T":
-				this.btnT = "myButtonActive";
+				this.btnT = "myButtonActive1";
 				break;
 			case "U":
-				this.btnU = "myButtonActive";
+				this.btnU = "myButtonActive1";
 				break;
 			case "V":
-				this.btnV = "myButtonActive";
+				this.btnV = "myButtonActive1";
 				break;
 			case "W":
-				this.btnW = "myButtonActive";
+				this.btnW = "myButtonActive1";
 				break;
 			case "X":
-				this.btnX = "myButtonActive";
+				this.btnX = "myButtonActive1";
 				break;
 			case "Y":
-				this.btnY = "myButtonActive";
+				this.btnY = "myButtonActive1";
 				break;
 			case "Z":
-				this.btnZ = "myButtonActive";
+				this.btnZ = "myButtonActive1";
 				break;
 		}
 

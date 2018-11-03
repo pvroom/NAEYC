@@ -6,6 +6,8 @@ import { Localstorage } from './../../providers/localstorage/localstorage';
 import { ViewEncapsulation } from '@angular/core';
 
 
+import { MorePage } from '../more/more';
+
 
 
 

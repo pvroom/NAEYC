@@ -55,6 +55,7 @@ import { DatabasePage } from '../pages/database/database';
 import { EvaluationConference } from '../pages/evaluationconference/evaluationconference';
 import { MyAgenda } from '../pages/myagenda/myagenda';
 import { ProfilePage } from '../pages/profile/profile';
+import { ConversationsPage } from '../pages/conversations/conversations';
 import { NotificationsPage } from '../pages/notifications/notifications';
 import { AttendeesPage } from '../pages/attendees/attendees';
 import { NetworkingPage } from '../pages/networking/networking';
@@ -86,7 +87,7 @@ import { SplashPage } from '../pages/splash/splash';
     ModalPage,
     ActivityPage,
     LoginPage,
-	ConversationPage,
+    ConversationPage,
 //    NotificationsPage,
 //    SettingPage,
     SponsorsPage,

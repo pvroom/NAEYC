@@ -9,7 +9,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 // Preload Pages
 import { LoginPage } from '../login/login';
-
+import { MorePage } from '../more/more';
 
 
 @IonicPage()

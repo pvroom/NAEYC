@@ -67,7 +67,7 @@ page-attendees {
 		font-size:13px;
 	}
 
-	.myButtonActive1  {
+	.myButtonActive  {
 		background-color:#009448!important;
 		color:#fff !important;
 		font-size:13px;
