@@ -108,12 +108,12 @@ export class MyApp {
 		  { title: 'Bookmarks', icon: 'bookmark', component: AttendeeBookmarksPage, naventry: 'Bookmarks' },
 		  //{ title: 'Splash', icon: 'image', component: SplashPage, naventry: 'Splash' },
 		  //{ title: 'Event Survey', icon: 'checkbox-outline', component: EvaluationConference, naventry: 'EventSurvey' },
-		  { title: 'Attendees', icon: 'contacts', component: AttendeesPage, naventry: 'Attendees' },
+		  //{ title: 'Attendees', icon: 'contacts', component: AttendeesPage, naventry: 'Attendees' },
 		  //{ title: 'Modal', icon: 'contacts', component: ModalPage, naventry: 'Modal' },
-		  { title: 'Conversations', icon: 'chatbubbles', component: ConversationsPage, naventry: 'Conversations' },
+		  //{ title: 'Conversations', icon: 'chatbubbles', component: ConversationsPage, naventry: 'Conversations' },
 		  //{ title: 'Social Media', icon: 'at', component: SocialPage, naventry: 'Social' },
-		  { title: 'Activity Feed', icon: 'chatboxes', component: ActivityPage, naventry: 'Activity' },
-		  { title: 'Profile', icon: 'contact', component: ProfilePage, naventry: 'Profile' },
+		  //{ title: 'Activity Feed', icon: 'chatboxes', component: ActivityPage, naventry: 'Activity' },
+		  //{ title: 'Profile', icon: 'contact', component: ProfilePage, naventry: 'Profile' },
 		  { title: 'More', icon: 'more', component: MorePage, naventry: 'More' },
 		  { title: 'Sign In / Out', icon: 'log-in', component: LoginPage, naventry: 'Login' }
 

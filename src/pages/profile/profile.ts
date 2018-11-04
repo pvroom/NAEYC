@@ -175,11 +175,11 @@ export class ProfilePage {
 		});
 
 		// Alert for failed save
-		let failalert = this.alertCtrl.create({
-			title: 'Profile Changes',
-			subTitle: 'Unable to save your changes at this time - please try again in a little bit.',
-			buttons: ['Ok']
-		});
+		//let failalert = this.alertCtrl.create({
+		//	title: 'Profile Changes',
+		//	subTitle: 'Unable to save your changes at this time - please try again in a little bit.',
+		//	buttons: ['Ok']
+		//});
 
 		var prTitle = this.prAttendeeTitle;
 		var prOrg = this.prAttendeeOrganization;

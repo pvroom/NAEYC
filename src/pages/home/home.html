@@ -71,19 +71,20 @@
 			</button>
 
 
-
 			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('MyAgenda')">
 				<p class="myFontSize26">My Agenda</p>
 				<ion-icon class="custom-icon" name="calendar" item-left></ion-icon>
 			</button>
 
-
+			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Networking')">
+				<p class="myFontSize26">Networking <ion-icon *ngIf=NewMessagesIndicator style="color:red" name="medical"></ion-icon></p>
+				<ion-icon class="custom-icon" name="contacts" item-left></ion-icon>
+			</button>
 
 			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Exhibitors')">
 				<p class="myFontSize26">Exhibitors</p>
 				<ion-icon class="custom-icon" name="people" item-left></ion-icon>
 			</button>
-
 
 
 			<button ion-item class="opacity" [navPush]="mapPage">
@@ -94,11 +95,6 @@
 			<button ion-item class="opacity" [navPush]="conferenceCityPage">
 				<p class="myFontSize26">Washington, DC</p>
 				<ion-icon class="custom-icon" name="compass" item-left></ion-icon>
-			</button>
-
-			<button ion-item class="opacity" (click)="NavigateToAuthenticatedPage('Networking')">
-				<p class="myFontSize26">Networking <ion-icon *ngIf=NewMessagesIndicator style="color:red" name="medical"></ion-icon></p>
-				<ion-icon class="custom-icon" name="contacts" item-left></ion-icon>
 			</button>
 
 			<button ion-item class="opacity" [navPush]="helpPage">
