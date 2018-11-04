@@ -8,35 +8,34 @@
 
 
 <ion-content>
+<!-- Posting picture attachment -->
+<img class="center" [src]="_DomSanitizer.bypassSecurityTrustUrl(ProfileImageAttachment)" onerror="this.src='assets/img/missing-image.png'">
 
-		<!-- Posting picture attachment -->
-		<img class="center" [src]="_DomSanitizer.bypassSecurityTrustUrl(ProfileImageAttachment)" onerror="this.src='assets/img/missing-image.png'">
-
-		<!-- Button controls -->
-		<ion-grid *ngIf=deviceButtons>
-			<ion-row>
-				<ion-col col-3 >
-					<button ion-button color="danger" (click)="closePage('Cancel')">
-						Cancel
-					</button>
-				</ion-col>
-				<ion-col col-3 >
-					<button ion-button color="danger" (click)="addGalleryImage()">
-						Gallery
-					</button>
-				</ion-col>
-				<ion-col col-3 >
-					<button ion-button color="danger" (click)="addCameraImage()">
-						Camera
-					</button>
-				</ion-col>
-				<ion-col col-3 >
-					<button ion-button color="danger" (click)="closePage('Save')">
-						Save
-					</button>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
+<!-- Button controls -->
+<ion-grid *ngIf=deviceButtons>
+	<ion-row>
+		<ion-col col-3 >
+			<button ion-button color="danger" (click)="closePage('Cancel')">
+				Cancel
+			</button>
+		</ion-col>
+		<ion-col col-3 >
+			<button color="danger" ion-button  (click)="addGalleryImage()">
+				Gallery
+			</button>
+		</ion-col>
+		<ion-col col-3 >
+			<button color="danger" ion-button  (click)="addCameraImage()">
+				Camera
+			</button>
+		</ion-col>
+		<ion-col col-3 >
+			<button color="danger" ion-button  (click)="closePage('Save')">
+				Save
+			</button>
+		</ion-col>
+	</ion-row>
+</ion-grid>
 
 		<ion-grid *ngIf=browserButtons>
 			<ion-row>

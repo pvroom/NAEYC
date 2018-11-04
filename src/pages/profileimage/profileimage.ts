@@ -12,6 +12,8 @@ import { normalizeURL } from 'ionic-angular';
 import { DomSanitizer } from '@angular/platform-browser';
 
 
+
+
 @IonicPage()
 @Component({
   selector: 'page-profileimage',
