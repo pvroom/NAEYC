@@ -23,10 +23,12 @@ page-notes {
 }
 
 .full-width-select {
-  width: 100%;
-  max-width: 100%;
+  max-width: 100%!important;
+  min-width: 70%!important;
 }
 
-
+.item-select .label{
+  width:70%!important;
+}
 
 }

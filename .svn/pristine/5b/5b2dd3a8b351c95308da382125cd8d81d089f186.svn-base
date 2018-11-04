@@ -386,12 +386,12 @@ export class AttendeesPage {
 					}
 
 					var imageAvatar = "";
-					//if (data[i].avatarFilename !== null) {
-						//if (data[i].avatarFilename.length >0) {
+					if (data[i].avatarFilename !== null) {
+						if (data[i].avatarFilename.length >0) {
 							imageAvatar = "https://naeyc.convergence-us.com/AdminGateway/images/Attendees/" + data[i].AttendeeID + ".jpg";
 							console.log('imageAvatar: ' + imageAvatar);
-						//}
-					//}
+						}
+					}
 					
 					// Add current record to the list
 					this.AttendeeListing.push({

@@ -88,7 +88,7 @@
 
 
 			<button ion-item class="opacity" [navPush]="mapPage">
-				<p class="myFontSize26">Maps</p>
+				<p class="myFontSize26">Map</p>
 				<ion-icon class="custom-icon" name="map" item-left></ion-icon>
 			</button>
 
