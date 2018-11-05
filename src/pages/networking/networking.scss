@@ -2,13 +2,31 @@ page-networking {
 
 	.buttonIconsL {
 		font-size:2.5em; 
-		padding-bottom:10px;
+		padding-top:50px;
 	}
 
 	.buttonShape {
 		text-align: center; 
 		color:#fff; 
-		height:200px;
+		//height:225px;
 	}
 	
+}
+
+.networking {
+ 
+	scroll-content {
+		display: flex;
+		flex-direction: column;
+	}
+ 
+	ion-grid {
+		padding: 0;
+		height: 100%;
+	}
+ 
+	ion-row {
+		flex: 1;
+	}
+ 
 }

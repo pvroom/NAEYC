@@ -18,7 +18,10 @@ export class ActivityFeedLeaderboardPage {
 	//public chartLabels: string[] = ['John Black','Peter Vroom','Lauren Post','Jennifer Toddley','Lisa Bollenbach'];
 	//public chartData: number[] = [1200,1000,850,825,700];
 	public chartLabels: string[] = [];
-	public chartData: number[] = [];
+	//public chartData: number[] = [];
+	public chartData:any[] = [
+		{data: [], label: 'Postings'}
+	  ];
 	public chartType: string = 'horizontalBar';
 	public chartLegend: boolean = false;
 	//public chartOptions: any[] = {title: {
@@ -40,7 +43,7 @@ export class ActivityFeedLeaderboardPage {
 				private cd: ChangeDetectorRef,
 				private view: ViewController,
 				private localstorage: Localstorage) {
-				
+						
 	}
 
 	ionViewDidEnter() {
@@ -61,13 +64,14 @@ export class ActivityFeedLeaderboardPage {
 					
 					this.chartLabels.push(AttendeeName);
 					var Counter = parseInt(data[i].PostingsComments);
-					this.chartData.push(Counter);
+					this.chartData[0].data.push(Counter);
 					
 				}
 				//console.log('Labels: ' + JSON.stringify(this.chartLabels));
 				//console.log('Data: ' + JSON.stringify(this.chartData));
 				
 				this.cd.markForCheck();
+				//this.chart.chart.config.data.labels = "Postings";
 				this.chart.chart.update();
 			}
 			

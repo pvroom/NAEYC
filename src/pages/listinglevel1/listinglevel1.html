@@ -19,7 +19,7 @@
 				</ion-item>
 			</ion-col>
 			<ion-col col-3>
-				<button ion-button full style="padding:0; margin:0; background:#004c94" (click)="GetSearchResults()">Submit</button>
+				<button ion-button block style="padding:0; margin:0; background:#004c94" (click)="GetSearchResults()">Submit</button>
 			</ion-col>
 		</ion-row>
 	</ion-grid>
@@ -30,33 +30,33 @@
 		<ion-row>
 
 			<ion-col style="padding:0">
-				<button ion-button full style="margin:0"[ngClass]="btnTue" (tap)="DayUpdate('Sat')">
+				<button ion-button block style="margin:0"[ngClass]="btnTue" (tap)="DayUpdate('Sat')">
 						<ion-icon name="calendar"></ion-icon>
 						<label style="padding-left:3px">11/13</label>
 				</button>
 			</ion-col>
 			<ion-col style="padding:0">
-				<button ion-button full style="margin:0"[ngClass]="btnWed" (tap)="DayUpdate('Sun')">
+				<button ion-button block style="margin:0"[ngClass]="btnWed" (tap)="DayUpdate('Sun')">
 						<ion-icon name="calendar"></ion-icon>
 						<label style="padding-left:3px">11/14</label>
 				</button>
 			</ion-col>
 			
 			<ion-col style="padding:0">
-				<button ion-button full style="margin:0"[ngClass]="btnThu" style="padding:0; margin:0" (tap)="DayUpdate('Mon')">
+				<button ion-button block style="margin:0"[ngClass]="btnThu" style="padding:0; margin:0" (tap)="DayUpdate('Mon')">
 						<ion-icon name="calendar"></ion-icon>
 						<label style="padding-left:3px">11/15</label>
 				</button>
 			</ion-col>
 
 			<ion-col style="padding:0">
-				<button ion-button full style="margin:0"[ngClass]="btnFri" style="padding:0; margin:0" (tap)="DayUpdate('Tue')">
+				<button ion-button block style="margin:0"[ngClass]="btnFri" style="padding:0; margin:0" (tap)="DayUpdate('Tue')">
 						<ion-icon name="calendar"></ion-icon>
 						<label style="padding-left:3px">11/16</label>
 				</button>
 			</ion-col>
 			<ion-col style="padding:0">
-				<button ion-button full style="margin:0"[ngClass]="btnSat" style="padding:0; margin:0" (tap)="DayUpdate('Wed')">
+				<button ion-button block style="margin:0"[ngClass]="btnSat" style="padding:0; margin:0" (tap)="DayUpdate('Wed')">
 						<ion-icon name="calendar"></ion-icon>
 						<label style="padding-left:3px">11/17</label>
 				</button>
