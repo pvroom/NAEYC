@@ -45,6 +45,14 @@
 			<p>{{ActivityFeedComment}}</p>
 		</ion-card-content>
 
+		<!-- Linked URL (Only for promoted postings entered via the Admin Gateway) -->
+		<ion-list>
+			<button ion-item *ngIf=showActivityFeedLinkedURL (click)="navToWeb(ActivityFeedLinkedURL)">
+				<ion-icon name="globe" item-start></ion-icon>
+				{{ActivityFeedLinkedURL}}
+			</button>
+		</ion-list>
+
 		<!-- Footer with details -->
 		<ion-row>
 			<ion-col>

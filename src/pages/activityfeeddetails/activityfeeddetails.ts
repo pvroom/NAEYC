@@ -9,6 +9,8 @@ import { Localstorage } from './../../providers/localstorage/localstorage';
 import { FabContainer } from 'ionic-angular';
 import { ViewEncapsulation } from '@angular/core';
 
+import * as moment from 'moment';
+
 // Pages
 import { LoginPage } from '../login/login';
 
@@ -36,6 +38,8 @@ export class ActivityFeedDetailsPage {
 	public ActivityFeedCommentPostedDuration: string;
 	public ActivityFeedAttachment: string;
 	public ActivityFeedAttendeeID: string;
+	public ActivityFeedLinkedURL: string;
+	public showActivityFeedLinkedURL;
 	
 	public afComments: any[] = [];
 	showEmojiPicker = false;
@@ -123,51 +127,9 @@ export class ActivityFeedDetailsPage {
 	
 	timeDifference(laterdate, earlierdate) {
 		
-		var difference = laterdate.getTime() - earlierdate.getTime();
-	 
-		var daysDifference = Math.floor(difference/1000/60/60/24);
-		difference -= daysDifference*1000*60*60*24
-	 
-		var hoursDifference = Math.floor(difference/1000/60/60);
-		difference -= hoursDifference*1000*60*60
-	 
-		var minutesDifference = Math.floor(difference/1000/60);
-		difference -= minutesDifference*1000*60
-	 
-		var secondsDifference = Math.floor(difference/1000);
-		var stringOutput = "";
-		
-		if (daysDifference>0) {
-			
-			stringOutput = daysDifference + ' day/s';
-			
-		} else {
-		
-			if (hoursDifference>0) {
+		console.log('Moment timeDifference output: ' + moment(earlierdate).fromNow());
+		return moment(earlierdate).fromNow(true);
 				
-				stringOutput = hoursDifference + ' hr/s';
-			
-			} else {
-		
-				if (minutesDifference>0) {
-
-					stringOutput = minutesDifference + ' min/s';
-
-				} else {
-
-					if (hoursDifference==0) {
-						
-						stringOutput = secondsDifference + ' sec/s';
-						
-					}
-				}
-			}
-		}
-		
-		console.log('timeDifference output: ' + stringOutput);
-		
-		return stringOutput;
-		
 	}
 
 	ngOnInit() {
@@ -207,6 +169,7 @@ export class ActivityFeedDetailsPage {
         var UpdatedEventDescription2;
 		var HandoutPDFName = "";
 		this.afComments = [];
+		var afWebLink;
 		
 		console.log('Activity Feed Details, flags: ' + flags);
         // Get Activity Feed detail record
@@ -245,6 +208,13 @@ export class ActivityFeedDetailsPage {
 				this.ActivityFeedCommentsCounter = data[0].CommentsCount;
 				this.ActivityFeedCommentPostedDuration = TimeDifference;
 				this.ActivityFeedAttachment = imageAttachment;
+				
+				afWebLink = false;
+				if (data[0].LinkedURL != "" && data[0].LinkedURL !== null) {
+					afWebLink = true;
+				}
+				this.ActivityFeedLinkedURL = data[0].LinkedURL;
+				this.showActivityFeedLinkedURL = afWebLink;
 
 				this.ActivityFeedAttendeeID = data[0].Poster;
 
@@ -266,6 +236,13 @@ export class ActivityFeedDetailsPage {
 						SQLDate = new Date(dbEventDateTime);
 						DisplayDateTime = dateFormat(SQLDate, "mm/dd h:MMtt");
 					
+						var postComment = '';
+						if (data[i].DeletedYN == 'Y') {
+							postComment = '[Deleted]';
+						} else {
+							postComment = data[i].afcComment;
+						}
+						
 						// Show the current record
 						this.afComments.push({
 							afID: data[i].afID,
@@ -273,7 +250,7 @@ export class ActivityFeedDetailsPage {
 							ActivityFeedCommentBy: DisplayName,
 							ActivityFeedCommentByID: data[i].Commenter,
 							ActivityFeedCommentPosted: DisplayDateTime,
-							ActivityFeedComment: data[i].afcComment
+							ActivityFeedComment: postComment
 						});
 
 					}
@@ -395,5 +372,18 @@ export class ActivityFeedDetailsPage {
 
     }
 
+	navToWeb(wURL) {
+		
+		if (wURL != "") {
+            if ((wURL.substring(0, 7).toLowerCase() != "http://") && (wURL.substring(0, 8).toLowerCase() != "https://")) {
+                wURL = "http://" + wURL;
+            }
+			
+			console.log('Attendee Profile Details: Navigating to: ' + wURL);
+            window.open(wURL, '_system');
+		}
+
+	}
+	
 
 }

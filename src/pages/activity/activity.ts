@@ -9,6 +9,8 @@ import { Localstorage } from './../../providers/localstorage/localstorage';
 import { FabContainer } from 'ionic-angular';
 import { ImageLoaderConfig } from 'ionic-image-loader';
 
+import * as moment from 'moment';
+
 declare var dateFormat: any;
 
 @Component({
@@ -20,6 +22,7 @@ declare var dateFormat: any;
 export class ActivityPage {
 
 	public activityFeedListing: any[] = [];
+	public date: any;
 
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
@@ -32,83 +35,31 @@ export class ActivityPage {
 				private localstorage: Localstorage) {
 	}
 
-	ionViewDidLoad() {
-		console.log('ionViewDidLoad ActivityPage');
+	ionViewWillEnter() {
+		
+		console.log('ionViewWillEnter ActivityPage');	
+		
+		// Update Comment count here when coming back from a posting
+		var ActivityFeedID = this.localstorage.getLocalValue('ActivityFeedID');
+		var ActivityFeedIDCCount = this.localstorage.getLocalValue('ActivityFeedIDCCount');
+		var ActivityFeedArrayString = this.localstorage.getLocalValue('ActivityFeedObject');
+		
+		this.LoadData();
+		
 	}
 
 	ionViewDidEnter() {
 		
 		console.log('ionViewDidEnter ActivityPage');
 
-		// Update Comment count here when coming back from a posting
-		var ActivityFeedID = this.localstorage.getLocalValue('ActivityFeedID');
-		var ActivityFeedIDCCount = this.localstorage.getLocalValue('ActivityFeedIDCCount');
-		var ActivityFeedArrayString = this.localstorage.getLocalValue('ActivityFeedObject');
-
-		this.LoadData();
-
-		//if (ActivityFeedArrayString == '' || ActivityFeedArrayString == null || ActivityFeedArrayString == undefined) {
-			// Don't do anything
-		//} else {
-
-		//	console.log('ActivityFeedArrayString: ' + ActivityFeedArrayString);
-		//	var data2 = JSON.parse(ActivityFeedArrayString);
-		//	console.log(data2);
-		//	console.log('ActivityFeedID, Current Comment Count: ' + data2.ActivityFeedCommentsCounter);
-		//	data2.ActivityFeedCommentsCounter = ActivityFeedIDCCount;
-		//	console.log('ActivityFeedID, Updated Comment Count: ' + data2.ActivityFeedCommentsCounter);
-			
-		//	this.cd.markForCheck();
-		//}
 	}
 
 	timeDifference(laterdate, earlierdate) {
 		
-		var difference = laterdate.getTime() - earlierdate.getTime();
-	 
-		var daysDifference = Math.floor(difference/1000/60/60/24);
-		difference -= daysDifference*1000*60*60*24
-	 
-		var hoursDifference = Math.floor(difference/1000/60/60);
-		difference -= hoursDifference*1000*60*60
-	 
-		var minutesDifference = Math.floor(difference/1000/60);
-		difference -= minutesDifference*1000*60
-	 
-		var secondsDifference = Math.floor(difference/1000);
-		var stringOutput = "";
-		
-		if (daysDifference>0) {
-			
-			stringOutput = daysDifference + ' day/s';
-			
-		} else {
-		
-			if (hoursDifference>0) {
+		console.log('Moment timeDifference input, laterdate: ' + laterdate + ', earlierdate: ' + earlierdate);
+		console.log('Moment timeDifference output: ' + moment(earlierdate).fromNow());
+		return moment(earlierdate).fromNow();
 				
-				stringOutput = hoursDifference + ' hr/s';
-			
-			} else {
-		
-				if (minutesDifference>0) {
-
-					stringOutput = minutesDifference + ' min/s';
-
-				} else {
-
-					if (hoursDifference==0) {
-						
-						stringOutput = secondsDifference + ' sec/s';
-						
-					}
-				}
-			}
-		}
-		
-		console.log('timeDifference output: ' + stringOutput);
-		
-		return stringOutput;
-		
 	}
 
 	//ngOnInit() {
@@ -138,6 +89,7 @@ export class ActivityPage {
         var SQLDate;
         var DisplayDateTime;
         var dbEventDateTime;
+		var afWebLink;
 		
 		// Get the data
 		this.databaseprovider.getActivityFeedData(flags, "0").then(data => {
@@ -159,19 +111,43 @@ export class ActivityPage {
 						imageAttachment = "https://naeyc.convergence-us.com/AdminGateway/images/ActivityFeedAttachments/" + imageAttachment;
 						imageAttached = true;
 					}
-
+					console.log('Activity Feed, imageAttached: ' + imageAttached);
+					console.log('Activity Feed, imageAttachment: ' + imageAttachment);
+					
 					DisplayName = data[i].PosterFirst + " " + data[i].PosterLast;
+					console.log('Activity Feed, DisplayName: ' + DisplayName);
+
+					afWebLink = false;
+					if (data[i].LinkedURL != "" && data[i].LinkedURL !== null) {
+						afWebLink = true;
+					}
+					console.log('Activity Feed, Linked URL available: ' + afWebLink);
+					console.log('Activity Feed, Linked URL: ' + data[i].LinkedURL);
 
 					dbEventDateTime = data[i].Posted.substring(0, 19);
 					dbEventDateTime = dbEventDateTime.replace(/-/g, '/');
 					dbEventDateTime = dbEventDateTime.replace(/T/g, ' ');
 					SQLDate = new Date(dbEventDateTime);
 					DisplayDateTime = dateFormat(SQLDate, "mm/dd h:MMtt");
+					console.log('Activity Feed, DisplayDateTime: ' + DisplayDateTime);
 				
-					var CurrentDateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '');
-					var CurrentDateTime2 = new Date(CurrentDateTime);
-					var PostedDate = new Date(data[i].Posted);
-					var TimeDifference = this.timeDifference(CurrentDateTime2, PostedDate);					
+					
+					var CurrentDateTime2 = new Date().toUTCString();
+					console.log('Activity Feed, CurrentDateTime2: ' + CurrentDateTime2);
+					var CurrentDateTime = dateFormat(CurrentDateTime2, "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'");
+					console.log('Activity Feed, CurrentDateTime: ' + CurrentDateTime);
+					
+					console.log('Activity Feed, afDateTime: ' + data[i].afDateTime);
+					dbEventDateTime = data[i].afDateTime.substring(0, 19);
+					dbEventDateTime = dbEventDateTime.replace(' ', 'T');
+					dbEventDateTime = dbEventDateTime + 'Z';
+					console.log('Activity Feed, dbEventDateTime: ' + dbEventDateTime);
+					var PostedDate2 = new Date(dbEventDateTime);
+					console.log('Activity Feed, PostedDate2: ' + PostedDate2);
+					var PostedDate = dateFormat(PostedDate2, "UTC:yyyy-mm-dd'T'HH:MM:ss'Z'");
+					console.log('Activity Feed, PostedDate: ' + PostedDate);
+					var TimeDifference = this.timeDifference(CurrentDateTime, PostedDate);					
+					console.log('Activity Feed, TimeDifference: ' + TimeDifference);
 
 					// Show the current record
 					this.activityFeedListing.push({
@@ -185,7 +161,9 @@ export class ActivityPage {
 						ActivityFeedLikesCounter: data[i].afLikesCounter,
 						ActivityFeedCommentsCounter: data[i].CommentsCount,
 						ActivityFeedCommentPostedDuration: TimeDifference,
-						ActivityFeedAttached: imageAttached
+						ActivityFeedAttached: imageAttached,
+						ActivityFeedLinkedURL: data[i].LinkedURL,
+						showActivityFeedLinkedURL: afWebLink
 					});
 
 				}
@@ -205,7 +183,9 @@ export class ActivityPage {
 						ActivityFeedLikesCounter: "",
 						ActivityFeedCommentsCounter: "",
 						ActivityFeedCommentPostedDuration: "",
-						ActivityFeedAttached: false
+						ActivityFeedAttached: false,
+						ActivityFeedLinkedURL: data[i].LinkedURL,
+						showActivityFeedLinkedURL: false
 				});
 
 			}
@@ -215,7 +195,7 @@ export class ActivityPage {
 			loading.dismiss();
 			
 		}).catch(function () {
-			console.log("Promise Rejected");
+			console.log("Activity Feed Promise Rejected");
 			loading.dismiss();
 		});
 					
@@ -331,6 +311,19 @@ export class ActivityPage {
 		});
 		
 		fab.close();
+
+	}
+
+	navToWeb(wURL) {
+		
+		if (wURL != "") {
+            if ((wURL.substring(0, 7).toLowerCase() != "http://") && (wURL.substring(0, 8).toLowerCase() != "https://")) {
+                wURL = "http://" + wURL;
+            }
+			
+			console.log('Attendee Profile Details: Navigating to: ' + wURL);
+            window.open(wURL, '_system');
+		}
 
 	}
 	

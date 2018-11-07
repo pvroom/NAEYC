@@ -7,7 +7,7 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="program" style="margin:0!important; background:#0b172a">
+<ion-content class="program" style="background:#0b172a">
 
 	<!-- Search input 
 	<div class="list marginTB0">
@@ -45,23 +45,23 @@
 
 
 			<ion-grid>
-			<ion-row style="background:#004c94">
-			  <ion-col>
-					<button ion-item no-lines class="buttonsize" (click)="DisplayListing('SearchbyTopic')" id="program-list-item1">
+			<ion-row align-self-center style="background:#004c94">
+			
+					<button ion-item no-lines detail-none class="buttonsize" (click)="DisplayListing('SearchbyTopic')" id="program-list-item1">
 							<ion-icon class="buttonIconTop" name="search"></ion-icon>
 							<h2>Search by Topic</h2>
 						</button>
-			</ion-col>
+
 		</ion-row>
 
-		<ion-row style="background:#0b172a">
-			  <ion-col>
-					<button ion-item no-lines class="buttonsize1" (click)="DisplayListing('Lectures')" id="program-list-item3">
+		<ion-row align-self-center style="background:#0b172a">
+			
+					<button ion-item no-lines detail-none class="buttonsize1" (click)="DisplayListing('Lectures')" id="program-list-item3">
 							<ion-icon class="buttonIconTop" name="list"></ion-icon>
 							<h2>Sessions by Day</h2>
 						</button>
 			
-			</ion-col>
+		
 			</ion-row>
 
 <!--Hide Receptions and Events
@@ -77,15 +77,15 @@
 
 -->
 
-			<ion-row style="background:#004c94">
-			  <ion-col>
-				  
-					<button ion-item no-lines class="buttonsize" (click)="DisplayListing('Speakers')" id="program-list-item2">
+			<ion-row align-self-center style="background:#004c94">
+			
+			<button ion-item no-lines detail-none class="buttonsize" (click)="DisplayListing('Speakers')" id="program-list-item2">
+			
 							<ion-icon class="buttonIconTop" name="mic"></ion-icon>
 							<h2>Speakers</h2>
 						</button>
 			
-			</ion-col>
+		
 			</ion-row>
 			</ion-grid>
 

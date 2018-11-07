@@ -143,12 +143,6 @@ export class HomePage {
 		})
 	  }
 	
-
-
-
-
-
-
 	private connectToDb(): void {
 
 		console.log('Home: Connecting to DB...');
@@ -402,8 +396,11 @@ export class HomePage {
 
 		}
 
+		/*
 		// ---------------------------
 		// Activity Feed
+		// Disabled 2018-11-06 John Black
+		// Not showing in a popover or other form on the Home screen
 		// ---------------------------
 		
 		// Blank and show loading info
@@ -492,6 +489,7 @@ export class HomePage {
 		}).catch(function () {
 			console.log("Activity Feed Promise Rejected");
 		});
+		*/
 		
 	}
 	
@@ -947,6 +945,9 @@ export class HomePage {
 					break;
 				case "Sponsors":
 					this.navCtrl.push(SponsorsPage, {}, {animate: true, direction: 'forward'});
+					break;
+				case "ActivityFeed":
+					this.navCtrl.push(ActivityPage, {}, {animate: true, direction: 'forward'});
 					break;
 			}
 			

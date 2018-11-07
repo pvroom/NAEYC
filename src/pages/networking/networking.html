@@ -7,36 +7,36 @@
 	</ion-navbar>
 </ion-header>
 
-<ion-content class="networking" style="margin:0!important; background:#0b172a">
+<ion-content class="networking" style="background:#0b172a">
 
-	<ion-grid style="margin:0!important; padding:0!important">
+	<ion-grid>
 	
-		<ion-row>
-			<ion-col style="background:#004c94">
-				<button ion-item no-lines detail-none class="buttonShape" style="background:#004c94;" (click)="NavigateTo('Attendees')" id="program-list-item1">
+		<ion-row style="background:#004c94">
+			<ion-col align-self-center style="background:#004c94; height:100%">
+				<ion-item no-lines detail-none class="buttonShape" style="background:#004c94;" (click)="NavigateTo('Attendees')" id="program-list-item1">
 					<ion-icon name="contacts" class="buttonIconsL"></ion-icon>
 					<h2>Attendees</h2>
-				</button>
+				</ion-item>
 			</ion-col>
 
-			<ion-col style="background:#009448">
-				<button ion-item no-lines detail-none class="buttonShape" style="background:#009448"  (click)="NavigateTo('Conversations')" id="program-list-item3">
+			<ion-col align-self-center style="background:#009448; height:100%">
+				<ion-item no-lines detail-none class="buttonShape" style="background:#009448"  (click)="NavigateTo('Conversations')" id="program-list-item3">
 					<ion-icon name="chatbubbles" class="buttonIconsL"></ion-icon>
 					<h2>Conversations</h2>
 					<p *ngIf=NewMessagesIndicator style="color:#fff;">{{NewMessagesCounter}} New Messages</p>
-				</button>
+				</ion-item>
 			</ion-col>
 		</ion-row>
 		
-		<ion-row>
-			<ion-col style="background:#009448">
+		<ion-row style="background:#009448"> 
+			<ion-col align-self-center style="background:#009448; height:100%">
 				<button ion-item no-lines detail-none class="buttonShape" style="background:#009448;" (click)="NavigateTo('MyProfile')" id="program-list-item5">
 					<ion-icon name="contact" class="buttonIconsL"></ion-icon>
 					<h2>My Profile</h2>
 				</button>
 			</ion-col>
 			
-			<ion-col style="background:#0b172a">
+			<ion-col align-self-center style="background:#0b172a; height:100%">
 				<button ion-item no-lines detail-none class="buttonShape" style="background:#0b172a" (click)="NavigateTo('Notifications')" id="program-list-item2">
 					<ion-icon name="alert" class="buttonIconsL"></ion-icon>
 					<h2>Notifications</h2>
@@ -44,15 +44,15 @@
 			</ion-col>
 		</ion-row>
 		
-		<ion-row>
-			<ion-col style="background:#004c94">
+		<ion-row style="background:#004c94">
+			<ion-col align-self-center style="background:#004c94; height:100%">
 				<button ion-item no-lines detail-none class="buttonShape" style="background:#004c94" (click)="NavigateTo('ActivityFeed')" id="program-list-item5">
 					<ion-icon name="chatboxes" class="buttonIconsL"></ion-icon>
 					<h2>Activities Feed</h2>
 				</button>
 			</ion-col>
 			
-			<ion-col style="background:#009448">
+			<ion-col align-self-center style="background:#009448; height:100%">
 				<button ion-item no-lines detail-none class="buttonShape" style="background:#009448;" (click)="NavigateTo('SocialMedia')" id="program-list-item2">
 					<ion-icon name="text" class="buttonIconsL"></ion-icon>
 					<h2>Social Media</h2>
@@ -63,3 +63,6 @@
 	</ion-grid>
 
 </ion-content>
+
+
+

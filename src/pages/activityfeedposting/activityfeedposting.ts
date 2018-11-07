@@ -14,6 +14,7 @@ import { DomSanitizer } from '@angular/platform-browser';
 
 // Pages
 import { HomePage } from '../home/home';
+import { ActivityPage } from '../activity/activity';
 
 @IonicPage()
 @Component({
@@ -70,6 +71,7 @@ export class ActivityFeedPostingPage {
 			*/
 			this.ActivityFeedAttachment = 'data:image/jpeg;base64,' + imageData;
 			//this.ActivityFeedAttachment = base64Image;
+			this.localstorage.setLocalValue('ActivityFeedPostedImage', 'Y');
 		
 			this.cd.markForCheck();
 			
@@ -101,6 +103,7 @@ export class ActivityFeedPostingPage {
 			//}
 			this.ActivityFeedAttachment = 'data:image/jpeg;base64,' + imageData;
 			//this.ActivityFeedAttachment = base64Image;
+			this.localstorage.setLocalValue('ActivityFeedPostedImage', 'Y');
 		
 			this.cd.markForCheck();
 			
@@ -115,6 +118,7 @@ export class ActivityFeedPostingPage {
 	ionViewDidEnter() {
 
 		this.ActivityFeedAttachment = '';
+		this.localstorage.setLocalValue('ActivityFeedPostedImage', 'N');
 	
 		var CurrentDateTime = new Date().toISOString().replace(/T/, ' ').replace(/\..+/, '').replace(/:/g, '').replace(/-/g,'').replace(' ', '');
 		console.log('CurrentDateTime: ' + CurrentDateTime);
@@ -214,6 +218,9 @@ export class ActivityFeedPostingPage {
 
 		if (UserAction == "Save") {
 
+			var afpImage = this.localstorage.getLocalValue('ActivityFeedPostedImage');
+
+				
 			// Load initial data set here
 			let loading = this.loadingCtrl.create({
 				spinner: 'crescent',
@@ -239,6 +246,7 @@ export class ActivityFeedPostingPage {
 			postData.append('location', 'ActivityFeedAttachments');
 			postData.append('filename', NewFilename);
 			postData.append('Comment', UserComment);
+			postData.append('afpImage', afpImage);
 			postData.append('AttendeeID', AttendeeID);
 			
 			let data:Observable<any> = this.http.post(url, postData);
@@ -251,7 +259,8 @@ export class ActivityFeedPostingPage {
 				console.log('afID: ' + result.afID);
 				loading.dismiss();
 				
-				this.navCtrl.setRoot(HomePage);
+				//this.navCtrl.setRoot(ActivityPage);
+				this.navCtrl.pop();
 						
 				//var flags = 'ad|' + result.afID + '|' + UserComment + '|0|' + NewFilename + '.jpg|' + PostedDateTime;
 				//this.localstorage.setLocalValue('ActivityFeedFlags', flags);
@@ -285,11 +294,12 @@ export class ActivityFeedPostingPage {
 				console.log(err.status);
 				console.log("Image uploader error: ", JSON.stringify(err));
 			});
-							
+
 		}
 		
 		if (UserAction == "Cancel") {
-			this.navCtrl.setRoot(HomePage);
+			//this.navCtrl.setRoot(ActivityPage);
+			this.navCtrl.pop();
 		}
 		
 	}
