@@ -3,9 +3,19 @@
 		<ion-title>{{AttendeeName}}</ion-title>
 	</ion-navbar>
 
-
-
-
+	<ion-toolbar no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+		<div class="input-wrap">
+			<textarea #chat_input
+				placeholder="Text Input"
+				[(ngModel)]="editorMsg"
+				(keyup.enter)="sendMsg()"
+				(focusin)="onFocus()">
+			</textarea>
+			<button ion-button clear icon-only item-right (click)="sendMsg()">
+				<ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+			</button>
+		</div>
+	</ion-toolbar>
 </ion-header>
 
 <ion-content>
@@ -37,19 +47,6 @@
 
 </ion-content>
 
-<ion-footer no-border style="margin:0" [style.height]="showEmojiPicker ? '255px' : '55px'">
-		<div style="background:#fff; color:#444; margin:0" class="input-wrap">
-			<ion-input style="background:#fff;color:#444" #chat_input
-				placeholder="Text Input"
-				[(ngModel)]="editorMsg"
-				(keyup.enter)="sendMsg()"
-				(focusin)="onFocus()">
-			</ion-input>
-			<button ion-button clear icon-only item-right (tap)="sendMsg()">
-				<ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
-			</button>
-		</div>
-	</ion-footer>
 
 
 
@@ -92,6 +89,25 @@
 		</ion-row>
 	  </ion-grid>
 	</ion-toolbar>
-  </ion-footer>
+	</ion-footer>
+	
+
+<ion-footer no-border [style.height]="showEmojiPicker ? '255px' : '55px'">
+<div class="input-wrap">
+<textarea style="background:#fff;color:#444" 
+#chat_input
+placeholder="Text Input"
+[(ngModel)]="editorMsg"
+(keyup.enter)="sendMsg()"
+(focusin)="onFocus()">
+</textarea>
+
+<button ion-button clear icon-only item-right (tap)="sendMsg()">
+<ion-icon name="ios-send" ios="ios-send" md="md-send"></ion-icon>
+</button>
+</div>
+</ion-footer>
+
+
 
   -->
