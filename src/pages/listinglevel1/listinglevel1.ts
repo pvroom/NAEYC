@@ -94,7 +94,7 @@ export class ListingLevel1 {
 		
 		switch(ProgramDay) {
 			case "Sat":
-				this.btnTue = "myButtonActive";
+				this.btnTue = "myButtonActive1";
 				flags = "11/13/2018";
 				break;
 			case "Sun":

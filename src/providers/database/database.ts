@@ -28,7 +28,7 @@ declare var dateFormat: any;
 // Sponsors			312
 // 
 // ------------------------
-
+var AttendeeListing = 'Online';
 
 // Global URL and conference year referenceused for all AJAX-to-MySQL calls
 var APIURLReference: string = "https://naeyc.convergence-us.com/cvPlanner.php?acy=2018&";
@@ -385,91 +385,6 @@ export class Database {
 			var url = APIURLReference + "action=sponsorquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
 			console.log(url);
 			
-			return new Promise(resolve => {
-				this.httpCall.get(url).subscribe(
-					response => {resolve(response.json());
-					},
-					err => {
-						if (err.status == "412") {
-							console.log("App and API versions don't match.");
-							var emptyJSONArray = {};
-							resolve(emptyJSONArray);
-						} else {
-							console.log(err.status);
-							console.log("API Error: ", err);
-						}
-					}
-				);
-			});
-			
-		}
-			
-    }
-
-	// -----------------------------------
-	// 
-	// CE Database Functions
-	// 
-	// -----------------------------------
-    public getCETrackerData(AttendeeID) {
-
-		console.log("Database: AttendeeID passed: " + AttendeeID);
-				
-		if (this.DevicePlatform == "iOS" || this.DevicePlatform == "Android") {
-			
-			var SQLquery = "SELECT DISTINCT c.session_id, c.course_id, c.session_title, ce.scannedYN AS ceStatusScan, ce.evalID AS ceStatusEval, c.ce_credits_type, ";
-			SQLquery = SQLquery + "e.evalID AS Evaluated, c.CEcreditsL, c.CEcreditsP ";
-			SQLquery = SQLquery + "FROM attendee_ces ce ";
-			SQLquery = SQLquery + "INNER JOIN courses c ON ce.session_id = c.session_id ";
-			SQLquery = SQLquery + "LEFT OUTER JOIN evaluations e ON e.session_id = c.session_id AND e.AttendeeID = '" + AttendeeID + "' ";
-			SQLquery = SQLquery + "WHERE ce.AttendeeID = '" + AttendeeID + "' ";
-			SQLquery = SQLquery + "ORDER BY c.course_id";
-
-			//console.log("CE Query: " + SQLquery);
-			
-			// Perform query against local SQLite database
-			return new Promise(resolve => {
-				
-				this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-					console.log('Database: Opened DB for CE query');
-					
-					this.db = db;
-					
-					console.log('Database: Set CE query db variable');
-					
-					this.db.executeSql(SQLquery, <any>{}).then((data) => {
-						//console.log('Database: CE query: ' + JSON.stringify(data));
-						console.log('Database: CE query rows: ' + data.rows.length);
-						let DatabaseResponse = [];
-						if(data.rows.length > 0) {
-							for(let i = 0; i < data.rows.length; i++) {
-								DatabaseResponse.push({
-									session_id: data.rows.item(i).session_id,
-									session_title: data.rows.item(i).session_title,
-									course_id: data.rows.item(i).course_id,
-									ceStatusScan: data.rows.item(i).ceStatusScan,
-									ceStatusEval: data.rows.item(i).ceStatusEval,
-									ce_credits_type: data.rows.item(i).ce_credits_type,
-									Evaluated: data.rows.item(i).Evaluated,
-									CEcreditsL: data.rows.item(i).CEcreditsL,
-									CEcreditsP: data.rows.item(i).CEcreditsP
-								});
-							}
-						}
-						resolve(DatabaseResponse);
-					})
-					.catch(e => console.log('Database: CE query error: ' + JSON.stringify(e)))
-				});
-				console.log('Database: CE query complete');
-
-			});
-			
-		} else {
-			
-			// Perform query against server-based MySQL database
-			var url = APIURLReference + "action=cequery&flags=cl&AttendeeID=" + AttendeeID;
-
 			return new Promise(resolve => {
 				this.httpCall.get(url).subscribe(
 					response => {resolve(response.json());
@@ -901,78 +816,6 @@ export class Database {
 
 	// -----------------------------------
 	// 
-	// Settings Database Functions
-	// 
-	// -----------------------------------
-	public getSettingsData(flags, AttendeeID) {
-
-		console.log("flags passed: " + flags);
-				
-		if (this.DevicePlatform == "iOS" || this.DevicePlatform == "Android") {
-			
-			var SQLquery = "SELECT DISTINCT c.session_id, c.course_id, c.session_title, ce.ceStatusScan, ce.ceStatusEval, c.ce_credits_type, ";
-			SQLquery = SQLquery + "e.id AS Evaluated, c.CEcreditsL, c.CEcreditsP ";
-			SQLquery = SQLquery + "FROM attendees_ces ce ";
-			SQLquery = SQLquery + "INNER JOIN ce_courses_source c ON ce.session_id = c.session_id ";
-			SQLquery = SQLquery + "ORDER BY c.course_id";
-
-			console.log("Settings Query: " + SQLquery);
-
-			// Perform query against local SQLite database
-			return new Promise(resolve => {
-				
-				this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-					console.log('Database: Opened DB for Settings query');
-					
-					this.db = db;
-					
-					console.log('Database: Set Settings query db variable');
-					
-					this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							console.log('Database: Settings query: ' + JSON.stringify(data));
-							if (data.rows.length > 0) {
-								console.log('Database: Settings query results exist');
-							}
-							console.log('Database: Settings query rows: ' + data.rows.length);
-							resolve(data);
-						}
-					)
-					.catch(e => console.log('Database: Settings query error: ' + JSON.stringify(e)))
-				});
-				console.log('Database: Settings query complete');
-
-			});
-
-			
-		} else {
-			
-			// Perform query against server-based MySQL database
-			var url = APIURLReference + "action=settings&flags=" + flags + "&AttendeeID=" + AttendeeID;
-
-			return new Promise(resolve => {
-				this.httpCall.get(url).subscribe(
-					response => {resolve(response.json());
-					},
-					err => {
-						if (err.status == "412") {
-							console.log("App and API versions don't match.");
-							var emptyJSONArray = {};
-							resolve(emptyJSONArray);
-						} else {
-							console.log(err.status);
-							console.log("API Error: ", err);
-						}
-					}
-				);
-			});
-			
-		}
-			
-    }
-
-	// -----------------------------------
-	// 
 	// Program Guide Database Functions
 	// 
 	// -----------------------------------
@@ -1289,27 +1132,31 @@ export class Database {
 				SQLquery = SQLquery + "FROM courses c ";
 				SQLquery = SQLquery + "INNER JOIN lookup_rooms lr ON c.room_number = lr.RoomName ";
 
+				SQLquery = SQLquery + "AND session_start_time LIKE '" + selectedDate + "%' ";
+				
+				/*
 				switch (selectedDate) {
-					case "11/13/2018":
+					case "2018-11-13":
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-13%' ";
 						break;
-					case "11/14/2018":
+					case "2018-11-14":
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-14%' ";
 						break;
-					case "11/15/2018":
+					case "2018-11-15":
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-15%' ";
 						break;
-					case "11/16/2018":
+					case "2018-11-16":
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-16%' ";
 						break;
-					case "11/17/2018":
+					case "2018-11-17":
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-17%' ";
 						break;
 					default:
 						SQLquery = SQLquery + "AND session_start_time LIKE '2018-11-13%' ";
 						break;
 				}
-		
+				*/
+				
 				// Append sort order
 				SQLquery = SQLquery + " ORDER BY c.session_start_time, c.session_id";
 
@@ -2474,39 +2321,6 @@ export class Database {
 			
 	}
 
-	public getinitialData(flags) {
-
-		console.log("Database: getinitialData");
-		
-		if (this.DevicePlatform == "iOS" || this.DevicePlatform == "Android") {
-			
-			console.log('Database: Getting initial table data for "' + flags + '"');
-			
-			// Perform query against server-based MySQL database
-			var url = APIURLReference + "action=initialdataquery&flags=" + flags;
-
-			console.log('Database: URL: ' + url);
-			
-			return new Promise(resolve => {
-				this.httpCall.get(url).subscribe(
-					response => {resolve(response.json());
-					},
-					err => {
-						if (err.status == "412") {
-							console.log("App and API versions don't match.");
-							var emptyJSONArray = {};
-							resolve(emptyJSONArray);
-						} else {
-							console.log(err.status);
-							console.log("API Error: ", err);
-						}
-					}
-				);
-			});
-
-		}			
-	}
-
 	public getDatabaseStats(flags, AttendeeID) {
 
 		console.log("flags passed: " + flags);
@@ -2564,7 +2378,8 @@ export class Database {
 					SQLquery = SQLquery + "UNION ";
 					SQLquery = SQLquery + "SELECT 'N/A' AS Records, 'Agenda' AS DatabaseTable ";
 					SQLquery = SQLquery + "UNION ";
-					SQLquery = SQLquery + "SELECT 'N/A' AS Records, 'Attendees' AS DatabaseTable ";
+					SQLquery = SQLquery + "SELECT COUNT(ct_id) AS Records, 'Attendees' AS DatabaseTable ";
+					SQLquery = SQLquery + "FROM attendees ";
 			
 				} else {
 
@@ -2578,7 +2393,6 @@ export class Database {
 					SQLquery = SQLquery + "UNION ";
 					SQLquery = SQLquery + "SELECT COUNT(ct_id) AS Records, 'Attendees' AS DatabaseTable ";
 					SQLquery = SQLquery + "FROM attendees ";
-					SQLquery = SQLquery + "WHERE ActiveYN = 'Y'  AND UpdateType != 'Delete' ";
 				
 				}
 				
@@ -2589,6 +2403,7 @@ export class Database {
 
 						console.log('Database: Opened DB for Stats query');
 						
+						this.db = null;
 						this.db = db;
 						
 						console.log('Database: Set Stats query db variable');
@@ -2698,412 +2513,436 @@ export class Database {
 
 			if (listingType == "pr") {	// Attendee Profile
 			
-				
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				//SQLquery = "SELECT * FROM attendees ";
-				//SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				SQLquery = "SELECT a.*, ";
-				SQLquery = SQLquery + "COALESCE(ab.abID,0) AS Bookmarked ";
-				SQLquery = SQLquery + "FROM attendees a ";
-				SQLquery = SQLquery + "LEFT OUTER JOIN attendee_bookmarks ab ";
-				SQLquery = SQLquery + "   ON ab.AttendeeID = '" + listingParameter + "' ";
-				SQLquery = SQLquery + "   AND ab.BookmarkID = a.ct_id ";
-				SQLquery = SQLquery + "   AND ab.BookmarkType = 'Attendees' ";
-				SQLquery = SQLquery + "   AND ab.UpdateType != 'Delete' ";
-				SQLquery = SQLquery + "WHERE a.ct_id = '" + AttendeeID + "' ";
-
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
+				if (AttendeeListing == 'Online') {
 					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-						console.log('Database: Opened DB for Profile query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Profile query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							//console.log('Database: Profile query: ' + JSON.stringify(data));
-							console.log('Database: Profile query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rows.length > 0) {
-								for(let i = 0; i < data.rows.length; i++) {
-									DatabaseResponse.push({
-										AttendeeID: data.rows.item(i).ct_id,
-										LastName: data.rows.item(i).last_name,
-										FirstName: data.rows.item(i).first_name,
-										Title: data.rows.item(i).title,
-										Company: data.rows.item(i).company,
-										smTwitter: data.rows.item(i).smTwitter,
-										showTwitter: data.rows.item(i).showTwitter,
-										smFacebook: data.rows.item(i).smFacebook,
-										showFacebook: data.rows.item(i).showFacebook,
-										smLinkedIn: data.rows.item(i).smLinkedIn,
-										showLinkedIn: data.rows.item(i).showLinkedIn,
-										smInstagram: data.rows.item(i).smInstagram,
-										showInstagram: data.rows.item(i).showInstagram,
-										smPinterest: data.rows.item(i).smPinterest,
-										showPinterest: data.rows.item(i).showPinterest,
-										Bookmarked: data.rows.item(i).Bookmarked
-									});
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					console.log(url);
+					
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									var emptyJSONArray = {};
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
 								}
 							}
-							resolve(DatabaseResponse);
-						})
-						.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Profile query complete');
 
-				});
-				*/
+				} else {
+					
+					var SQLquery = "";
+					//SQLquery = "SELECT * FROM attendees ";
+					//SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+
+					SQLquery = "SELECT a.*, ";
+					SQLquery = SQLquery + "COALESCE(ab.abID,0) AS Bookmarked ";
+					SQLquery = SQLquery + "FROM attendees a ";
+					SQLquery = SQLquery + "LEFT OUTER JOIN attendee_bookmarks ab ";
+					SQLquery = SQLquery + "   ON ab.AttendeeID = '" + listingParameter + "' ";
+					SQLquery = SQLquery + "   AND ab.BookmarkID = a.ct_id ";
+					SQLquery = SQLquery + "   AND ab.BookmarkType = 'Attendees' ";
+					SQLquery = SQLquery + "   AND ab.UpdateType != 'Delete' ";
+					SQLquery = SQLquery + "WHERE a.ct_id = '" + AttendeeID + "' ";
+
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+							console.log('Database: Opened DB for Profile query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Profile query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								//console.log('Database: Profile query: ' + JSON.stringify(data));
+								console.log('Database: Profile query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rows.length > 0) {
+									for(let i = 0; i < data.rows.length; i++) {
+										DatabaseResponse.push({
+											AttendeeID: data.rows.item(i).ct_id,
+											LastName: data.rows.item(i).last_name,
+											FirstName: data.rows.item(i).first_name,
+											Title: data.rows.item(i).title,
+											Company: data.rows.item(i).company,
+											smTwitter: data.rows.item(i).smTwitter,
+											showTwitter: data.rows.item(i).showTwitter,
+											smFacebook: data.rows.item(i).smFacebook,
+											showFacebook: data.rows.item(i).showFacebook,
+											smLinkedIn: data.rows.item(i).smLinkedIn,
+											showLinkedIn: data.rows.item(i).showLinkedIn,
+											smInstagram: data.rows.item(i).smInstagram,
+											showInstagram: data.rows.item(i).showInstagram,
+											smPinterest: data.rows.item(i).smPinterest,
+											showPinterest: data.rows.item(i).showPinterest,
+											Bookmarked: data.rows.item(i).Bookmarked
+										});
+									}
+								}
+								resolve(DatabaseResponse);
+							})
+							.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Profile query complete');
+
+					});
+				}
 			}
 
 			if (listingType == "pg") {	// Get Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				SQLquery = "SELECT * FROM attendees ";
-				SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
+				if (AttendeeListing == 'Online') {
+
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					console.log(url);
 					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-						console.log('Database: Opened DB for Profile query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Profile query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							//console.log('Database: Profile query: ' + JSON.stringify(data));
-							console.log('Database: Profile query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rows.length > 0) {
-								var smURL = "";
-								switch(listingParameter) {
-									case "statusTwitter":
-										smURL = data.rows.item(0).smTwitter;
-										break;
-									case "statusFacebook":
-										smURL = data.rows.item(0).smFacebook;
-										break;
-									case "statusLinkedIn":
-										smURL = data.rows.item(0).smLinkedIn;
-										break;
-									case "statusInstagram":
-										smURL = data.rows.item(0).smInstagram;
-										break;
-									case "statusPinterest":
-										smURL = data.rows.item(0).smPinterest;
-										break;
-								}		
-
-								DatabaseResponse.push({
-									smURL: smURL,
-								});
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									var emptyJSONArray = {};
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+								}
 							}
-							resolve(DatabaseResponse);
-						})
-						.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Profile query complete');
 
-				});
-				*/
+				} else {
+					
+					var SQLquery = "";
+					SQLquery = "SELECT * FROM attendees ";
+					SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+							console.log('Database: Opened DB for Profile query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Profile query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								//console.log('Database: Profile query: ' + JSON.stringify(data));
+								console.log('Database: Profile query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rows.length > 0) {
+									var smURL = "";
+									switch(listingParameter) {
+										case "statusTwitter":
+											smURL = data.rows.item(0).smTwitter;
+											break;
+										case "statusFacebook":
+											smURL = data.rows.item(0).smFacebook;
+											break;
+										case "statusLinkedIn":
+											smURL = data.rows.item(0).smLinkedIn;
+											break;
+										case "statusInstagram":
+											smURL = data.rows.item(0).smInstagram;
+											break;
+										case "statusPinterest":
+											smURL = data.rows.item(0).smPinterest;
+											break;
+									}		
+
+									DatabaseResponse.push({
+										smURL: smURL,
+									});
+								}
+								resolve(DatabaseResponse);
+							})
+							.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Profile query complete');
+
+					});
 				
+				}
 			}
 
 			if (listingType == "pu") {	// Update Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				SQLquery = "UPDATE attendees ";
-				
-				switch(listingParameter) {
-					case "statusTwitter":
-						SQLquery = SQLquery + "SET smTwitter = '" + listingValue + "', ";
-						SQLquery = SQLquery + "showTwitter = 'Y' ";
-						break;
-					case "statusFacebook":
-						SQLquery = SQLquery + "SET smFacebook = '" + listingValue + "', ";
-						SQLquery = SQLquery + "showFacebook = 'Y' ";
-						break;
-					case "statusLinkedIn":
-						SQLquery = SQLquery + "SET smLinkedIn = '" + listingValue + "', ";
-						SQLquery = SQLquery + "showLinkedIn = 'Y' ";
-						break;
-					case "statusInstagram":
-						SQLquery = SQLquery + "SET smInstagram = '" + listingValue + "', ";
-						SQLquery = SQLquery + "showInstagram = 'Y' ";
-						break;
-					case "statusPinterest":
-						SQLquery = SQLquery + "SET smPinterest = '" + listingValue + "', ";
-						SQLquery = SQLquery + "showPinterest = 'Y' ";
-						break;
-				}
-				
-				SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
+				if (AttendeeListing == 'Online') {
+
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					console.log(url);
 					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-						console.log('Database: Opened DB for Profile query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Profile query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							//console.log('Database: Profile query: ' + JSON.stringify(data));
-							console.log('Database: Profile query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rowsAffected > 0) {
-								DatabaseResponse.push({
-									Status: "Success",
-									Query: ""
-								});
-							} else {
-								DatabaseResponse.push({
-									Status: "Fail",
-									Query: ""
-								});
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									var emptyJSONArray = {};
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+								}
 							}
-							resolve(DatabaseResponse);
-						})
-						
-						.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Profile query complete');
+				
+				} else {
+				
+					var SQLquery = "";
+					SQLquery = "UPDATE attendees ";
+					
+					switch(listingParameter) {
+						case "statusTwitter":
+							SQLquery = SQLquery + "SET smTwitter = '" + listingValue + "', ";
+							SQLquery = SQLquery + "showTwitter = 'Y' ";
+							break;
+						case "statusFacebook":
+							SQLquery = SQLquery + "SET smFacebook = '" + listingValue + "', ";
+							SQLquery = SQLquery + "showFacebook = 'Y' ";
+							break;
+						case "statusLinkedIn":
+							SQLquery = SQLquery + "SET smLinkedIn = '" + listingValue + "', ";
+							SQLquery = SQLquery + "showLinkedIn = 'Y' ";
+							break;
+						case "statusInstagram":
+							SQLquery = SQLquery + "SET smInstagram = '" + listingValue + "', ";
+							SQLquery = SQLquery + "showInstagram = 'Y' ";
+							break;
+						case "statusPinterest":
+							SQLquery = SQLquery + "SET smPinterest = '" + listingValue + "', ";
+							SQLquery = SQLquery + "showPinterest = 'Y' ";
+							break;
+					}
+					
+					SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
 
-				});
-				*/
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+							console.log('Database: Opened DB for Profile query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Profile query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								//console.log('Database: Profile query: ' + JSON.stringify(data));
+								console.log('Database: Profile query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rowsAffected > 0) {
+									DatabaseResponse.push({
+										Status: "Success",
+										Query: ""
+									});
+								} else {
+									DatabaseResponse.push({
+										Status: "Fail",
+										Query: ""
+									});
+								}
+								resolve(DatabaseResponse);
+							})
+							
+							.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Profile query complete');
+
+					});
+				}
 			}
 
 			if (listingType == "pd") {	// Remove Attendee Social Media URL
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				SQLquery = "UPDATE attendees ";
-				
-				switch(listingParameter) {
-					case "statusTwitter":
-						SQLquery = SQLquery + "SET smTwitter = '', ";
-						SQLquery = SQLquery + "showTwitter = 'N' ";
-						break;
-					case "statusFacebook":
-						SQLquery = SQLquery + "SET smFacebook = '', ";
-						SQLquery = SQLquery + "showFacebook = 'N' ";
-						break;
-					case "statusLinkedIn":
-						SQLquery = SQLquery + "SET smLinkedIn = '', ";
-						SQLquery = SQLquery + "showLinkedIn = 'N' ";
-						break;
-					case "statusInstagram":
-						SQLquery = SQLquery + "SET smInstagram = '', ";
-						SQLquery = SQLquery + "showInstagram = 'N' ";
-						break;
-					case "statusPinterest":
-						SQLquery = SQLquery + "SET smPinterest = '', ";
-						SQLquery = SQLquery + "showPinterest = 'N' ";
-						break;
-				}
-				
-				SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
+				if (AttendeeListing == 'Online') {
+
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					console.log(url);
 					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-						console.log('Database: Opened DB for Profile query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Profile query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							//console.log('Database: Profile query: ' + JSON.stringify(data));
-							console.log('Database: Profile query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rowsAffected > 0) {
-								DatabaseResponse.push({
-									Status: "Success",
-									Query: ""
-								});
-							} else {
-								DatabaseResponse.push({
-									Status: "Fail",
-									Query: ""
-								});
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									var emptyJSONArray = {};
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+								}
 							}
-							resolve(DatabaseResponse);
-						})
-						
-						.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Profile query complete');
+				
+				} else {
+				
+					var SQLquery = "";
+					SQLquery = "UPDATE attendees ";
+					
+					switch(listingParameter) {
+						case "statusTwitter":
+							SQLquery = SQLquery + "SET smTwitter = '', ";
+							SQLquery = SQLquery + "showTwitter = 'N' ";
+							break;
+						case "statusFacebook":
+							SQLquery = SQLquery + "SET smFacebook = '', ";
+							SQLquery = SQLquery + "showFacebook = 'N' ";
+							break;
+						case "statusLinkedIn":
+							SQLquery = SQLquery + "SET smLinkedIn = '', ";
+							SQLquery = SQLquery + "showLinkedIn = 'N' ";
+							break;
+						case "statusInstagram":
+							SQLquery = SQLquery + "SET smInstagram = '', ";
+							SQLquery = SQLquery + "showInstagram = 'N' ";
+							break;
+						case "statusPinterest":
+							SQLquery = SQLquery + "SET smPinterest = '', ";
+							SQLquery = SQLquery + "showPinterest = 'N' ";
+							break;
+					}
+					
+					SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
 
-				});
-				*/
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+							console.log('Database: Opened DB for Profile query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Profile query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								//console.log('Database: Profile query: ' + JSON.stringify(data));
+								console.log('Database: Profile query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rowsAffected > 0) {
+									DatabaseResponse.push({
+										Status: "Success",
+										Query: ""
+									});
+								} else {
+									DatabaseResponse.push({
+										Status: "Fail",
+										Query: ""
+									});
+								}
+								resolve(DatabaseResponse);
+							})
+							
+							.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Profile query complete');
+
+					});
+				}
 			}
 
 			if (listingType == "ps") {	// Save Profile updates
 
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				console.log(url);
-				
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								var emptyJSONArray = {};
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				SQLquery = "UPDATE attendees ";
-				SQLquery = SQLquery + "SET title = '" + AttendeeProfileTitle + "', ";
-				SQLquery = SQLquery + "company = '" + AttendeeProfileOrganization + "' ";
-				
-				SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
+				if (AttendeeListing == 'Online') {
+
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=statsquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					console.log(url);
 					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
-
-						console.log('Database: Opened DB for Profile query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Profile query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							//console.log('Database: Profile query: ' + JSON.stringify(data));
-							console.log('Database: Profile query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rowsAffected > 0) {
-								DatabaseResponse.push({
-									Status: "Success",
-									Query: ""
-								});
-							} else {
-								DatabaseResponse.push({
-									Status: "Fail",
-									Query: ""
-								});
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									var emptyJSONArray = {};
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+								}
 							}
-							resolve(DatabaseResponse);
-						})
-						
-						.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Profile query complete');
+				
+				} else {
+				
+					var SQLquery = "";
+					SQLquery = "UPDATE attendees ";
+					SQLquery = SQLquery + "SET title = '" + AttendeeProfileTitle + "', ";
+					SQLquery = SQLquery + "company = '" + AttendeeProfileOrganization + "' ";
+					
+					SQLquery = SQLquery + "WHERE ct_id = '" + AttendeeID + "'";
 
-				});
-				*/
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+
+							console.log('Database: Opened DB for Profile query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Profile query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								//console.log('Database: Profile query: ' + JSON.stringify(data));
+								console.log('Database: Profile query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rowsAffected > 0) {
+									DatabaseResponse.push({
+										Status: "Success",
+										Query: ""
+									});
+								} else {
+									DatabaseResponse.push({
+										Status: "Fail",
+										Query: ""
+									});
+								}
+								resolve(DatabaseResponse);
+							})
+							
+							.catch(e => console.log('Database: Profile query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Profile query complete');
+
+					});
+				}
 			}
 			
 			if (listingType == "cn") { // Check Network
@@ -3286,7 +3125,7 @@ export class Database {
 						}
 					);
 				});
-
+				
 				/*
 				var SQLquery = "";
 				SQLquery = "SELECT DISTINCT m.ct_id, m.last_name, m.first_name, m.company ";
@@ -3423,154 +3262,163 @@ export class Database {
 
 			if (listingType == "al" || listingType == "sr") {	// Attendee Listing
 
-				/*
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				var emptyJSONArray = {};
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {
-							console.log('msgquery response: ' + JSON.stringify(response.json()));
-							resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-								resolve(emptyJSONArray);
-							}
-						}
-					);
-				});
-				*/
+				if (AttendeeListing == 'Online') {
 
-				var SQLquery = "";
-				SQLquery = "SELECT ct_id, last_name, first_name, title, company ";
-				SQLquery = SQLquery + "FROM attendees ";
-				SQLquery = SQLquery + "WHERE ActiveYN = 'Y' ";
-				if (listingType == "sr") {		// If searching, then add where clause criteria
-					// Split search terms by space to create WHERE clause
-					var whereClause = 'AND (';
-					var searchTerms = sortingType.split(" ");
-					
-					for (var i = 0; i < searchTerms.length; i++){
-						whereClause = whereClause + 'SearchField LIKE "%' + searchTerms[i] + '%" AND ';
-					}
-					// Remove last AND from where clause
-					whereClause = whereClause.substring(0, whereClause.length-5);        
-					whereClause = whereClause + ') ';
-					SQLquery = SQLquery + whereClause ;
-				}
-				
-				SQLquery = SQLquery + "ORDER BY lower(last_name), lower(first_name) ";
-				
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
-					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					var emptyJSONArray = {};
 
-						console.log('Database: Opened DB for Messaging query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Messaging query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							console.log('Database: Messaging query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rows.length > 0) {
-								for(let i = 0; i < data.rows.length; i++) {
-									DatabaseResponse.push({
-										AttendeeID: data.rows.item(i).ct_id,
-										LastName: data.rows.item(i).last_name,
-										FirstName: data.rows.item(i).first_name,
-										Title: data.rows.item(i).title,
-										Company: data.rows.item(i).company
-									});
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {
+								console.log('msgquery response: ' + JSON.stringify(response.json()));
+								resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+									resolve(emptyJSONArray);
 								}
 							}
-							resolve(DatabaseResponse);
-						})
-						.catch(e => console.log('Database: Messaging query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Stats query complete');
+				
+				} else {
 
-				});
+					var SQLquery = "";
+					SQLquery = "SELECT ct_id, last_name, first_name, title, company ";
+					SQLquery = SQLquery + "FROM attendees ";
+					//SQLquery = SQLquery + "WHERE ActiveYN = 'Y' ";
+					if (listingType == "sr") {		// If searching, then add where clause criteria
+						// Split search terms by space to create WHERE clause
+						var whereClause = 'AND (';
+						var searchTerms = sortingType.split(" ");
+						
+						for (var i = 0; i < searchTerms.length; i++){
+							whereClause = whereClause + 'SearchField LIKE "%' + searchTerms[i] + '%" AND ';
+						}
+						// Remove last AND from where clause
+						whereClause = whereClause.substring(0, whereClause.length-5);        
+						whereClause = whereClause + ') ';
+						SQLquery = SQLquery + whereClause ;
+					}
+					
+					SQLquery = SQLquery + "ORDER BY lower(last_name), lower(first_name) ";
+					
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
 
+							console.log('Database: Opened DB for Messaging query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Messaging query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								console.log('Database: Messaging query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rows.length > 0) {
+									for(let i = 0; i < data.rows.length; i++) {
+										DatabaseResponse.push({
+											AttendeeID: data.rows.item(i).ct_id,
+											LastName: data.rows.item(i).last_name,
+											FirstName: data.rows.item(i).first_name,
+											avatarFilename: data.rows.item(i).avatarFilename,
+											Title: data.rows.item(i).title,
+											Company: data.rows.item(i).company
+										});
+									}
+								}
+								resolve(DatabaseResponse);
+							})
+							.catch(e => console.log('Database: Messaging query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Stats query complete');
+
+					});
+				}
 			}
 
 			if (listingType == "al2") {	// Attendee Listing by Letter
 
-				
-				// Perform query against server-based MySQL database
-				var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
-				var emptyJSONArray = {};
+				console.log('Attendee Listing: ' + AttendeeListing);
 
-				return new Promise(resolve => {
-					this.httpCall.get(url).subscribe(
-						response => {
-							console.log('msgquery response: ' + JSON.stringify(response.json()));
-							resolve(response.json());
-						},
-						err => {
-							if (err.status == "412") {
-								console.log("App and API versions don't match.");
-								resolve(emptyJSONArray);
-							} else {
-								console.log(err.status);
-								console.log("API Error: ", err);
-								resolve(emptyJSONArray);
-							}
-						}
-					);
-				});
-				
-				/*
-				var SQLquery = "";
-				SQLquery = "SELECT ct_id, last_name, first_name, title, company, avatarFilename ";
-				SQLquery = SQLquery + "FROM attendees ";
-				SQLquery = SQLquery + "WHERE ActiveYN = 'Y' ";
-				SQLquery = SQLquery + "AND last_name LIKE '" + sortingType + "%' ";
-				SQLquery = SQLquery + "ORDER BY lower(last_name), lower(first_name) ";
-				
-				// Perform query against local SQLite database
-				return new Promise(resolve => {
-					
-					this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
+				if (AttendeeListing == 'Online') {
 
-						console.log('Database: Opened DB for Messaging query');
-						
-						this.db = db;
-						
-						console.log('Database: Set Messaging query db variable');
-						
-						this.db.executeSql(SQLquery, <any>{}).then((data) => {
-							console.log('Database: Messaging query rows: ' + data.rows.length);
-							let DatabaseResponse = [];
-							if(data.rows.length > 0) {
-								for(let i = 0; i < data.rows.length; i++) {
-									DatabaseResponse.push({
-										AttendeeID: data.rows.item(i).ct_id,
-										LastName: data.rows.item(i).last_name,
-										FirstName: data.rows.item(i).first_name,
-										avatarFilename: data.rows.item(i).avatarFilename,
-										Title: data.rows.item(i).title,
-										Company: data.rows.item(i).company
-									});
+					// Perform query against server-based MySQL database
+					var url = APIURLReference + "action=msgquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
+					var emptyJSONArray = {};
+
+					return new Promise(resolve => {
+						this.httpCall.get(url).subscribe(
+							response => {
+								console.log('msgquery response: ' + JSON.stringify(response.json()));
+								resolve(response.json());
+							},
+							err => {
+								if (err.status == "412") {
+									console.log("App and API versions don't match.");
+									resolve(emptyJSONArray);
+								} else {
+									console.log(err.status);
+									console.log("API Error: ", err);
+									resolve(emptyJSONArray);
 								}
 							}
-							resolve(DatabaseResponse);
-						})
-						.catch(e => console.log('Database: Messaging query error: ' + JSON.stringify(e)))
+						);
 					});
-					console.log('Database: Stats query complete');
+				
+				} else {
+				
+					var SQLquery = "";
+					SQLquery = "SELECT ct_id, last_name, first_name, title, company, avatarFilename ";
+					SQLquery = SQLquery + "FROM attendees ";
+					//SQLquery = SQLquery + "WHERE ActiveYN = 'Y' ";
+					SQLquery = SQLquery + "WHERE last_name LIKE '" + sortingType + "%' ";
+					SQLquery = SQLquery + "ORDER BY lower(last_name), lower(first_name) ";
+					
+					// Perform query against local SQLite database
+					return new Promise(resolve => {
+						
+						this.sqlite.create({name: 'cvPlanner.db', location: 'default', createFromLocation: 1}).then((db: SQLiteObject) => {
 
-				});
-				*/
+							console.log('Database: Opened DB for Messaging query');
+							
+							this.db = db;
+							
+							console.log('Database: Set Messaging query db variable');
+							
+							this.db.executeSql(SQLquery, <any>{}).then((data) => {
+								console.log('Database: Messaging query rows: ' + data.rows.length);
+								let DatabaseResponse = [];
+								if(data.rows.length > 0) {
+									for(let i = 0; i < data.rows.length; i++) {
+										DatabaseResponse.push({
+											AttendeeID: data.rows.item(i).ct_id,
+											LastName: data.rows.item(i).last_name,
+											FirstName: data.rows.item(i).first_name,
+											avatarFilename: data.rows.item(i).avatarFilename,
+											Title: data.rows.item(i).title,
+											Company: data.rows.item(i).company
+										});
+									}
+								}
+								resolve(DatabaseResponse);
+							})
+							.catch(e => console.log('Database: Messaging query error: ' + JSON.stringify(e)))
+						});
+						console.log('Database: Stats query complete');
+
+					});
+				}
 			}
 			
 		} else {
@@ -3617,7 +3465,7 @@ export class Database {
 		var BookmarkType = flagValues[2];
 		var BookmarkID = flagValues[3];
 		
-		/*
+		
 		if (this.DevicePlatform == "iOS" || this.DevicePlatform == "Android") {
 			
 			if (listingType == "li") { // List bookmarks
@@ -3982,7 +3830,7 @@ export class Database {
 			}
 					
 		} else {
-		*/
+		
 			// Perform query against server-based MySQL database
 			var url = APIURLReference + "action=bmkquery&flags=" + flags + "&AttendeeID=" + AttendeeID;
 
@@ -4003,7 +3851,7 @@ export class Database {
 				);
 			});
 			
-		//}
+		}
 			
 	}
 

@@ -124,7 +124,7 @@ export class Synchronization {
 					.catch(e => console.log('Sync DBCall: Error selecting (' + SQLSelectQuery + ') base record: ' + JSON.stringify(e)))
 				} else {
 					this.db.executeSql(SQLSelectQuery, <any>{}).then((dataS) => {
-						console.log('DBCall Return: ' + JSON.stringify(dataS));
+						//console.log('DBCall Return: ' + JSON.stringify(dataS));
 						if (dataS.rows.length > 0) {
 							//console.log('DBCall: ' + SQLUpdateQuery);
 							resolve(SQLUpdateQuery);
@@ -149,7 +149,7 @@ export class Synchronization {
 				
 				this.db = db;
 				this.db.executeSql(SQLQuery, <any>{}).then((dataS) => {
-					console.log('DBCall2 Return: ' + JSON.stringify(dataS));
+					//console.log('DBCall2 Return: ' + SQLQuery + ', ' + JSON.stringify(dataS));
 					resolve(SQLQuery);
 				})
 				.catch(e => console.log('Sync DBCall2: Error selecting (' + SQLQuery + ') base record: ' + JSON.stringify(e)))
@@ -330,7 +330,7 @@ export class Synchronization {
 							// Determine query to use based on table name
 							switch(data[i].TableName) {
 								case "courses":
-									SQLQuerySelect = "SELECT * FROM courses WHERE session_id = '" + data[i].session_id + "'";
+									SQLQuerySelect = "SELECT session_id FROM courses WHERE session_id = '" + data[i].session_id + "'";
 									
 									SQLQueryInsert = "INSERT INTO courses(";
 									SQLQueryInsert = SQLQueryInsert + "session_id, session_title, description, ";
@@ -444,7 +444,7 @@ export class Synchronization {
 									SQLQueryDelete = "NO";
 									break;
 								case "courses_speakers":
-									SQLQuerySelect = "SELECT * FROM courses_speakers WHERE speakerID = '" + data[i].speakerID + "'";
+									SQLQuerySelect = "SELECT speakerID FROM courses_speakers WHERE speakerID = '" + data[i].speakerID + "'";
 
 									SQLQueryInsert = "INSERT INTO courses_speakers(";
 									SQLQueryInsert = SQLQueryInsert + "speakerID, FullName, FirstName, LastName, Title, Company, ";
@@ -523,7 +523,7 @@ export class Synchronization {
 
 									break;
 								case "sponsors":
-									SQLQuerySelect = "SELECT * FROM sponsors WHERE SponsorID = '" + data[i].SponsorID + "'";
+									SQLQuerySelect = "SELECT SponsorID FROM sponsors WHERE SponsorID = '" + data[i].SponsorID + "'";
 
 									SQLQueryInsert = "INSERT INTO sponsors(";
 									SQLQueryInsert = SQLQueryInsert + "SponsorID, SponsorName, SponsorDescription, SponsorContactWeb, SponsorContactEmail, SponsorContactPhone, ";
@@ -561,7 +561,7 @@ export class Synchronization {
 
 									break;
 								case "exhibitors":
-									SQLQuerySelect = "SELECT * FROM exhibitors WHERE ExhibitorID = '" + data[i].ExhibitorID + "'";
+									SQLQuerySelect = "SELECT ExhibitorID FROM exhibitors WHERE ExhibitorID = '" + data[i].ExhibitorID + "'";
 
 									SQLQueryInsert = "INSERT INTO exhibitors(";
 									SQLQueryInsert = SQLQueryInsert + "ExhibitorID, ClientExhibitorID, CompanyName, ";
@@ -678,7 +678,7 @@ export class Synchronization {
 									SQLQueryDelete = "NO";
 									break;
 								case "activities_feed":
-									SQLQuerySelect = "SELECT * FROM activities_feed ";
+									SQLQuerySelect = "SELECT afID FROM activities_feed ";
 									SQLQuerySelect = SQLQuerySelect + "WHERE afID = '" + data[i].afID + "' ";
 
 									SQLQueryInsert = "INSERT INTO activities_feed(";
@@ -706,7 +706,7 @@ export class Synchronization {
 									SQLQueryDelete = "NO";
 									break;
 								case "attendees":
-									SQLQuerySelect = "SELECT * FROM attendees ";
+									SQLQuerySelect = "SELECT ct_id FROM attendees ";
 									SQLQuerySelect = SQLQuerySelect + "WHERE ct_id = '" + data[i].AttendeeID + "' ";
 
 									SQLQueryInsert = "INSERT INTO attendees(";
@@ -719,6 +719,7 @@ export class Synchronization {
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].LastName + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].Title + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].Company + "', ";
+									SQLQueryInsert = SQLQueryInsert + "'" + data[i].ActiveYN + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].smTwitter + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].showTwitter + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].smFaceBook + "', ";
@@ -728,8 +729,7 @@ export class Synchronization {
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].smInstagram + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].showInstagram + "', ";
 									SQLQueryInsert = SQLQueryInsert + "'" + data[i].smPinterest + "', ";
-									SQLQueryInsert = SQLQueryInsert + "'" + data[i].showPinterest + "', ";
-									SQLQueryInsert = SQLQueryInsert + "'" + data[i].ActiveYN + "')";
+									SQLQueryInsert = SQLQueryInsert + "'" + data[i].showPinterest + "')";
 
 									SQLQueryUpdate = "UPDATE attendees ";
 									SQLQueryUpdate = SQLQueryUpdate + "SET first_name = '" + data[i].FirstName + "', ";

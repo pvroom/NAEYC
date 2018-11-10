@@ -21,6 +21,7 @@ export class DatabasePage {
 	public DatabaseStatsListing: any[] = [];
 	public LastAutoSync: string;
 	public pnPushID: string;
+	public liAttendeeID: string;
 	
 	constructor(public navCtrl: NavController, 
 				public navParams: NavParams,
@@ -56,6 +57,7 @@ export class DatabasePage {
 		if (AttendeeID == '' || AttendeeID == null) {
 			AttendeeID = '0';
 		}
+		this.liAttendeeID = AttendeeID;
 										
 		this.databaseprovider.getDatabaseStats(flags, AttendeeID).then(data => {
 			

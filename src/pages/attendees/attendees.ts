@@ -368,13 +368,15 @@ export class AttendeesPage {
 
 			if (data['length'] > 0) {
 
+				console.log('getMessagingData, Attendee Listing, starting data record loop');
+				
 				for (var i = 0; i < data['length']; i++) {
 					DisplayName = "";
 
 					// Concatenate fields to build displayable name
 					DisplayName = DisplayName + data[i].LastName + ", " + data[i].FirstName;
 
-					// Use Credentials field for Company/Association
+					// Show Title and Company/Association
 					visDisplayTitle = "";
 					if (data[i].Title != "") {
 						visDisplayTitle = data[i].Title;
@@ -405,6 +407,9 @@ export class AttendeesPage {
 					});
 				}
 
+				this.cd.markForCheck();
+				console.log('Built data array: ' + JSON.stringify(this.AttendeeListing));
+
 			} else {
 
 				console.log("getMessagingData, Attendee Listing, No records");
@@ -419,11 +424,14 @@ export class AttendeesPage {
 					ShowHideAttendeeIcon: false,
 				});
 
+				this.cd.markForCheck();
+				console.log('Built data array: ' + JSON.stringify(this.AttendeeListing));
+
 			}
 
-			this.cd.markForCheck();
-
 			loading.dismiss();
+			
+			console.log('getMessagingData, Attendee Listing, done loading names');
 				
 		}).catch(function () {
 			console.log("Attendee Listing Style 2 Promise Rejected");
