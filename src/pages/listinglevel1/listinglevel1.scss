@@ -62,6 +62,7 @@ page-listinglevel1 {
 	border-radius:0!important;
 	border-right-style: solid;
 	border-width: 1px!important;
+	border-color:#0b172a;
 	font-size:13px;
 	border-color:transparent!important;
 
@@ -71,12 +72,19 @@ page-listinglevel1 {
 	background-color:#004c94!important;
 	font-weight:bold!important;
 	color:#fff !important;
+	border-right-style: solid;
+	border-width: 1px!important;
+	border-color:#004c94;
 	border-radius:0!important;
 	font-size:13px;
 }
 
-.buttonActive {
+.myButtonActive {
 Background:#004c94!important;
+border-right-style: solid;
+border-width: 1px!important;
+border-color:#004c94;
+color:#fff;
 font-size:13px;
 
 }

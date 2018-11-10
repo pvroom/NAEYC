@@ -94,7 +94,7 @@ export class ListingLevel1 {
 		
 		switch(ProgramDay) {
 			case "Sat":
-				this.btnTue = "myButtonActive1";
+				this.btnTue = "myButtonActive";
 				flags = "11/13/2018";
 				break;
 			case "Sun":
@@ -156,12 +156,12 @@ export class ListingLevel1 {
 						
 						if (data[i].OnAgenda != null) {
 							AgendaButtonText = "Remove";
-						    visAgendaButtonColor = "#0b172a";
-						    visAgendaButtonTextColor = "#ffffff";
+						    visAgendaButtonColor = "#004c94";
+						    visAgendaButtonTextColor = "#fff";
 						} else {
 							AgendaButtonText = "Add";
-						    visAgendaButtonColor = "#ffffff";
-						    visAgendaButtonTextColor = "#0b172a";
+						    visAgendaButtonColor = "#004c94";
+						    visAgendaButtonTextColor = "#fff";
 						}
 
 						var visEventName = data[i].session_title;
@@ -231,7 +231,7 @@ export class ListingLevel1 {
 								DisplaySubjectCodeCECredits: "",
 								SessionStatusStyle: "SessionStatusNormal",
 								SessionStatus: "",
-								AgendaButtonColor: "#ffffff",
+								AgendaButtonColor: "#004c94",
 								AgendaButtonTextColor: "#ffffff",
 								DisplayIcon: "",
 								DividerStyle: "DividerTimeslot",
@@ -508,8 +508,8 @@ export class ListingLevel1 {
 										
 										this.events.publish('user:Status', 'AgendaItem Remove');
 										session.visAgendaAddRemoveButton = "Add";
-										session.AgendaButtonColor = "#ffffff";
-										session.AgendaButtonTextColor = "#0b172a";
+										session.AgendaButtonColor = "#004c94";
+										session.AgendaButtonTextColor = "#fff";
 
 										// Disable the button while we process the request
 										session.btnAgendaDisable = true;
@@ -595,7 +595,7 @@ export class ListingLevel1 {
 										
 										this.events.publish('user:Status', 'AgendaItem Add');
 										session.visAgendaAddRemoveButton = "Remove";
-										session.AgendaButtonColor = "#0b172a";
+										session.AgendaButtonColor = "#004c94";
 										session.AgendaButtonTextColor = "#ffffff";
 
 										// Disable the button while we process the request
