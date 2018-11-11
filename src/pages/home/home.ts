@@ -947,7 +947,28 @@ export class HomePage {
 					this.navCtrl.push(SponsorsPage, {}, {animate: true, direction: 'forward'});
 					break;
 				case "ActivityFeed":
-					this.navCtrl.push(ActivityPage, {}, {animate: true, direction: 'forward'});
+					var flags = "cn";
+
+					this.databaseprovider.getDatabaseStats(flags, AttendeeID).then(data => {
+						
+						if (data[0].Status == "Connected") {
+							
+							// Navigate to Activity Feed page
+							this.navCtrl.push(ActivityPage, {}, {animate: true, direction: 'forward'});
+						
+						} else {
+
+							let alert = this.alertCtrl.create({
+								title: 'Internet Error',
+								subTitle: 'You need to have Internet access in order to use that feature.',
+								buttons: ['OK']
+							});
+							
+							alert.present();
+						
+						}
+						
+					});
 					break;
 			}
 			

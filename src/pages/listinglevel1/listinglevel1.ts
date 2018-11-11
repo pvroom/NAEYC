@@ -160,8 +160,8 @@ export class ListingLevel1 {
 						    visAgendaButtonTextColor = "#fff";
 						} else {
 							AgendaButtonText = "Add";
-						    visAgendaButtonColor = "#004c94";
-						    visAgendaButtonTextColor = "#fff";
+						    visAgendaButtonColor = "#fff";
+						    visAgendaButtonTextColor = "#004c94";
 						}
 
 						var visEventName = data[i].session_title;
@@ -508,8 +508,8 @@ export class ListingLevel1 {
 										
 										this.events.publish('user:Status', 'AgendaItem Remove');
 										session.visAgendaAddRemoveButton = "Add";
-										session.AgendaButtonColor = "#004c94";
-										session.AgendaButtonTextColor = "#fff";
+										session.AgendaButtonColor = "#fff";
+										session.AgendaButtonTextColor = "#004c94";
 
 										// Disable the button while we process the request
 										session.btnAgendaDisable = true;

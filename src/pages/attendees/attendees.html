@@ -9,52 +9,12 @@
 
 <ion-content class="attendees-page">
 
-	<!-- Search input 
-
-	<ion-grid>
-			<ion-row>
-				<ion-col col-9>	
-
-					<ion-item class="item-input; shadow">
-						<ion-icon name="search" item-left></ion-icon>
-						<ion-input name="srchBarEntry" id="srchBarEntry" 
-						type="text" placeholder="Search" [(ngModel)]="EntryTerms"></ion-input>
-					</ion-item>
-				</ion-col>
-				<ion-col col-3>
-					<button  color=danger style="margin:0" (tap)="GetSearchResults()">Submit</button>
-				</ion-col>
-			</ion-row>
-		</ion-grid>
--->
-
-
 	<!-- Attendee Listing -->
-	<!-- Style 1: Basic list, all records -->
-	<!--
-	<ion-list>
-		<ion-item tappable (click)="AttendeeDetails(attendee.AttendeeID)" *ngFor="let attendee of AttendeeListing" id="Attendee-list-item19">
-			<div style="float: left; padding-right: 10px;">
-				<ion-avatar item-start>
-					<img *ngIf=attendee.ShowHideAttendeeIcon [src]="attendee.AttendeeAvatar" src="assets/img/personIcon.png" onerror="this.src='assets/img/personIcon.png'">
-					<img *ngIf=attendee.ShowHideDividerIcon src="assets/img/SpeakerDivider.png">
-				</ion-avatar>
-			</div>
-			<ion-icon item-right name="{{attendee.navigationArrow}}"></ion-icon>
-				<h2 style="padding-top: 7px;">{{attendee.AttendeeName}}</h2>
-				<h3>{{attendee.AttendeeTitle}}</h3>
-				<h3>{{attendee.AttendeeOrganization}}</h3>
-		</ion-item>
-	</ion-list>
-	-->
-	
-	<!-- Attendee Listing -->
-	<!-- Style 2: Alpha buttons on right, list only shows last names that match -->
 	<ion-grid>
 		<ion-row>
 			<ion-col col-11>	
 				<ion-list>
-					<ion-item tappable (click)="AttendeeDetails(attendee.AttendeeID)" *ngFor="let attendee of AttendeeListing" id="Attendee-list-item19">
+					<ion-item tappable (click)="AttendeeDetails(attendee.AttendeeID)" *ngFor="let attendee of AttendeeListing" id="Attendee-list19">
 						<div style="float: left; padding-right: 10px;">
 							<ion-avatar item-start>
 								<img *ngIf=attendee.ShowHideAttendeeIcon [src]="attendee.AttendeeAvatar" src="assets/img/personIcon.png" onerror="this.src='assets/img/personIcon.png'">
@@ -68,310 +28,121 @@
 				</ion-list>
 			</ion-col>
 
-
-		<ion-col col-1>
+			<ion-col col-1>
 			
 				<ion-col col-1 style="position:sticky; position: -webkit-sticky; /* Safari */; top:0; right:0">
 
 					<button style="text-align:center; margin:0; height:20px; width:35px; margin-left:-5px" [ngClass]="btnA"  (click)="LoadAlpha('A')">
-							<label>A</label>
-						</button>
+						<label>A</label>
+					</button>
 
-					
-							<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnB" (click)="LoadAlpha('B')">
-								<label>B</label>
-							</button>
-		
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnB" (click)="LoadAlpha('B')">
+						<label>B</label>
+					</button>
 
-							<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnC" (click)="LoadAlpha('C')">
-									<label>C</label>
-								</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnC" (click)="LoadAlpha('C')">
+						<label>C</label>
+					</button>
 
-								<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnD"  (click)="LoadAlpha('D')">
-										<label>D</label>
-									</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnD"  (click)="LoadAlpha('D')">
+						<label>D</label>
+					</button>
 
-									<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnE"  (click)="LoadAlpha('E')">
-											<label>E</label>
-										</button>
-	
-										<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnF"  (click)="LoadAlpha('F')">
-												<label>F</label>
-											</button>
-		
-											<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnG"  (click)="LoadAlpha('G')">
-													<label>G</label>
-												</button>
-			
-												<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnH"  (click)="LoadAlpha('H')">
-														<label>H</label>
-													</button>
-				
-													<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnI"  (click)="LoadAlpha('I')">
-															<label>I</label>
-														</button>
-					
-														<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnJ"  (click)="LoadAlpha('J')">
-																<label>J</label>
-															</button>
-						
-															<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnK"  (click)="LoadAlpha('K')">
-																	<label>K</label>
-																</button>
-							
-																<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnL"  (click)="LoadAlpha('L')">
-																		<label>L</label>
-																	</button>
-								
-																	<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnM"  (click)="LoadAlpha('M')">
-																			<label>M</label>
-																		</button>
-									
-																		<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnN"  (click)="LoadAlpha('N')">
-																				<label>N</label>
-																			</button>
-										
-																			<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnO"  (click)="LoadAlpha('O')">
-																					<label>O</label>
-																				</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnE"  (click)="LoadAlpha('E')">
+						<label>E</label>
+					</button>
 
-																				<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnP"  (click)="LoadAlpha('P')">
-																						<label>P</label>
-																					</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnF"  (click)="LoadAlpha('F')">
+						<label>F</label>
+					</button>
 
-																					<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnQ"  (click)="LoadAlpha('Q')">
-																							<label>Q</label>
-																						</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnG"  (click)="LoadAlpha('G')">
+						<label>G</label>
+					</button>
 
-																						<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnR"  (click)="LoadAlpha('R')">
-																								<label>R</label>
-																							</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnH"  (click)="LoadAlpha('H')">
+						<label>H</label>
+					</button>
 
-																							<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnS"  (click)="LoadAlpha('S')">
-																									<label>S</label>
-																								</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnI"  (click)="LoadAlpha('I')">
+						<label>I</label>
+					</button>
 
-																								<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnT"  (click)="LoadAlpha('T')">
-																										<label>T</label>
-																									</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnJ"  (click)="LoadAlpha('J')">
+						<label>J</label>
+					</button>
 
-																									<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnU"  (click)="LoadAlpha('U')">
-																											<label>U</label>
-																										</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnK"  (click)="LoadAlpha('K')">
+						<label>K</label>
+					</button>
 
-																										<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnV"  (click)="LoadAlpha('V')">
-																												<label>V</label>
-																											</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnL"  (click)="LoadAlpha('L')">
+						<label>L</label>
+					</button>
 
-																											<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnW"  (click)="LoadAlpha('W')">
-																													<label>W</label>
-																												</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnM"  (click)="LoadAlpha('M')">
+						<label>M</label>
+					</button>
 
-																												<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnX"  (click)="LoadAlpha('X')">
-																														<label>X</label>
-																													</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnN"  (click)="LoadAlpha('N')">
+						<label>N</label>
+					</button>
 
-																													<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnY"  (click)="LoadAlpha('Y')">
-																															<label>Y</label>
-																														</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnO"  (click)="LoadAlpha('O')">
+						<label>O</label>
+					</button>
 
-																														<button  style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnZ"  (click)="LoadAlpha('Z')">
-																																<label>Z</label>
-																															</button>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnP"  (click)="LoadAlpha('P')">
+						<label>P</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnQ"  (click)="LoadAlpha('Q')">
+						<label>Q</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnR"  (click)="LoadAlpha('R')">
+						<label>R</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnS"  (click)="LoadAlpha('S')">
+						<label>S</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnT"  (click)="LoadAlpha('T')">
+						<label>T</label>
+					</button>
 
-						</ion-col>
-						</ion-col>
-						
-					</ion-row>
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnU"  (click)="LoadAlpha('U')">
+						<label>U</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnV"  (click)="LoadAlpha('V')">
+						<label>V</label>
+					</button>
 
-						</ion-grid>
-<!--  
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnW"  (click)="LoadAlpha('W')">
+						<label>W</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnX"  (click)="LoadAlpha('X')">
+						<label>X</label>
+					</button>
 
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:83px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-26px; height:25px; width:25px" [ngClass]="btnC" (click)="LoadAlpha('C')">
-								<label>C</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */;top:110px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-29px; height:25px; width:25px" [ngClass]="btnD"  (click)="LoadAlpha('D')">
-								<label>D</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:135px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-30px; height:25px; width:25px" [ngClass]="btnE" (click)="LoadAlpha('E')">
-								<label>E</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:163px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-38px; height:25px; width:25px" [ngClass]="btnF" (click)="LoadAlpha('F')">
-								<label>F</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:190px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-42px; height:25px; width:25px" [ngClass]="btnG" (click)="LoadAlpha('G')">
-								<label>G</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:215px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-43px; height:25px; width:25px" [ngClass]="btnH" (click)="LoadAlpha('H')">
-								<label>H</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:240px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-45px; height:25px; width:25px" [ngClass]="btnI" (click)="LoadAlpha('I')">
-								<label>I</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:265px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-45px; height:25px; width:25px" [ngClass]="btnJ" (click)="LoadAlpha('J')">
-								<label>J</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:291px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-47px; height:25px; width:25px"[ngClass]="btnK" (click)="LoadAlpha('K')">
-								<label>K</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:317px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-49px; height:25px; width:25px"[ngClass]="btnL" (click)="LoadAlpha('L')">
-								<label>L</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:343px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-51px; height:25px; width:25px"[ngClass]="btnM" (click)="LoadAlpha('M')">
-								<label>M</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:369px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-54px; height:25px; width:25px"[ngClass]="btnN" (click)="LoadAlpha('N')">
-								<label>N</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:395px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-55px; height:25px; width:25px"[ngClass]="btnO" (click)="LoadAlpha('O')">
-								<label>O</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:421px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-57px; height:25px; width:25px"[ngClass]="btnP" (click)="LoadAlpha('P')">
-								<label>P</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:450px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-75px; height:25px; width:25px"[ngClass]="btnQ" (click)="LoadAlpha('Q')">
-								<label>Q</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:478px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-80px; height:25x; width:25px"[ngClass]="btnR" (click)="LoadAlpha('R')">
-								<label>R</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:510px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-93px; height:25px; width:25px"[ngClass]="btnS" (click)="LoadAlpha('S')">
-								<label>S</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:535px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-101px; height:25px; width:25px"[ngClass]="btnT" (click)="LoadAlpha('T')">
-								<label>T</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:565px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-114px; height:25px; width:25px"[ngClass]="btnU" (click)="LoadAlpha('U')">
-								<label>U</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:590px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-120px; height:25px; width:25px"[ngClass]="btnV" (click)="LoadAlpha('V')">
-								<label>V</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:616px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-130px; height:25px; width:25px"[ngClass]="btnW" (click)="LoadAlpha('W')">
-								<label>W</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:642px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-138px; height:25px; width:25px"[ngClass]="btnX" (click)="LoadAlpha('X')">
-								<label>X</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:680px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-163px; height:25px; width:25px"[ngClass]="btnY" (click)="LoadAlpha('Y')">
-								<label>Y</label>
-							</button>
-						</ion-col>
-					</ion-row>
-					<ion-row style="margin:0; position:sticky; position: -webkit-sticky; /* Safari */; top:715px">
-						<ion-col>
-							<button style="text-align:center; padding:3px; margin-top:-183px; height:25px; width:25px"[ngClass]="btnZ" (click)="LoadAlpha('Z')">
-								<label>Z</label>
-							</button>
-						</ion-col>
-					</ion-row>
-				
--->
-	
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnY"  (click)="LoadAlpha('Y')">
+						<label>Y</label>
+					</button>
 
+					<button style="text-align:center; margin:0; height:20px; width:35px" [ngClass]="btnZ"  (click)="LoadAlpha('Z')">
+						<label>Z</label>
+					</button>
 
+				</ion-col>
 
+			</ion-col>
 
+		</ion-row>
 
-
-
-
+	</ion-grid>
 
 </ion-content>
 
