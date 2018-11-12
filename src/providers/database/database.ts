@@ -28,7 +28,7 @@ declare var dateFormat: any;
 // Sponsors			312
 // 
 // ------------------------
-var AttendeeListing = 'Offline';
+var AttendeeListing = 'Online';
 
 // Global URL and conference year referenceused for all AJAX-to-MySQL calls
 var APIURLReference: string = "https://naeyc.convergence-us.com/cvPlanner.php?acy=2018&";
