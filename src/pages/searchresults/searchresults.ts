@@ -158,7 +158,7 @@ export class SearchResultsPage {
                     SQLDate = new Date(dbEventDateTime);
                     DisplayDateTime = DisplayDateTime + " to " + dateFormat(SQLDate, "h:MMtt");
 
-                    visEventName = data[i].session_title.replace("'", "\\'");
+                    //visEventName = data[i].session_title.replace("'", "\\'");
 
                     this.sessionLW.push({
                         EventID: data[i].session_id,

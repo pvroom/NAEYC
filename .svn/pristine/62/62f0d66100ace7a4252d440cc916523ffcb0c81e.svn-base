@@ -153,29 +153,21 @@ export class MyAgendaPersonal {
 		console.log('agendaItempersonalStartTime :' + this.agendaItempersonalStartTime);
 		console.log('agendaItempersonalEndTime :' + this.agendaItempersonalEndTime);
 		
-		console.log('Personal Agenda Save: Validating entries');
-		
-		console.log('Personal Agenda Save: Validating entries, agendaItempersonalEventName');
         if (this.agendaItempersonalEventName == null || this.agendaItempersonalEventName == "") {
             ValidationPass = false;
         }
-		console.log('Personal Agenda Save: Validating entries, agendaItempersonalEventLocation');
         if (this.agendaItempersonalEventLocation == null || this.agendaItempersonalEventLocation == "") {
             ValidationPass = false;
         }
-		console.log('Personal Agenda Save: Validating entries, agendaItempersonalDate');
         if (this.agendaItempersonalDate == null || this.agendaItempersonalDate == "") {
             ValidationPass = false;
         }
-		console.log('Personal Agenda Save: Validating entries, agendaItempersonalStartTime');
         if (this.agendaItempersonalStartTime == null || this.agendaItempersonalStartTime == "") {
             ValidationPass = false;
         }
-		console.log('Personal Agenda Save: Validating entries, agendaItempersonalEndTime');
         if (this.agendaItempersonalEndTime == null || this.agendaItempersonalEndTime == "") {
             ValidationPass = false;
         }
-		console.log('Personal Agenda Save: Validating status: ' + ValidationPass);
         if (ValidationPass == false) {
 			
 			saving.dismiss();
