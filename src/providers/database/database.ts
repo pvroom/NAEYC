@@ -1945,8 +1945,8 @@ export class Database {
 								SQLquery2 = "INSERT INTO itinerary (AttendeeID, atID, mtgID, EventID, Time_Start, Time_End, Location, Subject, Date_Start, Date_End, LastUpdated, UpdateType) ";
 								SQLquery2 = SQLquery2 + "VALUES ('" + AttendeeID + "', ";
 								SQLquery2 = SQLquery2 + "'" + AttendeeID + "', ";
-								SQLquery2 = SQLquery2 + "'0', ";
 								SQLquery2 = SQLquery2 + "'" + EventID + "', ";
+								SQLquery2 = SQLquery2 + "'0', ";
 								SQLquery2 = SQLquery2 + "'" + EventStartTime + "', ";
 								SQLquery2 = SQLquery2 + "'" + EventEndTime + "', ";
 								SQLquery2 = SQLquery2 + "'" + EventLocation + "', ";

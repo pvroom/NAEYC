@@ -70,6 +70,14 @@ export class NetworkingPage {
 							// Navigate to Activity Feed page
 							this.navCtrl.push(ActivityPage, {}, {animate: true, direction: 'forward'});
 							break;
+						case "Attendees":
+							// Navigate to Activity Feed page
+							this.navCtrl.push(AttendeesPage, {}, {animate: true, direction: 'forward'});
+							break;
+						case "MyProfile":
+							// Navigate to Activity Feed page
+							this.navCtrl.push(ProfilePage, {}, {animate: true, direction: 'forward'});
+							break;
 					}
 				
 				} else {
