@@ -1411,6 +1411,7 @@ export class Database {
 				SQLquery = SQLquery + "INNER JOIN courses_speakers_ordering cso ON cso.session_id = c.session_id ";
 				SQLquery = SQLquery + "INNER JOIN courses_speakers s ON s.speakerID = cso.speakerID ";
 				SQLquery = SQLquery + "WHERE c.session_id = '" + courseID + "' ";
+				SQLquery = SQLquery + "WHERE s.ActiveYN = 'Y' ";
 				SQLquery = SQLquery + "ORDER BY cso.SortOrder";
 
 				//SQLquery = "SELECT DISTINCT s.speakerID, s.FirstName, s.LastName, s.Credentials, s.Title, s.Company, s.Bio, s.Courses, s.imageFilename ";
